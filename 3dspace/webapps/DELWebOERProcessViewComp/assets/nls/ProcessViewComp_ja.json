@@ -1,0 +1,11 @@
+{
+  "Toolbar.PERTView.ToolTip": "PERT ビューを表示/非表示にします",
+  "Toolbar.SwitchToProductBuildUp.ToolTip.shortHelp": "プロダクトのビルドアップに切り替えます",
+  "Toolbar.SwitchToWKIView.ToolTip.shortHelp": "3D Work Instructions ビューに切り替えます",
+  "ScopedMfgNotFound.Error.Message": "プロセスはマニュファクチャリング項目で有効範囲が指定されていません。プロセス構造のみがロードされます",
+  "Error.PROCESS.Failed.Message": "プロセス概要情報の取得に失敗しました。しばらくしてからやり直してください",
+  "PROCESS.PERTView.title": "PERT ビュー",
+  "BuildupFailed.Error.Message": "ビルドアップは現在利用できません。セッションを更新し、問題が解決しない場合は、管理者に連絡してください",
+  "BuildupActivate.Retry.Message": "ビルドアップの再計算中です。このプロセスには時間がかかる場合があります。",
+  "PERTView.title": "PERT ビュー"
+}

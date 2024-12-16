@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2010. All rights reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:info="http://www.3ds.com/xsd/XPDMXML/Info" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:annotation>
+		<xs:documentation>
+			<info:change version="1.1">
+					- SchemaVersion:  fixed="V6R2013x">
+					-  SourceSiteID  :  fixed="V6R2015x">
+					- new V6ExtensionName attribute on  'attribute' element : optional
+				 	- new AttributeGroup sequence in ObjectType : optional
+				 	- attribute V6CustoName in ObjectType becomes: optional
+			  </info:change>
+		</xs:documentation>
+	</xs:annotation>
+	<xs:attributeGroup name="AttributeFilterGroup">
+		<xs:attribute name="Export" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="Import" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="Inherit" type="xs:boolean" use="optional" default="false"/>
+	</xs:attributeGroup>
+	<xs:simpleType name="XPGNameType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ListXPGNameType">
+		<xs:list itemType="XPGNameType"/>
+	</xs:simpleType>
+	<xs:complexType name="CoreType" abstract="true">
+		<xs:sequence>
+			<xs:element name="Description" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="XPGCustConfigType">
+		<xs:complexContent>
+			<xs:extension base="CoreType">
+				<xs:sequence>
+					<xs:element name="Pdm" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="CoreType">
+									<xs:attribute name="name" type="xs:string" use="required"/>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="ObjectsConfig" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="CoreType">
+									<xs:sequence>
+										<xs:element name="Object" type="ObjectType" minOccurs="0" maxOccurs="unbounded"/>
+										<xs:element name="FileObject" type="FileObjectType" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+									<xs:attribute name="domain" type="xs:string" use="optional">
+										<xs:annotation>
+											<xs:documentation>This is the XPG applicative domain for which customized types and attributes have to be mapped. </xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="LifecycleConfig" type="LifecycleConfigType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="SchemaVersion" type="xs:string" use="required" fixed="V6R2013x">
+					<xs:annotation>
+						<xs:documentation>This is the V6 version. </xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="encoding" type="xs:string" use="optional" default="UTF-8"/>
+				<xs:attribute name="SourceSiteID" type="xs:string" use="optional" fixed="V6R2015x">
+					<xs:annotation>
+						<xs:documentation>Site ID of this local V6 XPG installation</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--   -->
+	<xs:group name="AttributeGroup">
+		<xs:choice>
+			<xs:element ref="attribute" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="attributeGroup" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="attribute" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="name" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:group>
+	<!--  -->
+	<xs:complexType name="AttributeType">
+		<xs:attribute name="V6Name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Name of the attribute on the V6 data model</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="V6ExtensionName" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Name of the Extension the attribute V6Name belongs to in the V6 data model</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="XPGName" type="ListXPGNameType" use="required">
+			<xs:annotation>
+				<xs:documentation>Name of the attribute in the XPDMXML file</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="AttributeFilterGroup"/>
+		<xs:attribute name="type" default="string">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="boolean"/>
+					<xs:enumeration value="booleanList"/>
+					<xs:enumeration value="dateTime"/>
+					<xs:enumeration value="dateTimeList"/>
+					<xs:enumeration value="double"/>
+					<xs:enumeration value="doubleList"/>
+					<xs:enumeration value="duration"/>
+					<xs:enumeration value="integer"/>
+					<xs:enumeration value="integerList"/>
+					<xs:enumeration value="positiveInteger"/>
+					<xs:enumeration value="positiveIntegerList"/>
+					<xs:enumeration value="string"/>
+					<xs:enumeration value="stringList"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="default" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>default value of attribute to be considered</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="attribute" type="AttributeType"/>
+	<!--   -->
+	<xs:complexType name="ObjectType">
+		<xs:complexContent>
+			<xs:extension base="CoreType">
+				<xs:group ref="AttributeGroup" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:attribute name="XPGXMLType" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>Name of the xml element as used in XPDMXML file</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="MappingType" type="xs:string" use="optional">
+					<xs:annotation>
+						<xs:documentation>Nickname of the data model customization that will be used in the Object mappingType attribute in XPDMXML file</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="V6Type" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>Name of the V6 data model type</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="V6CustoName" type="xs:string" use="optional">
+					<xs:annotation>
+						<xs:documentation>Name of the V6 data model customization</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FileObjectType">
+		<xs:complexContent>
+			<xs:extension base="ObjectType">
+				<xs:sequence>
+					<xs:element name="FileExtension" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:attribute name="TransferMode" use="required">
+								<xs:simpleType>
+									<xs:restriction base="xs:NMTOKEN">
+										<xs:enumeration value="ASCII"/>
+										<xs:enumeration value="BINARY"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+							<xs:attribute name="Name" type="xs:string" use="required"/>
+							<xs:attributeGroup ref="AttributeFilterGroup"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LifecycleConfigType">
+		<xs:complexContent>
+			<xs:extension base="CoreType">
+				<xs:sequence>
+					<xs:element name="Lifecycle" type="LifecycleType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LifecycleType">
+		<xs:complexContent>
+			<xs:extension base="CoreType">
+				<xs:sequence>
+					<xs:element name="LifecycleGraph" type="LifecycleGraphType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="LifecycleStateMap" type="LifecycleStateMapType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="ObjectType" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LifecycleGraphType">
+		<xs:complexContent>
+			<xs:extension base="CoreType">
+				<xs:sequence>
+					<xs:element name="LcmState" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:attribute name="Name" type="xs:string" use="required"/>
+							<xs:attribute name="Key" type="xs:string" use="required"/>
+							<xs:attribute name="Index" type="xs:int" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LifecycleStateMapType">
+		<xs:complexContent>
+			<xs:extension base="CoreType">
+				<xs:sequence>
+					<xs:element name="MapEntry" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:attribute name="LocalName" type="xs:string" use="required"/>
+							<xs:attribute name="RemoteName" type="xs:string" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--     -->
+	<xs:element name="XPGCustConfig" type="XPGCustConfigType"/>
+</xs:schema>

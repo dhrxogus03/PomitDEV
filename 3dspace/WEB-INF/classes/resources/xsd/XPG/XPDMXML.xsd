@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2010. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/Info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.4">
+	<!--  		-->
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="1.2">
+					- MultiStructure moved from  XPDMXMLCore.xsd
+				 	- new ChangeStructure.xsd (for future usage) 
+			</info:change>
+			<info:change version="1.3">
+				 	- new XPDMXMLFL.xsd (for future usage) 
+				 	- Structure are imbeded using the SubStitutionGroup XPDMXML_Structure defined in XPDMXMLCore.xsd
+			</info:change>
+			<info:change version="1.4">
+					- new XPDMXMLCfgDictionary.xsd (for future usage)
+			</info:change>
+			<info:change version="1.5">
+					- new XPDMXMLRequirement.xsd 
+					- add AnyDocumentSpecificationBase in MultiStructure
+			</info:change>
+			<info:change version="1.6">
+					- new XPDMXMLCfgEffectivity.xsd (for future usage)
+					- new XPDMXMLProductAEC.xsd
+					- new XPDMXMLMaterial.xsd
+			</info:change>
+			<info:change version="2.0">
+					- new XPDMXMLPeopleAndOrganization.xsd 
+					- rename XPDMXMLCfgEffectivity.xsd by XPDMXMLCfgExpression.xsd
+			</info:change>
+			<info:change version="2.1">
+					- rename XPDMXMLChange.xsd by XPDMXMLUnifiedChange.xsd
+			</info:change>
+			<info:change version="2.2">
+					- adding ListOfAcknowledgementObjectBase
+			</info:change>
+			<info:change version="2.3">
+					- adding ManufacturingContext
+			</info:change>
+			<info:change version="2.4">
+					- adding SimulationContext
+					- new XPDMXMLECAD.xsd
+					- adding PCBContext
+			</info:change>
+			<info:change version="2.5">
+					- adding XPDMXMLElectronics							
+			</info:change>
+			<info:change version="2.6">
+					- adding XPDMXMLProductSpace							
+			</info:change>
+			<info:change version="2.7">
+					- adding XPDMXMLSourcing							
+			</info:change>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLProduct.xsd"/>
+    <xsd:include schemaLocation="XPDMXMLProductSpace.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLProductAEC.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLPPR.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLEBOM.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLUnifiedChange.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLDocument.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLFL.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLRequirement.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLParameter.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLCfgDictionary.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLCfgExpression.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLMaterial.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLPeopleAndOrganization.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLSimulation.xsd"/>	
+	<xsd:include schemaLocation="XPDMXMLECAD.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLElectronics.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLSourcing.xsd"/>												
+	
+	<!-- ======================================================================================== -->
+	<!--                                                                                                                                                                                  -->
+	<!--                                                                                                                                                                                  -->
+	<!--                                                                                                                                                                                  -->
+	<!--                                                                                                                                                                                  -->
+	<!-- ======================================================================================== -->
+	<xsd:element name="XPDMXML" type="XPDMXMLType"/>
+	<xsd:complexType name="XPDMXMLType">
+		<xsd:annotation>
+			<xsd:documentation>XPDMXML main Container</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="InfoHeader" type="InfoHeaderType" minOccurs="0"/>
+			<xsd:element ref="XPDMXML_Structure" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="File" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="ListOfObjectBase" minOccurs="0"/>
+			<xsd:element ref="ListOfAcknowledgementObjectBase" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="schemaVersion" type="xsd:positiveInteger" use="required" fixed="2"/>
+	</xsd:complexType>
+	<xsd:element name="MultiStructure" type="MultiStructureType" substitutionGroup="XPDMXML_Structure"/>
+	<xsd:complexType name="MultiStructureType">
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element ref="AnyDocumentBase" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="AnyDocumentSpecificationBase" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="AnyDocumentRelationshipBase" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="Parameter" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="ParameterRelationship" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="ManufacturingContext" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="SimulationContext" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="PCBContext" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

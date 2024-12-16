@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2010. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/Info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+ <!--   -->
+  	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="1.0">
+					- New XSD to replace XPDMXMLChange.xsd
+				 	- Integration of Unified Change Date Modeler
+			  </info:change>
+		</xsd:documentation>
+	</xsd:annotation>
+<!--   -->
+  <xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+  <xsd:include schemaLocation="XPDMXMLCfgExpression.xsd"/>
+<!--   -->
+	
+  <xsd:element name="UnifiedChangeStructure" type="UnifiedChangeStructureType" substitutionGroup="XPDMXML_Structure"/>
+  <xsd:complexType name="UnifiedChangeStructureType">
+    <xsd:complexContent>
+      <xsd:extension base="StructureBase">
+        <xsd:group ref="ChangeAction"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <xsd:group name="ChangeAction">
+    <xsd:sequence>
+		<xsd:element name="CA" type="CAType" minOccurs="0" maxOccurs="1"/>
+	</xsd:sequence>
+  </xsd:group>
+  
+  <xsd:complexType name="CAType">
+    <xsd:complexContent>
+      <xsd:extension base="NonVersionableObjectBase">
+        <xsd:sequence>
+          <xsd:group ref="CAAttributesGroup" minOccurs="1"/>
+          <xsd:element name="CAProposedActivities" type="CAProposedActivitiesType" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="CARealizedChanges" type="CARealizedChangesType" minOccurs="0" maxOccurs="1"/>
+		  <xsd:element name="CAApplicability" type="ContextualEffectivityEvolutionConditionType" minOccurs="0" maxOccurs="1"/>
+		  <xsd:element name="CAContextItems" type="CAContextItemType" minOccurs="0" maxOccurs="1"/>
+		  <xsd:element name="CARelatedItems" type="CARelatedItemType" minOccurs="0" maxOccurs="1"/>		  
+		  <!-- FOR IMPACT ANALYSIS no treated as of TODAY
+		  <xsd:element ref="CAImpactAnalysis" type="xsd:IDREF" info:typeRef="ReferenceBase" minOccurs="0" maxOccurs="unbounded"/>
+		  -->
+		  <!-- FOR CO & CR...
+		  <xsd:element ref="CAChangeOrder" type="xsd:IDREF" info:typeRef="ReferenceBase" minOccurs="0" maxOccurs="1"/>
+		  <xsd:element ref="CAChangeRequest" type="xsd:IDREF" info:typeRef="ReferenceBase" minOccurs="0" maxOccurs="1"/>
+		  -->
+		  <!-- FOR PEOPLE DO WE TAKE THIS? OR WE DON'T CARE :) 
+		  <xsd:element ref="CAContributor" type="PeopleAndOrganizationStructureType" minOccurs="0" maxOccurs="unbounded"/>
+		  <xsd:element ref="CAReviewer" type="PeopleAndOrganizationStructureType" minOccurs="0" maxOccurs="unbounded"/>
+		  <xsd:element ref="CAFollower" type="PeopleAndOrganizationStructureType" minOccurs="0" maxOccurs="unbounded"/>-->
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Change Action Type   -->
+  
+  <xsd:simpleType name="CategoryofChangeTypeENUM">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Vendor Requirement"/>
+      <xsd:enumeration value="Unassigned"/>
+      <xsd:enumeration value="Product Improvement"/>
+      <xsd:enumeration value="New Production Introduction"/>
+      <xsd:enumeration value="Marketing Requirement"/>
+      <xsd:enumeration value="Facilitate Manufacturing"/>
+      <xsd:enumeration value="Drafting Error"/>
+      <xsd:enumeration value="Cost Reduction"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="SeverityTypeENUM">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Low"/>
+      <xsd:enumeration value="Medium"/>
+      <xsd:enumeration value="High"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+ <!-- ProposedOperation value Type--> 
+  <xsd:simpleType name="ProposedOperationTypeENUM">
+    <xsd:annotation>
+       <xsd:documentation>Simple union of Operation and Activity</xsd:documentation>
+    </xsd:annotation>
+    <xsd:union memberTypes="Operation Activity" />
+  </xsd:simpleType>
+  
+ <!-- "Proposed Activity" Operation Options-->
+ <xsd:simpleType name="Operation">
+  <xsd:annotation>
+    <xsd:documentation>"Proposed Activity" Operation Options</xsd:documentation>
+  </xsd:annotation>
+  <xsd:restriction base="xsd:string">
+    <xsd:enumeration value="CurrentVersion"/>
+    <xsd:enumeration value="Revise"/>
+    <xsd:enumeration value="NewEvolution"/>
+  </xsd:restriction>
+ </xsd:simpleType>
+
+ <!-- "Proposed Activity" Activity Options-->
+ <xsd:simpleType name="Activity">
+   <xsd:annotation>
+    <xsd:documentation>"Proposed Activity" Activity Options</xsd:documentation>
+  </xsd:annotation>
+  <xsd:restriction base="xsd:string">
+    <xsd:enumeration value="Modify"/>
+    <xsd:enumeration value="ChangeStatus#Release"/>
+    <xsd:enumeration value="ChangeStatus#Obsolete"/>
+  </xsd:restriction>
+ </xsd:simpleType>
+  
+  
+  <xsd:group name="CAAttributesGroup">
+    <xsd:sequence>
+      <xsd:element name="Originator" type="AttributeValueStringType" minOccurs="0"/>
+      <xsd:element name="EstimatedStartDate" type="AttributeValueDateTimeType" minOccurs="0"/>
+      <xsd:element name="EstimatedCompletionDate" type="AttributeValueDateTimeType" minOccurs="0"/>
+      <xsd:element name="ActualStartDate" type="AttributeValueDateTimeType" minOccurs="0"/>
+      <xsd:element name="ActualCompletionDate" type="AttributeValueDateTimeType" minOccurs="0"/>
+      <xsd:element name="CategoryofChange" type="CategoryofChangeTypeENUM" minOccurs="0"/>
+      <xsd:element name="Severity" type="SeverityTypeENUM" minOccurs="0"/>
+      <xsd:element name="Synopsis" type="AttributeValueStringType" minOccurs="0"/>
+      <xsd:element name="ReasonForCancel" type="AttributeValueStringType" minOccurs="0"/>
+	  <!-- FOR ON HOLD INTERFACE -->
+	  <xsd:element name="IsOnHold" type="xsd:boolean" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:group>
+  
+  <!-- Proposed Activity Type -->
+  
+  <xsd:simpleType name="ProposedActivityStatusTypeENUM">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Not Started"/>
+      <xsd:enumeration value="Started"/>
+      <xsd:enumeration value="Complete"/>
+      <xsd:enumeration value="Ignored"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="CAProposedActivitiesType">
+    <xsd:sequence>
+		<xsd:element ref="CAProposedActivity" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="CARelatedItemType">
+    <xsd:sequence>
+		<xsd:element ref="CARelatedItem" minOccurs="1" maxOccurs="unbounded"/>
+	</xsd:sequence>
+  </xsd:complexType>
+<xsd:element name="CARelatedItem" type="xsd:IDREF" info:typeRef="ReferenceBase"/>
+
+<xsd:complexType name="CAContextItemType">
+    <xsd:sequence>
+      <xsd:element ref="CAContextItem" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+</xsd:complexType>
+<xsd:element name="CAContextItem" type="xsd:IDREF" info:typeRef="ReferenceBase"/>
+
+  <xsd:element name="CAProposedActivity" type="CAProposedActivityType"/>
+  <xsd:complexType name="CAProposedActivityType">
+    <xsd:complexContent>
+      <xsd:extension base="NonVersionableObjectBase">
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Originator" type="AttributeValueStringType" minOccurs="0"/>
+          <xsd:element name="ProposedOperation" type="ProposedOperationTypeENUM" minOccurs="1" maxOccurs="1"/>
+          <xsd:element name="ProposedActivityStatus" type="ProposedActivityStatusTypeENUM" minOccurs="0"/>
+          <xsd:element name="ReasonforChange" type="AttributeValueStringType" minOccurs="0"/>
+          <xsd:element name="TreeOrder" type="AttributeValueDoubleType" minOccurs="0"/>
+		  <xsd:element name="CAProposedActivityWhere" type="xsd:IDREF" info:typeRef="ObjectBase" minOccurs="0" maxOccurs="1"/>
+		  <xsd:element name="CAProposedActivityWhat" type="xsd:IDREF" info:typeRef="ObjectBase" minOccurs="0" maxOccurs="unbounded"/>
+		  <xsd:element name="CAProposedActivityWhy" type="xsd:IDREF" info:typeRef="ObjectBase" minOccurs="0" maxOccurs="unbounded"/>
+          <!--xsd:element name="CAProposedActivity" minOccurs="0" maxOccurs="unbounded"/-->
+          <xsd:element name="CAProposedActivities" type="CAProposedActivitiesType" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  
+  <!-- Realized Activities Type -->
+
+  <xsd:simpleType name="RealizedActivityStatusTypeENUM">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pending"/>
+      <xsd:enumeration value="Approved"/>
+      <xsd:enumeration value="Rejected"/>
+      <xsd:enumeration value="Transferred"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="CARealizedChangesType">
+    <xsd:sequence>
+		<xsd:element ref="CARealizedChange" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:element name="CARealizedChange" type="CARealizedChangeType"/>
+  <xsd:complexType name="CARealizedChangeType">
+    <xsd:complexContent>
+      <xsd:extension base="NonVersionableObjectBase">
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Originator" type="AttributeValueStringType" minOccurs="0"/>
+          <xsd:element name="OperationSummary" type="AttributeValueStringType" minOccurs="1"/>
+          <xsd:element name="RealizedActivityStatus" type="RealizedActivityStatusTypeENUM" minOccurs="0"/>
+		  <xsd:element name="CARealizedActivityWhere" type="xsd:IDREF" info:typeRef="ObjectBase" minOccurs="1" maxOccurs="1"/>
+		  <xsd:element name="CARealizedActivityBefore" type="xsd:IDREF" info:typeRef="ObjectBase" minOccurs="0" maxOccurs="1"/>
+		  <xsd:element name="CARealizedActivityAfter" type="xsd:IDREF" info:typeRef="ObjectBase" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+</xsd:schema>

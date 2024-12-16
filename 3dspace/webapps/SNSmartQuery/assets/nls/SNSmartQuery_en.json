@@ -1,0 +1,15 @@
+{
+  "SNSmartQuery.vocab.predicate.swym:postTestTag" : "Post Test Tag",
+
+  "SNSmartQuery.basic_predicate.label": "Title",
+  "SNSmartQuery.basic_predicate.identifier": "Name",
+  "SNSmartQuery.basic_predicate.modified": "Modification Date",
+  "SNSmartQuery.basic_predicate.description": "Description",
+  "SNSmartQuery.basic_predicate.responsible": "Responsible",
+  "SNSmartQuery.basic_predicate.created": "Created on",
+
+  "SNSmartQuery.pred_keyword.about": "About",
+  "SNSmartQuery.pred_keyword.by": "By",
+  "SNSmartQuery.pred_keyword.created": "Created",
+  "SNSmartQuery.pred_keyword.createdBy": "Created By"
+}

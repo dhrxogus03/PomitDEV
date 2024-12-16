@@ -1,0 +1,15 @@
+/** FUN131296 */
+div.shown:not(.fitted) .X3DSEAR_AP {
+  container: sidePanel / inline-size;
+}
+@container (width < 700px) {
+  div.onesearch_sortcontent>div>button.wux-controls-combobox-mainelement>span {
+    display: none;
+  }
+  div.onesearch_sortcontent>div>button.wux-controls-combobox-mainelement .wux-comboBox-icon-placeholder {
+    margin-right: 0px !important;
+  }
+  div.onesearch_sortcontent>.wux-controls-combobox[touch-mode] .wux-controls-combobox-expander {
+    width: 0px;
+  }
+}

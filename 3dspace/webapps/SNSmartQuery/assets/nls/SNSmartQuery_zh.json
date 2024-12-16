@@ -1,0 +1,11 @@
+{
+  "SNSmartQuery.vocab.predicate.swym:postTestTag": "测试后标记",
+  "SNSmartQuery.basic_predicate.label": "标题",
+  "SNSmartQuery.basic_predicate.identifier": "名称",
+  "SNSmartQuery.basic_predicate.modified": "修改日期",
+  "SNSmartQuery.basic_predicate.description": "描述",
+  "SNSmartQuery.basic_predicate.responsible": "负责人",
+  "SNSmartQuery.basic_predicate.created": "创建于",
+  "SNSmartQuery.pred_keyword.about": "关于",
+  "SNSmartQuery.pred_keyword.by": "按"
+}

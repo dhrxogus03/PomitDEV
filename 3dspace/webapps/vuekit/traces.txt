@@ -1,0 +1,78 @@
+
+ Log File : G:\R426\BSF\Vuekit\vuekit.mweb\LocalGenerated\win_b64\_tmp_Build.smaCodeGen1\copy-traces.txt
+
+ WARNING  Compiled with 3 warnings12:20:31 AM
+
+ warning  
+
+asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  vu-kit.common.js (618 KiB)
+
+ warning  
+
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  vu-kit.common (671 KiB)
+      vu-kit.css
+      vu-kit.common.js
+
+
+ warning  
+
+webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+
+ WARNING  Compiled with 3 warnings12:20:31 AM
+
+ warning  
+
+asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  vu-kit.umd.js (618 KiB)
+
+ warning  
+
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  vu-kit.umd (671 KiB)
+      vu-kit.css
+      vu-kit.umd.js
+
+
+ warning  
+
+webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+
+ WARNING  Compiled with 2 warnings12:20:33 AM
+
+ warning  
+
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  vu-kit.umd.min (248 KiB)
+      vu-kit.css
+      vu-kit.umd.min.js
+
+
+ warning  
+
+webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+
+  File                                   Size              Gzipped
+
+  ..\webapps\vuekit\vu-kit.umd.min.js    195.72 KiB        57.77 KiB
+  ..\webapps\vuekit\vu-kit.umd.js        618.41 KiB        118.24 KiB
+  ..\webapps\vuekit\vu-kit.common.js     618.02 KiB        118.12 KiB
+  ..\webapps\vuekit\vuekit.js            0.90 KiB          0.47 KiB
+  ..\webapps\vuekit\vu-kit.css           52.52 KiB         13.97 KiB
+
+  Images and other types of assets omitted.
+

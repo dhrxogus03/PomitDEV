@@ -1,0 +1,14 @@
+{
+  "betaOptions": [
+    {
+      "id": "FUN143768",
+      "title": "Abrir aplicaciones web como pestañas del navegador (BETA)",
+      "description": "Las aplicaciones web de 3DCompass se abrirán en pestañas específicas en lugar de en la ventana de vista previa del panel."
+    },
+    {
+      "id": "FUN136611",
+      "title": "Activar duplicación y sincronización de paneles (BETA)",
+      "description": "Habilite la duplicación de paneles para todos los miembros junto con las funciones de sincronización bajo demanda."
+    }
+  ]
+}

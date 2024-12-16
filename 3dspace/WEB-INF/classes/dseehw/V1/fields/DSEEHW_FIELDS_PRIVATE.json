@@ -1,0 +1,17 @@
+{
+  "dsmveehw:basic.typeDB": {
+    "property": "type",
+    "key": "typeDB",
+    "label": "CRS.common.Label.Attribute.Type",
+    "example": "My Type",
+    "description": "Basic type value"
+  },
+  "dsmveehw:basic.typeNLS": {
+    "property": "type",
+    "key": "typeNLS",
+    "label": "CRS.common.Label.Attribute.Type",
+    "format": "nls_type",
+    "example": "My Type",
+    "description": "Basic type NLS value"
+  }
+}

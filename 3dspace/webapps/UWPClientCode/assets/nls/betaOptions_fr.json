@@ -1,0 +1,14 @@
+{
+  "betaOptions": [
+    {
+      "id": "FUN143768",
+      "title": "Ouvrir les applications Web sous forme d'onglets de navigateur (BETA)",
+      "description": "Les applications Web 3DCompass s'ouvrent dans des onglets dédiés au lieu de la fenêtre d'aperçu du tableau de bord."
+    },
+    {
+      "id": "FUN136611",
+      "title": "Activer la duplication et la synchronisation du tableau de bord (BETA)",
+      "description": "Activez la duplication du tableau de bord pour tous les membres, ainsi que les fonctionnalités de synchronisation à la demande."
+    }
+  ]
+}

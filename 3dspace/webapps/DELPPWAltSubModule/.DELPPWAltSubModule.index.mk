@@ -1,0 +1,11 @@
+m|DELPPWModules\DELPPWAltSubModule.mweb
+b|j|c,m
+b|c|c,m
+v|6.426.1.23326|3.2
+r|G:\R426\BSF\.
+t|win_b64\webapps\DELPPWAltSubModule\DELPPWAltSubModule.js|1700691844|9835
+s|DELPPWModules\DELPPWAltSubModule.mweb\src\AltSubModule.js|1698997064|21720
+u|DELPPWModules\DELPPWAltSubModule.mweb\src\AltSubViewUI.js|1675161127|11709
+u|DELPPWModules\DELPPWAltSubModule.mweb\src\ReplaceByAlternateDialog.js|1652278054|7523
+u|win_b64\code\toolcmds\mkwebconcat.bat|1685139395|287
+u|win_b64\code\toolcmds\terser.bat|1700685953|365

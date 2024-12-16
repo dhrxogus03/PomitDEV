@@ -1,0 +1,92 @@
+{
+  "dsmveehw:attribute.reference.partNumber": {
+    "property": "computed",
+    "key": "PartNumber",
+    "label": "dseehw.Label.Attribute.PartNumber",
+    "example": "1.2.4",
+    "description": "PART Number"
+  },
+  "dsmveehw:attribute.reference.ecu.wakeUpOverBusSupported": {
+    "property": "attribute[EEECU.wakeUpOverBusSupported]",
+    "key": "WakeUpOverBus",
+    "label": "dseehw.Label.Attribute.wakeUpOverBus",
+    "format":"boolean",
+    "example": true,
+    "description": "Sets if the WakeUp Over Bus is supported"
+  },
+  "dsmveehw:attribute.reference.rack.nbOfColumns": {
+    "property": "attribute[EERack.nbOfColumns]",
+    "key": "NumberOfColumns",
+    "label": "dseehw.Label.Attribute.Rack.nbOfCols",
+    "example": 4,
+    "format":"integer",
+    "description": "The number of columns in a EERack"
+  },
+  "dsmveehw:attribute.reference.rack.nbOfRows": {
+    "property": "attribute[EERack.nbOfRows]",
+    "key": "NumberOfRows",
+    "label": "dseehw.Label.Attribute.Rack.nbOfRows",
+    "example": 4,
+    "format":"integer",
+    "description": "The number of rows in a EERack"
+  },
+  "dsmveehw:attribute.reference.rack.nbOfSlotsPerUnit": {
+    "property": "attribute[EERack.nbOfSlotsPerUnit]",
+    "key": "SlotsPerUnit",
+    "label": "dseehw.Label.Attribute.Rack.slotsPerUnit",
+    "example": 4,
+    "format":"integer",
+    "description": "The number of slots per unit in a EERack"
+  },
+  "dsmveehw:attribute.instance.eeecus.comConfigurationGwTimeBase": {
+    "property": "computed",
+    "key": "comConfigurationGwTimeBase",
+    "label": "dseehw.Label.Attribute.EEECUInstance.comConfigurationGwTimeBase",
+    "example": 0.005,
+    "format":"double",
+    "description": "The period between successive calls to Frame forwarding task. Unit: seconds"
+  },
+  "dsmveehw:attribute.instance.eeecus.comConfigurationRxTimeBase": {
+    "property": "computed",
+    "key": "comConfigurationRxTimeBase",
+    "label": "dseehw.Label.Attribute.EEECUInstance.comConfigurationRxTimeBase",
+    "example": 0.005,
+    "format":"double",
+    "description": "The period between successive calls to Frame receiving task. Unit: seconds"
+  },
+  "dsmveehw:attribute.instance.eeecus.comConfigurationTxTimeBase": {
+    "property": "computed",
+    "key": "comConfigurationTxTimeBase",
+    "label": "dseehw.Label.Attribute.EEECUInstance.comConfigurationTxTimeBase",
+    "example": 0.005,
+    "format":"double",
+    "description": "The period between successive calls to Frame sending task. Unit: seconds"
+  },
+  
+   "dsmveehw:attribute.properties.row": {
+    "property": "attribute[EERackPosition.row]",
+    "key": "row",
+    "label": "dseehw.Label.Attribute.row",
+    "example": 1,
+    "format":"integer",
+    "description": "Row"
+  },
+  
+   "dsmveehw:attribute.properties.column": {
+    "property": "attribute[EERackPosition.column]",
+    "key": "column",
+    "label": "dsengelec.Label.Attribute.column",
+    "example": 2,
+    "format":"integer",
+    "description": "Column"
+  },
+  
+   "dsmveehw:attribute.properties.slot": {
+    "property": "attribute[EERackPosition.slot]",
+    "key": "slot",
+    "label": "dsengelec.Label.Attribute.slot",
+    "example": 1,
+    "format":"integer",
+    "description": "Slot"
+  }
+}

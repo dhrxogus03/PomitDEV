@@ -1,0 +1,1 @@
+define("DS/DELWebOERCommonUtils/DELWebOERCommonUtils_fr",{});define("DS/DELWebOERCommonUtils/assets/nls/DELOERCommonServicesComp",{"Warn.Timeout.Message":"La demande de service Web a expiré. Vous pouvez augmenter le délai ou réessayer ultérieurement"});

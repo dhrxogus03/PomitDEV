@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2011. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<!--  Logical Structure  -->
+	<xsd:complexType name="LogicalSystemType">
+		<xsd:annotation>
+			<xsd:documentation>A Logical System is a hierarchical assembly of interconnected sub-systems. It exposes Logical Signals</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="LogicalInstanceType">
+		<xsd:annotation>
+			<xsd:documentation>A Logical Instance corresponds to a usage of a Logical System or a Logical Communication</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--  Logical System Interfaces  -->
+	<!--    -->
+	<xsd:complexType name="LogicalPortType">
+		<xsd:annotation>
+			<xsd:documentation>
+			A Logical Port enables exposing a Logical Signal on a Logical System.
+			There are two kinds of Logical Ports: 
+			-  causal (In, Out and InOut direction) 
+			-  a-causal (no direction)   -  Direction : defines the orientation of a Logical Port
+			.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="PortBase">
+				<xsd:sequence>
+					<xsd:element name="Direction" type="LogicalSignalDirectionEnum"/>
+					<xsd:element name="ExposedSignalInstanceRef" type="ObjectPathRef" minOccurs="0" info:typeRef="LogicalSignalCompositionInstanceType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--   -->
+	<xsd:complexType name="LogicalSignalType">
+		<xsd:annotation>
+			<xsd:documentation>A Signal is an information associated to a Logical System. It specifies the type of data exposed by the Logical System</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="LogicalSignalInstanceBase" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>A Logical Signal Instance corresponds to a usage of a Logical Signal.
+					- The Identifier attribute characterizes the usage of a Logical Signal Instance.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase">
+				<xsd:sequence>
+					<xsd:element name="Identifier" type="AttributeValueStringType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="LogicalSignalCompositionInstanceType">
+		<xsd:annotation>
+			<xsd:documentation>A Composite Signal uses other signal by using a composed contract made of Logical Signal Composition Instance</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="LogicalSignalInstanceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:simpleType name="LogicalSignalDirectionEnum">
+		<xsd:annotation>
+			<xsd:documentation>
+				A Logical Signal associated to a Logical System can have four directions: 
+                     - In:      during execution, signal is received by the logical component
+                     - Out:   during execution, signal is emitted by the logical component
+                     - InOut: during execution, signal can be emitted and received by the logical component.
+                     - No Direction: In this case, port exposes a variable
+                      The connection of such port to another port (also without direction) models a mathematical equality between exposed variable
+
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="In"/>
+			<xsd:enumeration value="Out"/>
+			<xsd:enumeration value="InOut"/>
+			<xsd:enumeration value="NoDirection"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!--    -->
+	<xsd:complexType name="LogicalSignalExpositionInstanceType">
+		<xsd:annotation>
+			<xsd:documentation>
+			The Logical Signal Exposition Instance defines the contract associated to the Signal exposed by a Logical System.
+            The exposition contract provides a direction who is an attribute that defines the orientation of the Logical Signal Exposition Instance.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="LogicalSignalInstanceBase">
+				<xsd:sequence>
+					<xsd:element name="Direction" type="LogicalSignalDirectionEnum"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:element name="LogicalSignalInstance" type="LogicalSignalInstanceBase" abstract="true"/>
+	<xsd:element name="LogicalSignalCompositionInstance" type="LogicalSignalCompositionInstanceType" substitutionGroup="LogicalSignalInstance"/>
+	<xsd:element name="LogicalSignalExpositionInstance" type="LogicalSignalExpositionInstanceType" substitutionGroup="LogicalSignalInstance"/>
+	<!--  Logical Connectivity aspect  -->
+	<!--    -->
+	<xsd:complexType name="LogicalSystemConnectionBase" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>A Logical System Connection enables linking two Logical Signals exposed by two Logical Systems.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ConnectionBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="LogicalConnectedLogicalInstancesType">
+		<xsd:annotation>
+			<xsd:documentation>Describes the Logical connected objects</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ConnectedLogicalInstanceRef" type="ObjectRef" minOccurs="2" maxOccurs="2" info:typeRef="LogicalSystemInstanceType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LogicalConnectionPointsType">
+		<xsd:annotation>
+			<xsd:documentation>Describes the Logical connecting objects</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ConnectionPointRef" type="ObjectPathRef" minOccurs="2" maxOccurs="2" info:typeRef="LogicalSignalInstanceBase LogicalPortType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="LogicalSiblingConnectionType">
+		<xsd:annotation>
+			<xsd:documentation>A Sibling Logical Connection enables link two Logical Signals of two Logical Systems of the same Assembly hierarchie level</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="LogicalSystemConnectionBase">
+				<xsd:sequence>
+					<xsd:element name="ConnectedLogicalInstances" type="LogicalConnectedLogicalInstancesType"/>
+					<xsd:element name="ConnectionPoints" type="LogicalConnectionPointsType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="LogicalParentChildConnectionType">
+		<xsd:annotation>
+			<xsd:documentation>A Parent-Child Connection enables link a Logical Signal of a parent Logical System to a Logical Signal of a child Logical System.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="LogicalSystemConnectionBase">
+				<xsd:sequence>
+					<xsd:element name="ParentLogicalSystemRef" type="ObjectRef" info:typeRef="LogicalSystemType"/>
+					<xsd:element name="ParentLogicalConnectionPointRef" type="ObjectPathRef" info:typeRef="LogicalSignalInstanceBase LogicalPortType"/>
+					<xsd:element name="ChildLogicalInstanceRef" type="ObjectRef" info:typeRef="LogicalInstanceType"/>
+					<xsd:element name="ChildLogicalConnectionPointRef" type="ObjectPathRef" info:typeRef="LogicalSignalInstanceBase LogicalPortType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:element name="LogicalSystemConnection" type="LogicalSystemConnectionBase" abstract="true"/>
+	<xsd:element name="LogicalSiblingConnection" type="LogicalSiblingConnectionType" substitutionGroup="LogicalSystemConnection"/>
+	<xsd:element name="LogicalParentChildConnection" type="LogicalParentChildConnectionType" substitutionGroup="LogicalSystemConnection"/>
+	<!--  Multiplexer / Demultiplexer aspect  -->
+	<xsd:complexType name="LogicalSystemCommunicationBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="LogicalMultiplexerType">
+		<xsd:annotation>
+			<xsd:documentation>When defining composite signals, it is necessary to provide constructor of such type. 
+			The Logical Multiplexer is used for this purpose. It considers several signals for its input and emits as output a composite signal composed of all the input signals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="LogicalSystemCommunicationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="LogicalDemultiplexerType">
+		<xsd:annotation>
+			<xsd:documentation>When defining composite signals, it is necessary to provide destructor of such type.
+			The Logical Demultiplexer is used for this purpose. It considers, as input, one composite signal and emits as its outputs the subsignals of the input signal.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="LogicalSystemCommunicationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:element name="LogicalSystemCommunication" type="LogicalSystemCommunicationBase" abstract="true"/>
+	<xsd:element name="LogicalMultiplexer" type="LogicalMultiplexerType" substitutionGroup="LogicalSystemCommunication"/>
+	<xsd:element name="LogicalDemultiplexer" type="LogicalDemultiplexerType" substitutionGroup="LogicalSystemCommunication"/>
+	<!--  Traceability  -->
+	<!--    -->
+	<xsd:complexType name="LogicalImplementLinkType">
+		<xsd:annotation>
+			<xsd:documentation>A Logical Implement Link enables link objects between the Logical and the Functional domains and may define a working scope or context</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ConnectionBase">
+				<xsd:sequence>
+					<xsd:element name="ImplementingObjectRef" type="ObjectRef" info:typeRef="LogicalSystemType LogicalSignalType"/>
+					<xsd:element name="ImplementedObjectRef" type="ObjectRef" info:typeRef="FunctionalSystemType FunctionalFlowType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="LogicalSubImplementLinkType">
+		<xsd:annotation>
+			<xsd:documentation>A Logical Sub-Implement Link enables link objects between the Logical and the Functional domains in context of a Logical Implement Link</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ConnectionBase">
+				<xsd:sequence>
+					<xsd:element name="ImplementingObjectRef" type="ObjectPathRef" info:typeRef="LogicalInstanceType LogicalSignalInstanceBase LogicalPortType LogicalConnectionBase"/>
+					<xsd:element name="ImplementedObjectRef" type="ObjectPathRef" info:typeRef="LogicalInstanceType FunctionalFlowInstanceBase FunctionalPortType FunctionalConnectionBase"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--  Logical Structure Definition  -->
+	<xsd:complexType name="LogicalStructureType">
+		<xsd:annotation>
+			<xsd:documentation>A Logical Structure defines the Logical architecture of a System</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="LogicalSystem" type="LogicalSystemType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="LogicalInstance" type="LogicalInstanceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="Signal" type="LogicalSignalType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="LogicalSignalInstance" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="LogicalPort" type="LogicalPortType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="LogicalSystemConnection" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="LogicalSystemCommunication" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="LogicalImplementLink" type="LogicalImplementLinkType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="LogicalSubImplementLink" type="LogicalSubImplementLinkType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:element name="LogicalStructure" type="LogicalStructureType" substitutionGroup="XPDMXML_Structure">
+		<!-- Constraints definition related to elements belonging to the LogicalStructure element -->
+		<!-- Not exhaustive because some rules cannot be expressed through xml schema -->
+		
+		<!-- Constraints for Logical Elements -->
+		<xsd:key name="LogicalSystemKey">
+			<xsd:selector xpath="LogicalSystem"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="LogicalSystemOwnedRef" refer="LogicalSystemKey">
+			<xsd:selector xpath="LogicalInstance|LogicalSignalExpositionInstance|LogicalSignalCompositionInstance|LogicalPort|LogicalParentChildConnection|LogicalSiblingConnection|LogicalImplementLink|LogicalSubImplementLink"/>
+			<xsd:field xpath="Owned"/>
+		</xsd:keyref>
+		<xsd:key name="LogicalReferenceKey">
+			<xsd:selector xpath="LogicalSystem|LogicalMultiplexer|LogicalDemultiplexer"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="LogicalInstanceInstancingRef" refer="LogicalReferenceKey">
+			<xsd:selector xpath="LogicalInstance"/>
+			<xsd:field xpath="Instancing"/>
+		</xsd:keyref>
+		<xsd:key name="LogicalSignalKey">
+			<xsd:selector xpath="Signal"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="LogicalSignalInstanceInstancingRef" refer="LogicalSignalKey">
+			<xsd:selector xpath="LogicalSignalExpositionInstance|LogicalSignalCompositionInstance"/>
+			<xsd:field xpath="Instancing"/>
+		</xsd:keyref>
+		<xsd:keyref name="LogicalParentConnectionRef" refer="LogicalSystemKey">
+			<xsd:selector xpath="LogicalParentChildConnection"/>
+			<xsd:field xpath="ParentLogicalSystemRef"/>
+		</xsd:keyref>
+		<xsd:key name="LogicalInstanceKey">
+			<xsd:selector xpath="LogicalInstance"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="LogicalChildConnectionRef" refer="LogicalInstanceKey">
+			<xsd:selector xpath="LogicalParentChildConnection"/>
+			<xsd:field xpath="ChildLogicalInstanceRef"/>
+		</xsd:keyref>
+		<xsd:key name="LogicalSignalInstanceKey">
+			<xsd:selector xpath="LogicalSignalExpositionInstance|LogicalSignalCompositionInstance"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:key name="LogicalSignalCompositionInstanceKey">
+			<xsd:selector xpath="LogicalSignalCompositionInstance"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="LogicalParentChildCnctPtConnectionRef" refer="LogicalSignalInstanceKey">
+			<xsd:selector xpath="LogicalParentChildConnection/ParentLogicalConnectionPointRef|ChildLogicalConnectionPointRef"/>
+			<xsd:field xpath="PathItem"/>
+		</xsd:keyref>
+		<xsd:keyref name="LogicalSiblingInstanceConnectionRef" refer="LogicalInstanceKey">
+			<xsd:selector xpath="LogicalSiblingConnection/ConnectedLogicalInstances"/>
+			<xsd:field xpath="ConnectedLogicalInstanceRef"/>
+		</xsd:keyref>
+		<xsd:keyref name="LogicalSiblingCnctPtConnectionRef" refer="LogicalSignalInstanceKey">
+			<xsd:selector xpath="LogicalSiblingConnection/ConnectionPoints/ConnectionPointRef"/>
+			<xsd:field xpath="PathItem"/>
+		</xsd:keyref>
+		<xsd:keyref name="LogicalPortExposedSignalInstanceRef" refer="LogicalSignalCompositionInstanceKey">
+			<xsd:selector xpath="LogicalPort/ExposedSignalInstanceRef"/>
+			<xsd:field xpath="PathItem"/>
+		</xsd:keyref>
+
+		<!-- Constraints for Implement Link -->
+		<xsd:key name="LogicalIL_INGKey">
+			<xsd:selector xpath="LogicalSystem|Signal"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="LogicalImplementLinkING" refer="LogicalIL_INGKey">
+			<xsd:selector xpath="LogicalImplementLink"/>
+			<xsd:field xpath="ImplementingObjectRef"/>
+		</xsd:keyref>
+		
+		<xsd:key name="FunctionalIL_EDKey">
+			<xsd:selector xpath="FunctionalStructure/FunctionalSystem|FunctionalStructure/Flow"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="LogicalImplementLinkED" refer="FunctionalIL_EDKey">
+			<xsd:selector xpath="LogicalImplementLink"/>
+			<xsd:field xpath="ImplementedObjectRef"/>
+		</xsd:keyref>
+		
+		<!-- Constraints definition related to elements belonging to the LogicalStructure element -->
+		<xsd:key name="LogicalSubIL_INGKey">
+			<xsd:selector xpath="LogicalInstance|LogicalPort|LogicalSignalExpositionInstance"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="LogicalSubImplementLinkING" refer="LogicalSubIL_INGKey">
+			<xsd:selector xpath="LogicalSubImplementLink/ImplementingObjectRef"/>
+			<xsd:field xpath="PathItem"/>
+		</xsd:keyref>
+
+		<xsd:key name="FunctionalSubIL_EDKey">
+			<xsd:selector xpath="FunctionalStructure/FunctionalInstance|FunctionalStructure/FunctionalPort|FunctionalStructure/FunctionalFlowExpositionInstance"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="FunctionalSubImplementLinkED" refer="FunctionalSubIL_EDKey">
+			<xsd:selector xpath="LogicalSubImplementLink/ImplementedObjectRef"/>
+			<xsd:field xpath="PathItem"/>
+		</xsd:keyref>
+		
+	</xsd:element>
+	
+	<!--  -->
+	<!--  Functional Structure  -->
+	<!--    -->
+	<xsd:complexType name="FunctionalSystemType">
+		<xsd:annotation>
+			<xsd:documentation>A Functional System is a hierarchical assembly of interconnected sub-systems. It exposes Functional Flows</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="FunctionalInstanceType">
+		<xsd:annotation>
+			<xsd:documentation>A Functional Instance corresponds to a usage of a Functional System or a Functional Communication</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--  Functional Connectivity aspect  -->
+	<!--    -->
+	<xsd:complexType name="FunctionalPortType">
+		<xsd:annotation>
+			<xsd:documentation>
+			A Functional Port (also called Flow Association) enables exposing a Functional Flow on a Functional System.
+			There are two kinds of Functional Ports: Consumption and Emission.   -  Direction : defines the orientation of a Functional Port
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="PortBase">
+				<xsd:sequence>
+					<xsd:element name="Direction" type="FunctionalFlowDirectionEnum"/>
+					<xsd:element name="ExposedFlowInstanceRef" type="ObjectPathRef" minOccurs="0" info:typeRef="FunctionalFlowCompositionInstanceType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:simpleType name="FunctionalFlowDirectionEnum">
+		<xsd:annotation>
+			<xsd:documentation>Describes the different values of the Direction of the Functional Flow</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Consumption"/>
+			<xsd:enumeration value="Emission"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!--    -->
+	<xsd:simpleType name="FunctionalFlowCategoryEnum">
+		<xsd:annotation>
+			<xsd:documentation>
+				There are two categories of Functional Flow:
+			    Data:    This Flow models the data exchanged between Functional Systems
+			    Control:  This Flow models the change of state message between Functional Systems
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Data"/>
+			<xsd:enumeration value="Control"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!--    -->
+	<xsd:complexType name="FunctionalSystemConnectionBase" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>A functional Connection is an explicit representation of the flow exchange between two FunctionalSystems</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ConnectionBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="FunctionalConnectedSystemInstancesType">
+		<xsd:annotation>
+			<xsd:documentation>Describes the Functional connected objects</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ConnectedFunctionalInstanceRef" type="ObjectRef" minOccurs="2" maxOccurs="2" info:typeRef="FunctionalSystemInstanceType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FunctionalConnectionPointsType">
+		<xsd:annotation>
+			<xsd:documentation>Describes the Functional connecting objects</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ConnectionPointRef" type="ObjectPathRef" minOccurs="2" maxOccurs="2" info:typeRef="FunctionalFlowInstanceBase FunctionalPortType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="FunctionalSiblingConnectionType">
+		<xsd:annotation>
+			<xsd:documentation>A Sibling Functional Connection enables link two Functional Flow of two Functional Systems of the same Assembly hierarchie level</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="FunctionalSystemConnectionBase">
+				<xsd:sequence>
+					<xsd:element name="ConnectedFunctionalInstances" type="FunctionalConnectedSystemInstancesType"/>
+					<xsd:element name="ConnectionPoints" type="FunctionalConnectionPointsType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="FunctionalParentChildConnectionType">
+		<xsd:annotation>
+			<xsd:documentation>A Parent-Child Functional Connection enables link two Functional Flows of two Functional Systems</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="FunctionalSystemConnectionBase">
+				<xsd:sequence>
+					<xsd:element name="ParentFunctionalSystemRef" type="ObjectRef" info:typeRef="FunctionalSystemType"/>
+					<xsd:element name="ParentFunctionalConnectionPointRef" type="ObjectPathRef" info:typeRef="FunctionalFlowInstanceBase FunctionalPortType"/>
+					<xsd:element name="ChildFunctionallnstanceRef" type="ObjectRef" info:typeRef="FunctionalSystemalInstanceType"/>
+					<xsd:element name="ChildFunctionalConnectionPointRef" type="ObjectPathRef" info:typeRef="FunctionalFlowInstanceBase FunctionalPortType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:element name="FunctionalSystemConnection" type="FunctionalSystemConnectionBase" abstract="true"/>
+	<xsd:element name="FunctionalSiblingConnection" type="FunctionalSiblingConnectionType" substitutionGroup="FunctionalSystemConnection"/>
+	<xsd:element name="FunctionalParentChildConnection" type="FunctionalParentChildConnectionType" substitutionGroup="FunctionalSystemConnection"/>
+	<!--  Functional Mux / Demux  -->
+	<xsd:complexType name="FunctionalSystemCommunicationBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="FunctionalMultiplexerType">
+		<xsd:annotation>
+			<xsd:documentation>
+			When defining structured Flows, it is necessary to provide constructor of such flow. 
+			The functional MUX (Multiplexer) is used for this purpose. 
+			The MUX considers several flows for its input and emits as output a structured flow composed of all the input flows.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="FunctionalSystemCommunicationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="FunctionalDemultiplexerType">
+		<xsd:annotation>
+			<xsd:documentation>
+			When defining structured Flows, it is necessary to provide destructor of such flow. 
+			The functional DEMUX (Demultiplexer) is used for this purpose. 
+			The DEMUX takes, as input, one structured flow and emits as its outputs the subflows of the input flow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="FunctionalSystemCommunicationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="FunctionalSystemCommunication" type="FunctionalSystemCommunicationBase" abstract="true"/>
+	<xsd:element name="FunctionalMultiplexer" type="FunctionalMultiplexerType" substitutionGroup="FunctionalSystemCommunication"/>
+	<xsd:element name="FunctionalDemultiplexer" type="FunctionalDemultiplexerType" substitutionGroup="FunctionalSystemCommunication"/>
+	<!--  Functional Interface  -->
+	<xsd:complexType name="FunctionalFlowType">
+		<xsd:annotation>
+			<xsd:documentation>
+			A Functional Flow is the data/service that a Functional System emits or consumes.
+			 It can be consumed by one or several Functional Systems.
+			 There are two categories of flow:
+			      - Data : This Flow models the data exchanged between Functional Systems
+			      - Control : This Flow models the change of state message between Functional Systems
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence>
+					<xsd:element name="Category" type="FunctionalFlowCategoryEnum"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="FunctionalFlowInstanceBase" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>
+			A Functional Flow Instance corresponds to a usage of a Functional Flow.
+				- The Identifier attribute characterizes the usage of a Functional Flow Instance
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase">
+				<xsd:sequence>
+					<xsd:element name="Identifier" type="AttributeValueStringType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="FunctionalFlowExpositionInstanceType">
+		<xsd:annotation>
+			<xsd:documentation>
+			The Functional Flow Exposition Instance defines the contract associated to the Functional Flow exposed by a Function.
+			The exposition contract may provide an direction
+			     - Direction:   defines the orientation of a Functional Flow Exposition Instance
+			 </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="FunctionalFlowInstanceBase">
+				<xsd:sequence>
+					<xsd:element name="Direction" type="FunctionalFlowDirectionEnum"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="FunctionalFlowCompositionInstanceType">
+		<xsd:annotation>
+			<xsd:documentation>A Composite Flow uses other Functional Flows by using a compose contract made of Functional Flow Composition Instance</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="FunctionalFlowInstanceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--   -->
+	<xsd:element name="FunctionalFlowInstance" type="FunctionalFlowInstanceBase" abstract="true"/>
+	<xsd:element name="FunctionalFlowExpositionInstance" type="FunctionalFlowExpositionInstanceType" substitutionGroup="FunctionalFlowInstance"/>
+	<xsd:element name="FunctionalFlowCompositionInstance" type="FunctionalFlowCompositionInstanceType" substitutionGroup="FunctionalFlowInstance"/>
+	<!--  Functional Structure Definition  -->
+	<xsd:complexType name="FunctionalStructureType">
+		<xsd:annotation>
+			<xsd:documentation>A Functional Structure defines the Functional architecture of a System.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="FunctionalSystem" type="FunctionalSystemType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="FunctionalInstance" type="FunctionalInstanceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="Flow" type="FunctionalFlowType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="FunctionalFlowInstance" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="FunctionalPort" type="FunctionalPortType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="FunctionalSystemConnection" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="FunctionalSystemCommunication" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="FunctionalStructure" type="FunctionalStructureType" substitutionGroup="XPDMXML_Structure">
+		<!-- Constraints definition related to elements belonging to the FunctionalStructure element -->
+		<!-- Not exhaustive because some rules cannot be expressed through xml schema -->
+		<!-- Constraints for Functional Elements -->
+		<xsd:key name="FunctionalSystemKey">
+			<xsd:selector xpath="FunctionalSystem"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="FunctionalSystemOwnedRef" refer="FunctionalSystemKey">
+			<xsd:selector xpath="FunctionalInstance|FunctionalFlowInstance|FunctionalPort|FunctionalSystemConnection"/>
+			<xsd:field xpath="Owned"/>
+		</xsd:keyref>
+		<xsd:key name="FunctionalReferenceKey">
+			<xsd:selector xpath="FunctionalSystem|FunctionalSystemCommunication"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="FunctionalInstanceInstancingRef" refer="FunctionalReferenceKey">
+			<xsd:selector xpath="FunctionalInstance"/>
+			<xsd:field xpath="Instancing"/>
+		</xsd:keyref>
+		<xsd:key name="FunctionalFlowKey">
+			<xsd:selector xpath="Flow"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="FunctionalFlowInstanceInstancingRef" refer="FunctionalFlowKey">
+			<xsd:selector xpath="Flow"/>
+			<xsd:field xpath="Instancing"/>
+		</xsd:keyref>
+		<xsd:keyref name="FunctionalParentConnectionRef" refer="FunctionalSystemKey">
+			<xsd:selector xpath="FunctionalParentChildConnection"/>
+			<xsd:field xpath="ParentFunctionalSystemRef"/>
+		</xsd:keyref>
+		<xsd:key name="FunctionalInstanceKey">
+			<xsd:selector xpath="FunctionalInstance"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="FunctionalChildConnectionRef" refer="FunctionalInstanceKey">
+			<xsd:selector xpath="FunctionalParentChildConnection"/>
+			<xsd:field xpath="ChildFunctionalInstanceRef"/>
+		</xsd:keyref>
+		<xsd:key name="FunctionalFlowInstanceKey">
+			<xsd:selector xpath="FunctionalFlowExpositionInstance|FunctionalFlowCompositionInstance"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:key name="FunctionalFlowCompositionInstanceKey">
+			<xsd:selector xpath="FunctionalFlowCompositionInstance"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="FunctionalParentChildCnctPtConnectionRef" refer="FunctionalFlowInstanceKey">
+			<xsd:selector xpath="FunctionalParentChildConnection/ParentFunctionalConnectionPointRef|ChildFunctionalConnectionPointRef"/>
+			<xsd:field xpath="PathItem"/>
+		</xsd:keyref>
+		<xsd:keyref name="FunctionalSiblingInstanceConnectionRef" refer="FunctionalInstanceKey">
+			<xsd:selector xpath="FunctionalSiblingConnection/ConnectedFunctionalInstances"/>
+			<xsd:field xpath="ConnectedFunctionalInstanceRef"/>
+		</xsd:keyref>
+		<xsd:keyref name="FunctionalSiblingCnctPtConnectionRef" refer="FunctionalFlowInstanceKey">
+			<xsd:selector xpath="FunctionalSiblingConnection/ConnectionPoints/ConnectionPointRef"/>
+			<xsd:field xpath="PathItem"/>
+		</xsd:keyref>
+		<xsd:keyref name="FunctionalPortExposedFlowInstanceRef" refer="FunctionalFlowCompositionInstanceKey">
+			<xsd:selector xpath="FunctionalPort/ExposedFlowInstanceRef"/>
+			<xsd:field xpath="PathItem"/>
+		</xsd:keyref>
+	</xsd:element>
+</xsd:schema>

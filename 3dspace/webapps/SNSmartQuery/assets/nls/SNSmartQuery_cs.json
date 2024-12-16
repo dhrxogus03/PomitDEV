@@ -1,0 +1,11 @@
+{
+  "SNSmartQuery.vocab.predicate.swym:postTestTag": "Zveřejnit štítek testu",
+  "SNSmartQuery.basic_predicate.label": "Titul",
+  "SNSmartQuery.basic_predicate.identifier": "Název",
+  "SNSmartQuery.basic_predicate.modified": "Datum změny",
+  "SNSmartQuery.basic_predicate.description": "Popis",
+  "SNSmartQuery.basic_predicate.responsible": "Odpovědná osoba",
+  "SNSmartQuery.basic_predicate.created": "Vytvořeno",
+  "SNSmartQuery.pred_keyword.about": "O aplikaci",
+  "SNSmartQuery.pred_keyword.by": "Od uživatele"
+}

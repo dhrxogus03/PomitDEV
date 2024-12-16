@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2010. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/Info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="1.1">
+					-File creation
+					- Originator element is declared in XPDMXMLCore.xsd 
+					-Creating new types : ManufacturerEquivalentItem, GeneralQualification, EquivalentQualification
+			  </info:change>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--   -->
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLProduct.xsd"/>
+	<!--    -->
+	<!-- ======================================================================================== -->
+	<!--                                                                                                                                                                                  -->
+	<!-- ======================================================================================== -->
+	<xsd:complexType name="ManufacturerEquivalentItemType">
+		<xsd:annotation>
+			<xsd:documentation>
+			Manufacturer Equivalent Item is an extension on Physical Product (VPMReference)
+			extending ProductStructure type.
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="Product3DType">
+				<xsd:sequence>
+					<!-- MEI attributes -->
+					<xsd:element name="ManufacturerPartNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+					<xsd:element name="ManufacturerName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+					<xsd:element name="PartSource" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="PartSourceURL" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- Qualification structure -->
+	<xsd:element name="QualificationStructure" type="QualificationStructureType" substitutionGroup="XPDMXML_Structure"/>
+	<xsd:complexType name="QualificationStructureType">
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="GeneralQualification" type="GeneralQualificationType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="EquivalentQualification" type="EquivalentQualificationType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- Qualification schema -->
+	<xsd:simpleType name="Preferred_Enum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Yes"/>
+			<xsd:enumeration value="No"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="Approved_Orderable_Enum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Yes"/>
+			<xsd:enumeration value="No"/>
+			<xsd:enumeration value=""/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- Qualification Base -->
+	<xsd:complexType name="QualificationBaseType">
+	<xsd:complexContent>
+		<xsd:extension base="ReferenceBase">
+		  <xsd:sequence>
+				<xsd:element name="Preferred" type="Preferred_Enum" default="No" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="Approved" type="Approved_Orderable_Enum" default="" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="Comments" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		  </xsd:sequence>
+		</xsd:extension>
+	  </xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- General Qualification -->
+	<xsd:complexType name="GeneralQualificationType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Qualification of an object irrespective of where the object is used. Can be related to compliance, performance, validation, procurement or Sourcing. ManufacturerEquivalentItemRef points to Target Object (ManufacturerEquivalentItem)
+			</xsd:documentation>
+		</xsd:annotation>
+	  <xsd:complexContent>
+		<xsd:extension base="QualificationBaseType">
+		  <xsd:sequence>
+			<xsd:element name="Orderable" type="Approved_Orderable_Enum" default="" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="LastTimeBuy" type="AttributeValueDateTimeType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="ManufacturerEquivalentItemRef" type="xsd:IDREF" info:typeRef="ReferenceBase" minOccurs="1" maxOccurs="1"/>
+		  </xsd:sequence>
+		</xsd:extension>
+	  </xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- Equivalent Qualification -->
+	<xsd:complexType name="EquivalentQualificationType">
+	  <xsd:annotation>
+			<xsd:documentation>
+			Qualifies two independent objects as equivalent of each other, for e.g. a Manufacturer Equivalent Item can be identified as an equivalent of the Engineering Item.
+			ManufacturerEquivalentItemRef points to Target Object (ManufacturerEquivalentItem)
+			ContextRef points to a Context Object (Engineering Item).
+      </xsd:documentation>
+		</xsd:annotation>
+	  <xsd:complexContent>
+		<xsd:extension base="QualificationBaseType">
+			<xsd:sequence>
+			    <xsd:element name="ManufacturerEquivalentItemRef" type="xsd:IDREF" info:typeRef="ReferenceBase" minOccurs="1" maxOccurs="1"/>
+				<xsd:element name="ContextRef" type="xsd:IDREF" info:typeRef="ReferenceBase" minOccurs="1" maxOccurs="unbounded"/>
+			  </xsd:sequence>
+		</xsd:extension>
+	  </xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

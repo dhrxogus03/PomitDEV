@@ -1,0 +1,104 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+  <xsd:annotation>
+    <xsd:documentation>
+      <info:change version="1.0">
+        -File creation
+        -Creating new types : PCBPhysicalComponentInst, PCBPhysicalComponent, PCB3DPackage, PCBPackageWrap, PCBPackageFootprint
+      </info:change>
+    </xsd:documentation>
+  </xsd:annotation>
+  <!--    -->
+  <xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+  <xsd:include schemaLocation="XPDMXMLProduct.xsd"/>
+  <!--    -->
+  
+  <xsd:simpleType name="BoardSideENUM">
+	<xsd:restriction base="xsd:NMTOKEN">
+		<xsd:enumeration value="Top"/>
+		<xsd:enumeration value="Bottom"/>
+	</xsd:restriction>
+  </xsd:simpleType>  
+  
+  <xsd:simpleType name="PlacementStatusENUM">
+	<xsd:restriction base="xsd:NMTOKEN">
+		<xsd:enumeration value="Placed"/>
+		<xsd:enumeration value="Unplaced"/>
+		<xsd:enumeration value="MCAD"/>
+		<xsd:enumeration value="ECAD"/>		
+	</xsd:restriction>
+  </xsd:simpleType>  
+
+  <xsd:complexType abstract = "true" name = "ProductPCBBase">
+    <xsd:annotation>
+      <xsd:documentation>Base PCB Product</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "Product3DType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+    <xsd:complexType abstract = "true" name = "ProductInstPCBBase">
+    <xsd:annotation>
+      <xsd:documentation>Base PCB ProductInst</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "Product3DInstanceType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!--    -->
+  <xsd:complexType name = "PCBPhysicalComponentInstType">
+    <xsd:annotation>
+      <xsd:documentation>It represents the PCB physical component instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductInstPCBBase">
+	    <xsd:attribute name="PlacementStatus" type="PlacementStatusENUM" default="Placed"/>
+		<xsd:attribute name="BoardSide" type="BoardSideENUM" default="Top"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!--    -->
+  <xsd:complexType name = "PCBPhysicalComponentType">
+    <xsd:annotation>
+      <xsd:documentation>It represents the PCB physical component.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductPCBBase">
+	    <xsd:attribute name="ElecSubType" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!--    -->
+  <xsd:complexType name = "PCB3DPackageType">
+    <xsd:annotation>
+      <xsd:documentation>It represents the PCB 3D package.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductPCBBase">
+	    <xsd:attribute name="ElecSubType" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!--    -->
+  <xsd:complexType name = "PCBPackageWrapType">
+    <xsd:annotation>
+      <xsd:documentation>It represents the PCB package wrap.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductPCBBase">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!--    -->
+  <xsd:complexType name = "PCBPackageFootprintType">
+    <xsd:annotation>
+      <xsd:documentation>It represents the PCB package footprint.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductPCBBase">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  	<!--    -->
+</xsd:schema>

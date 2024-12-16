@@ -1,0 +1,1 @@
+define("DS/DELWebOERCommonUtils/DELWebOERCommonUtils_de",{});define("DS/DELWebOERCommonUtils/assets/nls/DELOERCommonServicesComp",{"Warn.Timeout.Message":"Zeitüberschreitung bei Webserviceanforderung. Erhöhen Sie das Zeitlimit oder versuchen Sie es später erneut"});

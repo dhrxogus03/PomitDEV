@@ -1,0 +1,21 @@
+{
+    "Create_xRevision": "Effectivity based - Create Revision",
+    "Reuse_xRevision": "Effectivity based - Reuse Revision Sequence",
+    "xRevision_Creation_Success": "Revision creation successful",
+    "xRevision_Creation_Error": "Error in creating revision",
+    "Select_Physical_product": "Select Physical Product",
+    "noScopeDefined": "Configuration context not available to define Variability",
+    "Context": "Configuration Context",
+    "revisionControlClassical": "Explicit",
+    "revisionControlEffectivityBased": "Effectivity based",
+    "revisionControlEffectivityBasedUseExisting": "Effectivity based - Use existing graph",
+    "revisionControlEffectivityBasedModel": "Effectivity based - Model",
+    "labelRevisionControl": "Revision mode",
+    "labelControlledBy": "Controlled by",
+    "labelModelCriteria": "Criteria",
+    "revisionInfo": "Define the revision mode of your object",
+    "SelectConfigurationContext": "Select Configuration Context",
+    "ProductState": "Model Version",
+    "ManufacturingPlan": "Manufacturing Plan",
+    "RevisionFacet_NoCFGRole": "Revision mode choice is not available without CFG role to user"
+}

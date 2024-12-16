@@ -1,0 +1,14 @@
+{
+    "betaOptions": [
+        {
+            "id": "FUN143768",
+            "title": "Open Web Apps as Browser Tabs (BETA)",
+            "description": "3DCompass Web apps will open in dedicated tabs instead of Dashboard preview window."
+        },
+        {
+            "id": "FUN136611",
+            "title": "Enable Dashboard Duplication & Synchronization (BETA)",
+            "description": "Enable Dashboard duplication for all members along with on-demand synchronization capabilities."
+        }
+    ]
+}

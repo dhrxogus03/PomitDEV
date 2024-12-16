@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2010. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.11">
+  <xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+  <xsd:include schemaLocation="XPDMXMLProduct.xsd"/>
+  <xsd:annotation>
+    <xsd:documentation>
+      <info:change version="1.0">
+        - Creation
+      </info:change>
+    </xsd:documentation>
+  </xsd:annotation>
+  <!--    -->
+
+  <xsd:group name = "ProductSpaceGroup">
+    <xsd:choice>
+      <xsd:element maxOccurs = "unbounded" minOccurs = "0" ref = "ProductSpaceReferenceBase"/>
+      <xsd:element maxOccurs = "unbounded" minOccurs = "0" ref = "ProductSpaceInstanceBase"/>
+    </xsd:choice>
+  </xsd:group>
+
+  <xsd:element abstract = "true" name = "ProductSpaceReferenceBase" type = "ProductSpaceReferenceBaseType"/>
+  <xsd:complexType abstract = "true" name = "ProductSpaceReferenceBaseType">
+    <xsd:annotation>
+      <xsd:documentation>Base of Space reference object, extends Product</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "Product3DType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <xsd:element abstract = "true" name = "ProductSpaceInstanceBase" type = "ProductSpaceInstanceBaseType"/>
+  <xsd:complexType abstract = "true" name = "ProductSpaceInstanceBaseType">
+    <xsd:annotation>
+      <xsd:documentation>Base of Space instance object, extends ProductInst</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "Product3DInstanceType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType abstract = "true" name = "ProductSpaceElementReferenceBaseType">
+    <xsd:annotation>
+      <xsd:documentation>.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceReferenceBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <xsd:complexType abstract = "true" name = "ProductSpaceElementInstanceBaseType">
+    <xsd:annotation>
+      <xsd:documentation>.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceInstanceBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+      
+  <!--    -->
+  <xsd:element name = "SPP_AbstractSpaceRef" substitutionGroup = "ProductSpaceReferenceBase" type = "AbstractSpaceRefType"/>
+  <xsd:complexType name = "AbstractSpaceRefType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementReferenceBaseType">
+        <xsd:choice maxOccurs = "unbounded" minOccurs = "0">
+          <xsd:element minOccurs = "0" name = "V_StableName" type = "AttributeValueStringType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SPP_SpaceRoot" substitutionGroup = "ProductSpaceReferenceBase" type = "SpaceRootType"/>
+  <xsd:complexType name = "SpaceRootType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "AbstractSpaceRefType">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SSM_SpaceSystem" substitutionGroup = "ProductSpaceReferenceBase" type = "SpaceSystemType"/>
+  <xsd:complexType name = "SpaceSystemType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementReferenceBaseType">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SPP_SpaceFolder" substitutionGroup = "ProductSpaceReferenceBase" type = "SpaceFolderType"/>
+  <xsd:complexType name = "SpaceFolderType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementReferenceBaseType">
+        <xsd:choice maxOccurs = "unbounded" minOccurs = "0">
+          <xsd:element minOccurs = "0" name = "V_StableName" type = "AttributeValueStringType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SPP_AbstractSpaceConcept" substitutionGroup = "ProductSpaceReferenceBase" type = "AbstractSpaceConceptType"/>
+  <xsd:complexType name = "AbstractSpaceConceptType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementReferenceBaseType">
+        <xsd:choice maxOccurs = "unbounded" minOccurs = "0">
+          <xsd:element minOccurs = "0" name = "V_StableName" type = "AttributeValueStringType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+    
+  <xsd:element name = "SPP_SpaceConceptRoot" substitutionGroup = "ProductSpaceReferenceBase" type = "SpaceConceptRootType"/>
+  <xsd:complexType name = "SpaceConceptRootType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "AbstractSpaceConceptType">
+        <xsd:choice maxOccurs = "unbounded" minOccurs = "0">
+          <xsd:element minOccurs = "0" name = "V_UnionOfChildrenMustBeEqualToSpaceRootVolume" type = "AttributeValueBooleanType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SPP_SpaceConceptNode" substitutionGroup = "ProductSpaceReferenceBase" type = "SpaceConceptNodeType"/>
+  <xsd:complexType name = "SpaceConceptNodeType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "AbstractSpaceConceptType">
+        <xsd:choice maxOccurs = "unbounded" minOccurs = "0">
+          <xsd:element minOccurs = "0" name = "V_SpaceAssociated" type = "AttributeValueBooleanType"/>
+          <xsd:element minOccurs = "0" name = "V_UnionOfChildrenMustBeEqualToSpaceVolume" type = "AttributeValueBooleanType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SSM_SpaceRef" substitutionGroup = "ProductSpaceReferenceBase" type = "SpaceRefType"/>
+  <xsd:complexType name = "SpaceRefType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "AbstractSpaceRefType">
+        <xsd:choice maxOccurs = "unbounded" minOccurs = "0">
+          <xsd:element minOccurs = "0" name = "V_Volume" type = "VolumeType"/>
+          <xsd:element minOccurs = "0" name = "V_EstimatedVolume" type = "VolumeType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SSM_DesignSpaceRef" substitutionGroup = "ProductSpaceReferenceBase" type = "DesignSpaceRefType"/>
+  <xsd:complexType name = "DesignSpaceRefType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "SpaceRefType">
+        <xsd:choice maxOccurs = "unbounded" minOccurs = "0">
+          <xsd:element minOccurs = "0" name = "V_FloorArea" type = "VolumeType"/>
+          <xsd:element minOccurs = "0" name = "V_EstimatedFloorArea" type = "VolumeType"/>
+          <xsd:element minOccurs = "0" name = "V_ProjectedFloorArea" type = "VolumeType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SSM_ManufacturingSpaceRef" substitutionGroup = "ProductSpaceReferenceBase" type = "ManufacturingSpaceRefType"/>
+  <xsd:complexType name = "ManufacturingSpaceRefType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "SpaceRefType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SPP_SpaceRootInstance" substitutionGroup = "ProductSpaceInstanceBase" type = "SpaceRootInstanceType"/>
+  <xsd:complexType name = "SpaceRootInstanceType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementInstanceBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <xsd:element name = "SPP_SpaceFolderInstance" substitutionGroup = "ProductSpaceInstanceBase" type = "SpaceFolderInstanceType"/>
+  <xsd:complexType name = "SpaceFolderInstanceType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementInstanceBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name = "SPP_SpaceInstance" substitutionGroup = "ProductSpaceInstanceBase" type = "SpaceInstanceType"/>
+  <xsd:complexType name = "SpaceInstanceType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementInstanceBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <xsd:element name = "SPP_SpaceConceptRootInstance" substitutionGroup = "ProductSpaceInstanceBase" type = "SpaceConceptRootInstanceType"/>
+  <xsd:complexType name = "SpaceConceptRootInstanceType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementInstanceBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <xsd:element name = "SPP_SpaceConceptNodeInstance" substitutionGroup = "ProductSpaceInstanceBase" type = "SpaceConceptNodeInstanceType"/>
+  <xsd:complexType name = "SpaceConceptNodeInstanceType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementInstanceBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+<xsd:element name = "SPP_SpaceSystemInstance" substitutionGroup = "ProductSpaceInstanceBase" type = "SpaceSystemInstanceType"/>
+  <xsd:complexType name = "SpaceSystemInstanceType">
+    <xsd:annotation>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base = "ProductSpaceElementInstanceBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+</xsd:schema>

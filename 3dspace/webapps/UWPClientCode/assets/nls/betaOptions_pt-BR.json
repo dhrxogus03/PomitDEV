@@ -1,0 +1,14 @@
+{
+  "betaOptions": [
+    {
+      "id": "FUN143768",
+      "title": "Abrir aplicativos da Web como guias do navegador (BETA)",
+      "description": "Apps da Web do 3DCompass serão abertos em guias separadas, e não na janela de visualização do painel."
+    },
+    {
+      "id": "FUN136611",
+      "title": "Ativar duplicação e sincronização do painel (BETA)",
+      "description": "Habilite a duplicação do painel para todos os membros, junto com os recursos de sincronização sob demanda."
+    }
+  ]
+}

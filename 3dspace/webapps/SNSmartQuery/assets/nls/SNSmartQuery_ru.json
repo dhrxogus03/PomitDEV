@@ -1,0 +1,11 @@
+{
+  "SNSmartQuery.vocab.predicate.swym:postTestTag": "Тестовый тег публикации",
+  "SNSmartQuery.basic_predicate.label": "Заголовок",
+  "SNSmartQuery.basic_predicate.identifier": "Имя",
+  "SNSmartQuery.basic_predicate.modified": "Дата изменения",
+  "SNSmartQuery.basic_predicate.description": "Описание",
+  "SNSmartQuery.basic_predicate.responsible": "Ответственный",
+  "SNSmartQuery.basic_predicate.created": "Дата создания",
+  "SNSmartQuery.pred_keyword.about": "О",
+  "SNSmartQuery.pred_keyword.by": "Кем"
+}

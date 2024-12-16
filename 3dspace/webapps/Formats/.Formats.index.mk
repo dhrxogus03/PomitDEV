@@ -1,0 +1,10 @@
+m|WebVisualization\Formats.mweb
+b|j|n,m
+b|c|c,m
+v|6.426.4.24134|3.2
+r|G:\R426\BSF\.
+t|win_b64\webapps\Formats\CGRFile.js|1715631380|250235
+s|WebVisualization\Formats.mweb\src\CGRFile.js|1714748352|830642
+t|win_b64\webapps\Formats\Formats.js|1700692055|0
+s|WebVisualization\Formats.mweb\src\Formats.js|1425399768|1
+u|win_b64\code\toolcmds\terser.bat|1700685953|365

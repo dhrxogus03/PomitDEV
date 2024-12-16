@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2014. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLDocument.xsd"/>
+	<!--    -->
+	<xsd:simpleType name="RequirementPriorityENUM">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Pre-assigned"/>
+			<xsd:enumeration value="Low"/>
+			<xsd:enumeration value="Medium"/>
+			<xsd:enumeration value="High"/>
+			<xsd:enumeration value="Urgent"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RequirementDifficultyENUM">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Low"/>
+			<xsd:enumeration value="Medium"/>
+			<xsd:enumeration value="High"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RequirementClassificationENUM">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Constraint"/>
+			<xsd:enumeration value="Functional"/>
+			<xsd:enumeration value="Non-Functional"/>
+			<xsd:enumeration value="None"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RequirementImportanceENUM">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Least Important"/>
+			<xsd:enumeration value="Low"/>
+			<xsd:enumeration value="Medium"/>
+			<xsd:enumeration value="High"/>
+			<xsd:enumeration value="Very High"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- -->
+	<xsd:simpleType name="RequirementContentTypeENUM">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="html"/>
+			<xsd:enumeration value="rtf.gz.b64"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:group name="RequirementContentAttributeGroup">
+		<xsd:sequence>
+			<xsd:element name="ContentType" type="RequirementContentTypeENUM" minOccurs="0"/>
+			<xsd:element name="ContentData" type="AttributeValueStringType" minOccurs="0"/>
+			<xsd:element name="ContentText" type="AttributeValueStringType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<!-- -->
+	<xsd:complexType name="SpecificationTypeBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- -->
+	<!-- -->
+	<xsd:complexType name="RequirementType">
+		<xsd:complexContent>
+			<xsd:extension base="SpecificationTypeBase">
+				<xsd:sequence>
+					<xsd:group ref="RequirementContentAttributeGroup"/>
+					<xsd:element name="Category" type="AttributeValueStringType" minOccurs="0"/>
+					<xsd:element name="Classification" type="RequirementClassificationENUM" minOccurs="0"/>
+					<xsd:element name="DesignatedUser" type="AttributeValueStringType" minOccurs="0"/>
+					<xsd:element name="Difficulty" type="RequirementDifficultyENUM" minOccurs="0"/>
+					<xsd:element ref="Originator" minOccurs="0"/>
+					<xsd:element name="Priority" type="RequirementPriorityENUM" minOccurs="0"/>
+					<xsd:element name="SponsoringCustomer" type="AttributeValueStringType" minOccurs="0"/>
+					<xsd:element name="UserImportance" type="RequirementImportanceENUM" minOccurs="0"/>
+					<xsd:element name="RequirementFTA" type="RequirementFTAType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RequirementFTAType">
+      <xsd:sequence>
+		<xsd:element name="Type" type="AttributeValueStringType" minOccurs="1"/>
+		<xsd:element name="LabelValue" type="AttributeValueStringType" minOccurs="0"/>
+		<xsd:element name="NominalValue" type="AttributeValueStringType" minOccurs="0"/>
+		<xsd:element name="TolLowerLimit" type="AttributeValueStringType" minOccurs="0"/>
+		<xsd:element name="TolUpperLimit" type="AttributeValueStringType" minOccurs="0"/>
+		<xsd:element name="Unit" type="AttributeValueStringType" minOccurs="0"/>
+     </xsd:sequence>
+	</xsd:complexType>
+	<!-- -->
+	<xsd:complexType name="RequirementCommentType">
+		<xsd:complexContent>
+			<xsd:extension base="SpecificationTypeBase">
+				<xsd:sequence>
+					<xsd:group ref="RequirementContentAttributeGroup"/>
+					<xsd:element ref="Originator" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="RequirementChapterType">
+		<xsd:complexContent>
+			<xsd:extension base="SpecificationTypeBase">
+				<xsd:sequence>
+					<xsd:element ref="Originator" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--                 -->
+	<xsd:element name="RequirementSpecification" type="RequirementSpecificationType"/>
+	<xsd:complexType name="RequirementSpecificationType">
+		<xsd:complexContent>
+			<xsd:extension base="DocumentSpecificationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="RequirementRelationBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase">
+				<xsd:sequence>
+					<xsd:element name="RelationshipStatus" type="AttributeValueStringType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RequirementHierarchyRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Requirement to sub-Requirement relation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="RequirementRelationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+	<xsd:complexType name="SpecificationRelationshipBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SpecificationRequirementRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Specification to Requirement relation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SpecificationRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="ChapterCommentRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Chapter to Comment  relation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SpecificationRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SpecificationCommentRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Specification to Comment  relation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SpecificationRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="SpecificationChapterRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Specification to Chapter   relation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SpecificationRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ChapterRequirementRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Chapter to Requirement-  relation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SpecificationRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ChapterHierarchyRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Chapter to Chapter relation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SpecificationRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+	<xsd:complexType name="RequirementStructureType">
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="Specification" type="RequirementSpecificationType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="Requirement" type="RequirementType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="Chapter" type="RequirementChapterType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="Comment" type="RequirementCommentType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="ChapterRelationship" type="SpecificationChapterRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="SpecificationCommentRelationship" type="SpecificationCommentRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="ChapterCommentRelationship" type="ChapterCommentRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="ChapterHierarchyRelationship" type="ChapterHierarchyRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="ChapterRequirementRelationship" type="ChapterRequirementRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="RequirementRelationship" type="SpecificationRequirementRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="RequirementHierarchyRelationship" type="RequirementHierarchyRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="RequirementStructure" type="RequirementStructureType" substitutionGroup="XPDMXML_Structure"/>
+</xsd:schema>

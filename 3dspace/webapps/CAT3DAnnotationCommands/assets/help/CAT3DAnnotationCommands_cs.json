@@ -1,0 +1,19 @@
+{
+"CAT3DAnnotationFilterHdr.Title":"Filtr sad popisů",
+"CAT3DAnnotationFilterHdr.ShortHelp":"Zobrazí nebo skryje panel filtru sad popisů.",
+"CAT3DAnnotationFilterHdr.LongHelp":"Filtrovat můžete sady popisů, popisy zobrazené v 3D oblasti a technologické atributy.",
+"OpenAnnotationFilterBrowser.Title":"Annotation Sets Filter",
+"OpenAnnotationFilterBrowser.ShortHelp":"Displays or hides the Annotation Sets filter panel.",
+"OpenAnnotationFilterBrowser.LongHelp":"You can filter the annotation sets, annotations displayed in the 3D area, and the technological attributes.",
+"CloseAnnotationFilterBrowser.Title":"Annotation Sets Filter",
+"CloseAnnotationFilterBrowser.ShortHelp":"Displays or hides the Annotation Sets filter panel.",
+"CloseAnnotationFilterBrowser.LongHelp":"You can filter the annotation sets, annotations displayed in the 3D area, and the technological attributes.",
+"CAT3DAnnotationOpenFavoriteCtxHdr.Title":"Otevřít v oblíbeném kontextu",
+"CAT3DAnnotationOpenFavoriteCtxHdr.ShortHelp":"Otevřete vybraný 3D tvar v oblíbeném kontextu.",
+"CAT3DAnnotationFilterHdr.WebHelp":"A3iUserMap/a3i-t-Filter.htm",
+"CAT3DAnnotationFilterHdr.WebHelp.ENOR3D_AP":"D3reUserMap/d3re-t-FTADataReview.htm",
+"OpenAnnotationFilterBrowser.WebHelp":"A3iUserMap/a3i-t-Filter.htm",
+"OpenAnnotationFilterBrowser.WebHelp.ENOR3D_AP":"D3reUserMap/d3re-t-FTADataReview.htm",
+"CloseAnnotationFilterBrowser.WebHelp":"A3iUserMap/a3i-t-Filter.htm",
+"CloseAnnotationFilterBrowser.WebHelp.ENOR3D_AP":"D3reUserMap/d3re-t-FTADataReview.htm"
+}

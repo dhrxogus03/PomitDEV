@@ -1,0 +1,1 @@
+define("DS/VCXScenePanelView/VCXScenePanelView_es",{});define("DS/VCXScenePanelView/assets/nls/VCXScenePanelView",{PreviewModeTooltipTogglePlayButton:"Iniciar reproducción automática",PreviewModeTooltipTogglePauseButton:"Pausar reproducción automática",PreviewModeLabelTogglePlayButton:"REPRODUCIR",PreviewModeLabelTogglePauseButton:"PAUSAR"});

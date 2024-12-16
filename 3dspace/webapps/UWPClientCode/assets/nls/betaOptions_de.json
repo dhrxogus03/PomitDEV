@@ -1,0 +1,14 @@
+{
+  "betaOptions": [
+    {
+      "id": "FUN143768",
+      "title": "Web-Apps als Browser-Registerkarten öffnen (BETA)",
+      "description": "3DCompass Web-Apps werden in speziellen Registerkarten statt im Dashboard-Voranzeigefenster geöffnet."
+    },
+    {
+      "id": "FUN136611",
+      "title": "Dashboard-Duplizierung & -Synchronisierung aktivieren (BETA)",
+      "description": "Dashboard-Duplizierung für alle Mitglieder zusammen mit On-Demand-Synchronisierungsfunktionen aktivieren."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+	"defaultFacetCreate" : "Properties",
+	"classificationFacet" : "Classifications",
+	"revisionFacet" : "Revision",
+	"releaseSnapshotFacet" : "Release Snapshot Template",
+	"MaterialFacet" : "Material"
+
+}

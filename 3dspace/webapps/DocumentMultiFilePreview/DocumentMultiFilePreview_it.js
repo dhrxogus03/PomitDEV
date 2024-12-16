@@ -1,0 +1,1 @@
+define("DS/DocumentMultiFilePreview/DocumentMultiFilePreview_it",{});define("DS/DocumentMultiFilePreview/assets/nls/DocumentPreview",{Expand:"Espandi",Close:"Chiudi",Restore_Down:"Ripristina in basso",Download:"Scarica",Download_File:"Scarica file",Download_Document:"Scarica documento",INFORMATION:"Informazioni"});

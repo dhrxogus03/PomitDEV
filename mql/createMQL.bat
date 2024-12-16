@@ -1,0 +1,16 @@
+@echo off
+mkdir 01.attribute
+mkdir 02.type
+mkdir 03.role
+mkdir 04.policy
+mkdir 05.relationship
+mkdir 06.command
+mkdir 07.menu
+mkdir 08.channel
+mkdir 09.portal
+mkdir 10.table
+mkdir 11.form
+mkdir 12.page
+mkdir 13.attribute
+mkdir 14.searchindex
+mkdir 15.bus

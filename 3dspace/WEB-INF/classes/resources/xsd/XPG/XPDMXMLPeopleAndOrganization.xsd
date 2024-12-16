@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2016. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="1.0">
+			- Creation 
+			</info:change>
+    </xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<!-- -->
+	<xsd:complexType name="OrganizationType" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="OrganizationID"   type="AttributeValueStringType"/>
+					<xsd:element name="OrganizationName" type="AttributeValueStringType"/>
+					<xsd:element name="Address"          type="AttributeValueStringType"/>
+					<xsd:element name="PostalCode"       type="AttributeValueStringType"/>
+					<xsd:element name="City"             type="AttributeValueStringType"/>
+					<xsd:element name="StateRegion"      type="AttributeValueStringType"/>
+					<xsd:element name="Country"          type="AttributeValueStringType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- -->
+	<xsd:complexType name="CompanyType">
+		<xsd:complexContent>
+			<xsd:extension base="OrganizationType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- -->
+	<xsd:complexType name="BusinessUnitType">
+		<xsd:complexContent>
+			<xsd:extension base="OrganizationType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- -->
+	<xsd:complexType name="DepartmentType">
+		<xsd:complexContent>
+			<xsd:extension base="OrganizationType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- -->
+	<xsd:complexType name="PlantType">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="PlantID"           type="AttributeValueStringType"/>
+					<xsd:element name="Address1"          type="AttributeValueStringType"/>
+					<xsd:element name="Address2"          type="AttributeValueStringType"/>
+					<xsd:element name="LocationCode"      type="AttributeValueStringType"/>
+					<xsd:element name="City"              type="AttributeValueStringType"/>
+					<xsd:element name="Region"            type="AttributeValueStringType"/>
+					<xsd:element name="Country"           type="AttributeValueStringType"/>
+					<xsd:element name="PlantTimeZone"     type="AttributeValueStringType"/>
+					<xsd:element name="NonProductionDays" type="AttributeValueStringType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- -->
+	<xsd:complexType name="PeopleAndOrganizationStructureType">
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="Company"      type="CompanyType"      minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="BusinessUnit" type="BusinessUnitType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="Department"   type="DepartmentType"   minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="Plant"        type="PlantType"        minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- -->
+	<xsd:element name="PeopleAndOrganizationStructure" type="PeopleAndOrganizationStructureType" substitutionGroup="XPDMXML_Structure"/>
+</xsd:schema>

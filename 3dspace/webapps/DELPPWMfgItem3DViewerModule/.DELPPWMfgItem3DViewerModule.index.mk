@@ -1,0 +1,10 @@
+m|DELPPWModules\DELPPWMfgItem3DViewerModule.mweb
+b|j|c,m
+b|c|c,m
+v|6.426.4.24128|3.2
+r|G:\R426\BSF\.
+t|win_b64\webapps\DELPPWMfgItem3DViewerModule\DELPPWMfgItem3DViewerModule.js|1715111754|8992
+s|DELPPWModules\DELPPWMfgItem3DViewerModule.mweb\src\MfgItem3DViewerModule.js|1714978539|26610
+u|DELPPWModules\DELPPWMfgItem3DViewerModule.mweb\src\ScopedProductSelectionUI.js|1668072418|13975
+u|win_b64\code\toolcmds\mkwebconcat.bat|1685139395|287
+u|win_b64\code\toolcmds\terser.bat|1700685953|365

@@ -1,0 +1,1 @@
+define("DS/DELWebOERCommonUtils/DELWebOERCommonUtils_zh",{});define("DS/DELWebOERCommonUtils/assets/nls/DELOERCommonServicesComp",{"Warn.Timeout.Message":"Web 服务请求超时，您可以增加超时时间或稍后再试"});

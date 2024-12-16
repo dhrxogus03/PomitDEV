@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2016 rel. 2 sp1 (x64) (http://www.altova.com) by EBN (DASSAULT SYSTEMES SE) -->
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2011. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="1.0">
+				- Creation 
+			</info:change>
+			<info:change version="1.1">
+				- Add CADConfiguration and VirtualComponent for Custom Configuration
+			</info:change>
+			<info:change version="1.2">
+				- Added CADInternalEntityType(base of CADConfiguration and VirtualComponent) and updateObjectMode and updateDocumentRelationMode on it.
+			</info:change>
+			<info:change version="1.3">
+				- Removing updateObjectMode from CADInternalEntityType(base of CADConfiguration and VirtualComponent).
+			</info:change>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--    -->
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<xsd:group name="XCADReferenceGroup">
+		<xsd:sequence>
+			<xsd:element name="ModelName" type="AttributeValueStringType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>FileName without extension </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ItemName" type="AttributeValueStringType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Stable Name of item in CAD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="xCADID" type="AttributeValueStringType" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>GUID of the CAD Document</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:simpleType name="CADOriginEnum">
+		<xsd:annotation>
+			<xsd:documentation>To list the different xCAD</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="INVENTOR"/>
+			<xsd:enumeration value="AUTOCAD"/>
+			<xsd:enumeration value="NX"/>
+			<xsd:enumeration value="CREO"/>
+			<xsd:enumeration value="xCAD"/>
+			<xsd:enumeration value="SOLIDEDGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ItemOfLinkType">
+		<xsd:annotation>
+			<xsd:documentation>ItemOfLink is the Link from Family to each Configuration/Item</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:element name="From" type="xsd:IDREF" minOccurs="1" maxOccurs="1" info:typeRef="ObjectBase">
+						<xsd:annotation>
+							<xsd:documentation>XMLID of CADFamily</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="To" type="xsd:IDREF" minOccurs="1" maxOccurs="1" info:typeRef="ObjectBase">
+						<xsd:annotation>
+							<xsd:documentation>XMLID of Component</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="IsItemActive" type="AttributeValueBooleanType">
+						<xsd:annotation>
+							<xsd:documentation>IsItemActive enables to show the active configuration</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="LinkTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation>To describe the kind of possible link</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="FileToFile"/>
+			<xsd:enumeration value="DerivedComponent"/>
+			<xsd:enumeration value="Drawing"/>
+			<xsd:enumeration value="Presentation"/>
+			<xsd:enumeration value="Attachment"/>
+			<xsd:enumeration value="DrawingChild"/>
+			<xsd:enumeration value="DerivedOutput"/>
+			<xsd:enumeration value="CADInsertedObject"/>
+			<xsd:enumeration value="Format"/>
+			<xsd:enumeration value="CADDrawing"/>
+			<xsd:enumeration value="AssociativeLink"/>
+			<xsd:enumeration value="WeldmentLink"/>
+			<xsd:enumeration value="MakeFrom"/>
+			<xsd:enumeration value="MemberOf"/>
+			<xsd:enumeration value="MdlDependency"/>
+			<xsd:enumeration value="Merged"/>
+			<xsd:enumeration value="Suppressed"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="CADRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>CADRelationship makes the Relation between 2 kinds of Assembly or Part </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:element name="From" type="xsd:IDREF" minOccurs="1" maxOccurs="1" info:typeRef="ObjectBase">
+						<xsd:annotation>
+							<xsd:documentation>From : XMLID of Object</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="To" type="xsd:IDREF" minOccurs="1" maxOccurs="1" info:typeRef="ObjectBase">
+						<xsd:annotation>
+							<xsd:documentation>To : XMLID of Object</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="LinkType" type="LinkTypeEnum" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>LinkType</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="CADOrigin" type="CADOriginEnum" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>CADOrigin</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="NonPSCADDocType">
+		<xsd:annotation>
+			<xsd:documentation>
+        NonPSCADDocType is made to support associated documents for attachment
+            -  FileRef references a file associated to the CAD Assembly
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:group ref="XCADReferenceGroup" minOccurs="0"/>
+					<xsd:element name="FileRef" type="ObjectRef" minOccurs="0" info:typeRef="FileType"/>
+					<xsd:element name="CADLink" type="CADLinkType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:attribute name="CADOrigin" type="CADOriginEnum" use="optional"/>
+				<xsd:attribute name="updateFileMode" type="UpdateFileModeEnum" use="optional" default="IgnoreExistingNotProvided"/>				
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PresentationForCADDocType">
+		<xsd:annotation>
+			<xsd:documentation>
+        CADPresentationFamilyType is made to support Presentation (.ipn file for INVENTOR).
+            -  FileRef references a file associated to the CAD Presentation
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="NonPSCADDocType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AttachmentForCADDocType">
+		<xsd:annotation>
+			<xsd:documentation>
+        CADAttachmentFamilyType is made to support associated documents for attachment
+            -  FileRef references a file associated to the CAD Assembly
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="NonPSCADDocType">			
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>	
+
+    <xsd:complexType name="DefinitionForDrawingType">
+		<xsd:annotation>
+			<xsd:documentation>
+        DefinitionForDrawing is made to support associated documents for attachment
+            -  FileRef references a file associated to the Drawing Format
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="NonPSCADDocType">		
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>	
+
+
+	<xsd:complexType name="CADConfigurationsType">
+		<xsd:sequence>
+			<xsd:element name="CADConfiguration" type="xsd:IDREF" info:typeRef="CADConfigurationType" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="mappingType" type="xsd:string" use="optional"/>
+	</xsd:complexType>	
+
+
+	<xsd:complexType name="CADConfigurationType">	
+		<xsd:complexContent>
+			<xsd:extension base="CADInternalEntityType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="VirtualComponentsType">
+		<xsd:sequence>
+			<xsd:element name="VirtualComponent" type="xsd:IDREF" info:typeRef="VirtualComponentType" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="mappingType" type="xsd:string" use="optional"/>
+	</xsd:complexType>	
+
+	<xsd:complexType name="VirtualComponentType">	
+		<xsd:complexContent>
+			<xsd:extension base="CADInternalEntityType">
+				<xsd:attribute name="modelName" type="xsd:string" use="required"/>		
+			</xsd:extension>
+		</xsd:complexContent>	
+	</xsd:complexType>
+	
+	<xsd:complexType name="CADInternalEntityType" abstract="true">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="Description" type="AttributeValueStringType" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:group ref="ObjectPropertiesGroup" minOccurs="0"/>
+		</xsd:choice>	
+		<xsd:attribute name="configurationName" type="xsd:string" use="required" />
+		<xsd:attribute name="id" type="xsd:ID" use="required"/>
+		<xsd:attribute name="updateDocumentRelationMode" type="UpdateStructureModeEnum" use="optional" default="RemoveExistingNotProvided"/>		
+	</xsd:complexType>
+</xsd:schema>

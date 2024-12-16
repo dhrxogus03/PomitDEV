@@ -1,0 +1,12 @@
+m|DELMFNApp\DELMFNAfrCommands.mweb
+b|j|c,m
+b|c|c,m
+v|6.426.1.23326|3.2
+r|G:\R426\BSF\.
+t|win_b64\webapps\DELMFNAfrCommands\DELMFNAfrCommands.js|1700691828|2322
+s|DELMFNApp\DELMFNAfrCommands.mweb\src\AssignProductCmd.js|1679412603|2014
+u|DELMFNApp\DELMFNAfrCommands.mweb\src\CreateMfgItemAndLinkAltSubstCmd.js|1679412603|2004
+u|DELMFNApp\DELMFNAfrCommands.mweb\src\CreateMfgItemAndResultingProductCmd.js|1679412603|2216
+u|DELMFNApp\DELMFNAfrCommands.mweb\src\CreateMfgItemAndScopeCmd.js|1679412603|2150
+u|win_b64\code\toolcmds\mkwebconcat.bat|1685139395|287
+u|win_b64\code\toolcmds\terser.bat|1700685953|365

@@ -1,0 +1,13 @@
+m|DELWKOApp\DELWKONavigationServices.mweb
+b|j|c,m
+b|c|c,m
+v|6.426.4.24111|3.2
+r|G:\R426\BSF\.
+t|win_b64\webapps\DELWKONavigationServices\DELWKONavigationServices.js|1713579083|93174
+s|DELWKOApp\DELWKONavigationServices.mweb\src\DELWKONavigateOnCloud.js|1713458221|34706
+u|DELWKOApp\DELWKONavigationServices.mweb\src\DELWKONavigateOnDB.js|1710980191|51174
+u|DELWKOApp\DELWKONavigationServices.mweb\src\DELWKONavigateOnIndex.js|1711040225|248016
+u|DELWKOApp\DELWKONavigationServices.mweb\src\DELWKONavigateUtil.js|1710970775|31426
+u|DELWKOApp\DELWKONavigationServices.mweb\src\DELWKOPathSRParser.js|1679518530|34032
+u|win_b64\code\toolcmds\mkwebconcat.bat|1685139395|287
+u|win_b64\code\toolcmds\terser.bat|1700685953|365

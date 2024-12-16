@@ -1,0 +1,3 @@
+<meta charset="UTF-8"/>
+VPMPrequisitesNotSatisfied.Title="Fehlende Voraussetzung";
+VPMPrequisitesNotSatisfied.Text="Multi-Discipline Collaboration Platform wurde in dieser Installation nicht erkannt.\nDies ist eine Voraussetzung für das Einrichten des Anschlusses für Apriso.\nInstallieren Sie die Multi-Discipline Collaboration Platform.";

@@ -1,0 +1,1 @@
+define("DS/DELWebOERCommonUtils/DELWebOERCommonUtils_en",{});define("DS/DELWebOERCommonUtils/assets/nls/DELOERCommonServicesComp",{"Warn.Timeout.Message":"Web service request timed out, you can increase the timeout or try after some time"});

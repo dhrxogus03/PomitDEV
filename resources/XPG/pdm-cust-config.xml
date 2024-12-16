@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XPGCustConfig SourceSiteID="V6R2015x" SchemaVersion="V6R2013x" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="pdm-cust-config.xsd">
+<ObjectsConfig domain="BOM" >  			
+</ObjectsConfig>
+<LifecycleConfig>
+	<Lifecycle ObjectType="policy_ECPart">
+		<LifecycleStateMap>
+			<MapEntry LocalName="Preliminary" RemoteName="In Work" />
+			<MapEntry LocalName="Review" RemoteName="Review" />		
+			<MapEntry LocalName="Approved" RemoteName="Approved" />
+			<MapEntry LocalName="Release" RemoteName="Released" />	
+		</LifecycleStateMap>			
+	</Lifecycle>  
+	<Lifecycle ObjectType="policy_DevelopmentPart">
+		<LifecycleStateMap>
+			<MapEntry LocalName="Create" RemoteName="In Work" />
+			<MapEntry LocalName="Peer Review" RemoteName="Review" />	   
+			<MapEntry LocalName="Complete" RemoteName="Approved" />
+		</LifecycleStateMap>			
+	</Lifecycle>	
+	<Lifecycle ObjectType="policy_DrawingPrint">
+		<LifecycleStateMap>
+			<MapEntry LocalName="Preliminary" RemoteName="InWork" />
+			<MapEntry LocalName="Review" RemoteName="UnderReview" />
+			<MapEntry LocalName="Approved" RemoteName="Approved" />
+			<MapEntry LocalName="Release" RemoteName="Released" />
+		</LifecycleStateMap>
+	</Lifecycle>
+	<Lifecycle ObjectType="policy_Document">
+		<LifecycleStateMap>
+			<MapEntry LocalName="PRIVATE" RemoteName="PRIVATE" />
+			<MapEntry LocalName="IN_WORK" RemoteName="IN_WORK" />
+			<MapEntry LocalName="FROZEN" RemoteName="FROZEN" />
+			<MapEntry LocalName="RELEASED" RemoteName="RELEASED" />
+			<MapEntry LocalName="OBSOLETE" RemoteName="OBSOLETE" />
+		</LifecycleStateMap>				
+	</Lifecycle>
+</LifecycleConfig>
+</XPGCustConfig>

@@ -1,0 +1,108 @@
+{
+  "DELLmiWorkOrderReference" :
+  {
+	   "title" : "PLM_ExternalID",
+     "name" : "V_Name",
+     "createdBy" : "owner",
+     "createdDate" : "originated",
+     "lastModifiedDate" : "modified",
+     "description": "V_description",
+     "type" : "type",
+     "state": "current",
+     "dueDate": "V_DueDate",
+     "earliestStartDate": "V_EarliestStartDate",
+     "targetStartDate": "V_TargetStartDate",
+     "targetEndDate": "V_TargetEndDate",
+     "plannedStartDate": "V_PlannedStartDate",
+     "plannedEndDate": "V_PlannedEndDate",
+     "actualStartDate": "V_ActualStartDate",
+     "actualEndDate": "V_ActualEndDate",
+     "scheduledStartDate": "V_ScheduledStartDate",
+     "scheduledEndDate": "V_ScheduledEndDate",
+     "calculatedDueDate": "V_CalculatedDueDate",
+     "revision": "revision"
+  },
+  "DELLmiProductionPlanReference" :
+  {
+    "title" : "V_Name",
+    "createdBy" : "owner",
+    "createdDate" : "originated",
+    "lastModifiedDate" : "modified",
+    "description": "V_description",
+    "type" : "type",
+    "state": "current",
+    "revision": "revision"
+  },
+  "DELLmiExecHeaderOperationInstance" :
+  {
+    "title" : "PLM_ExternalID",
+    "createdBy" : "owner",
+    "createdDate" : "originated",
+    "lastModifiedDate" : "modified",
+    "description": "V_description",
+    "type" : "type",
+    "state": "current",
+    "revision": "revision"
+  },
+  "DELLmiExecHeaderOperationReference" :
+  {
+   "title" : "V_Name",
+   "description": "V_description",
+   "type" : "type",
+   "createdBy" : "owner",
+   "createdDate" : "originated",
+   "lastModifiedDate" : "modified",
+   "state": "current",
+   "scheduled": "V_Scheduled",
+	 "interruptible": "V_Interruptible",
+	 "preparationTime": "V_PreparationTime",
+	 "isTimeProportionalToQty": "V_IsTimeProportionalToQty",
+	 "remainingTime": "V_RemainingTime",
+	 "actualTime": "V_ActualTime",
+	 "estimatedTime": "V_EstimatedTime",
+	 "targetStartDate": "V_TargetStartDate",
+	 "targetEndDate": "V_TargetEndDate",
+	 "plannedStartDate": "V_PlannedStartDate",
+	 "plannedEndDate": "V_PlannedEndDate",
+	 "scheduledStartDate": "V_ScheduledStartDate",
+	 "scheduledEndDate": "V_ScheduledEndDate",
+	 "actualStartDate": "V_ActualStartDate",
+	 "actualEndDate": "V_ActualEndDate",
+	 "onHoldComment": "V_OnHoldComment",
+	 "quantityToBeProducedPerTime": "V_QuantityToBeProducedPerTime",
+	 "minStartDateUser": "V_MinStartDateUser",
+	 "minStartDateRawMaterial": "V_MinStartDateRawMaterial",
+	 "minStartDateSemiFinished": "V_MinStartDateSemiFinished",
+	 "minStartDateAuto": "V_MinStartDateAuto",
+   "revision": "revision"
+  },
+  "DELLmiOperationPPRInstance" :
+  {
+    "title" : "PLM_ExternalID",
+    "createdBy" : "owner",
+    "createdDate" : "originated",
+    "lastModifiedDate" : "modified",
+    "description": "V_description",
+    "icontype" : "type",
+    "state": "current",
+    "revision": "revision"
+  },
+  "DELLmiOperationPPRReference" :
+  {
+   "title" : "V_Name",
+   "description": "V_description",
+   "icontype" : "type",
+   "createdBy" : "owner",
+   "createdDate" : "originated",
+   "lastModifiedDate" : "modified",
+   "state": "current",
+   "revision": "revision"
+ },
+  "DELLmiExecTimeConstraintRelation" : {
+    "delay" : "V_Delay",
+		"delayMode" : "V_DelayMode",
+		"dependencyType" : "V_DependencyType",
+	  "isOptional" : "V_OptionalTimeConstraint",
+		"resourceConstraint" : "V_ResourceConstraint"
+  }
+}

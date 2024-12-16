@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2010. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="2.0">
+			-Adding new attribute for Parameter : displayUnit
+			</info:change>
+    </xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<!-- Parameter Type-->
+	<xsd:simpleType name="IntervalValueNumericBoundingENUM">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="min"/>
+			<xsd:enumeration value="max"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="IntervalValueNumericInclusionENUM">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="inclusive"/>
+			<xsd:enumeration value="exclusive"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="ValuationEnum">
+		<xsd:annotation>
+			<xsd:documentation>A parameter can be one of the three following kinds: NotSet / Simple / Multiple</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="NotSet">
+				<xsd:annotation>
+					<xsd:documentation>NotSet - the parameter is not set</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Simple">
+				<xsd:annotation>
+					<xsd:documentation>Simple - the parameter has a simple value</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Multiple">
+				<xsd:annotation>
+					<xsd:documentation>Multiple - the parameter has multiple values</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="ParameterType">
+		<xsd:annotation>
+			<xsd:documentation>        
+				Value of the parameter; it must be formatted accordingly with its type: ValueString, ValueInteger, ValueBoolean, ValueDouble
+						 If the value is not set, this means that the parameter is unset.
+				BoundingValues				
+					MinValueDouble, MaxValueDouble and MinValueInteger,MaxValueInteger define the bounds of the numerica interval. Bounds are inclusivel: a minimum value can be specified for numeric parameter 
+					MaxValueDouble, MaxValueInteger: a maximum value can be specified for numeric parameter 
+				
+				AuthorizedValues: a list of authorized values can be specified; all values in the list are formatted accordingly with the type of the parameter :
+						 ValueString, ValueInteger,  ValueDouble
+					if AuthorizedValues field is present,  the Value must be defined and included in this list.				
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:choice minOccurs="0">
+						<xsd:element name="ValueString" type="AttributeValueStringType"/>
+						<xsd:element name="ValueInteger" type="AttributeValueIntegerType"/>
+						<xsd:element name="ValueBoolean" type="AttributeValueBooleanType"/>
+						<xsd:element name="ValueDouble" type="AttributeValueDoubleType"/>
+					</xsd:choice>
+					<xsd:element name="BoundingValues" minOccurs="0">
+						<xsd:complexType>
+							<xsd:choice minOccurs="0">
+								<xsd:sequence>
+									<xsd:element name="MinValueDouble">
+										<xsd:complexType>
+											<xsd:complexContent>
+												<xsd:extension base="AttributeValueDoubleType">
+													<xsd:attribute name="isExclusive" type="xsd:boolean" use="optional" default="false"/>
+												</xsd:extension>
+											</xsd:complexContent>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="MaxValueDouble">
+										<xsd:complexType>
+											<xsd:complexContent>
+												<xsd:extension base="AttributeValueDoubleType">
+													<xsd:attribute name="isExclusive" type="xsd:boolean" use="optional" default="false"/>
+												</xsd:extension>
+											</xsd:complexContent>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:sequence>
+									<xsd:element name="MinValueInteger">
+										<xsd:complexType>
+											<xsd:complexContent>
+												<xsd:extension base="AttributeValueIntegerType">
+													<xsd:attribute name="isExclusive" type="xsd:boolean" use="optional" default="false"/>
+												</xsd:extension>
+											</xsd:complexContent>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="MaxValueInteger">
+										<xsd:complexType>
+											<xsd:complexContent>
+												<xsd:extension base="AttributeValueIntegerType">
+													<xsd:attribute name="isExclusive" type="xsd:boolean" use="optional" default="false"/>
+												</xsd:extension>
+											</xsd:complexContent>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:choice>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="AuthorizedValues" minOccurs="0">
+						<xsd:complexType>
+							<xsd:choice>
+								<xsd:element name="ValueString" type="AttributeValueStringType" maxOccurs="unbounded"/>
+								<xsd:element name="ValueInteger" type="AttributeValueIntegerType" maxOccurs="unbounded"/>
+								<xsd:element name="ValueDouble" type="AttributeValueDoubleType" maxOccurs="unbounded"/>
+							</xsd:choice>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="magnitude" type="MagnitudeEnum" use="required"/>
+				<xsd:attribute name="displayUnit" type="UnitEnum" use="optional"/>
+				<xsd:attribute name="valuation" type="ValuationEnum" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="Parameter" type="ParameterType"/>
+	<!-- Relationships-->
+	<xsd:complexType name="ParameterRelationshipBase" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>Object-Parameter Relation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ParameterUsageRelationshipType">
+		<xsd:complexContent>
+			<xsd:extension base="ParameterRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ParameterAggregationRelationshipType">
+		<xsd:complexContent>
+			<xsd:extension base="ParameterRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="ParameterRelationship" type="ParameterRelationshipBase" abstract="true"/>
+	<xsd:element name="ParameterUsageRelationship" type="ParameterUsageRelationshipType" substitutionGroup="ParameterRelationship"/>
+	<xsd:element name="ParameterAggregationRelationship" type="ParameterAggregationRelationshipType" substitutionGroup="ParameterRelationship"/>
+</xsd:schema>

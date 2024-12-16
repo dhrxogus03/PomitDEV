@@ -1,0 +1,11 @@
+m|DELWKOApp\DELWKOModelBehaviors.mweb
+b|j|c,m
+b|c|c,m
+v|6.426.4.24111|3.2
+r|G:\R426\BSF\.
+t|win_b64\webapps\DELWKOModelBehaviors\DELWKOModelBehaviors.js|1713579079|36855
+s|DELWKOApp\DELWKOModelBehaviors.mweb\src\DELWKOLinkBehavior.js|1713287652|54977
+u|DELWKOApp\DELWKOModelBehaviors.mweb\src\DELWKOModelBehavior.js|1708700637|73176
+u|DELWKOApp\DELWKOModelBehaviors.mweb\src\DELWKOProductFlowBehavior.js|1666298921|14193
+u|win_b64\code\toolcmds\mkwebconcat.bat|1685139395|287
+u|win_b64\code\toolcmds\terser.bat|1700685953|365

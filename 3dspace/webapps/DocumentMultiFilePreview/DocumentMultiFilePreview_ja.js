@@ -1,0 +1,1 @@
+define("DS/DocumentMultiFilePreview/DocumentMultiFilePreview_ja",{});define("DS/DocumentMultiFilePreview/assets/nls/DocumentPreview",{Expand:"展開",Close:"閉じる",Restore_Down:"リストア ダウン",Download:"ダウンロード",Download_File:"ファイルをダウンロード",Download_Document:"ドキュメントをダウンロード",INFORMATION:"情報"});

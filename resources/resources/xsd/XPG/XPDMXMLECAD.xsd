@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2011. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="1.0">
+				- Creation : declaration PCBContext
+			</info:change>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--    -->
+  <xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+  	
+	
+	
+<xsd:complexType name="PCBContextType">
+		<xsd:annotation>
+			<xsd:documentation>PCBContextType exposes one and only one single ECAD Document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent >
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:element name="FileRef" type="ObjectRef" minOccurs="0" info:typeRef="FileType"/>
+					<xsd:element name="CADLink" type="CADLinkElementType" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+				<xsd:attribute name="CADFileOrigin" type="xsd:string" use="required"/>
+                                <xsd:attribute name="updateFileMode" type="UpdateFileModeEnum" use="optional" default="IgnoreExistingNotProvided"/>                           				
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>  
+  
+    
+	<xsd:complexType name="CADLinkElementType">
+		<xsd:annotation>
+			<xsd:documentation>CADLinkElementType describes the link type and it's pointing type</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:IDREF">
+			<xsd:attribute name="CADLinkType" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>  
+	
+	<xsd:element name="PCBContext" type="PCBContextType"/>
+</xsd:schema>

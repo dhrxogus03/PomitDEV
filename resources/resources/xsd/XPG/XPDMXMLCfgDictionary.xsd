@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2011. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+<xsd:annotation>
+	<xsd:documentation>
+		<info:change version="1.0">
+        - Creation
+		</info:change>
+		<info:change version="1.1">
+        - Adding HardwareProduct SoftwareProduct ServiceProduct
+		</info:change>
+		<info:change version="1.2">
+        - Adding attribute isObjectInserted on Product to support insert before the product
+		</info:change>
+		<info:change version="1.3">
+        - Adding EffectivityMatrixLinks on Product to support effectivity matrix
+		- Adding attribute updateMatrixCompositionRelation on Product to support update of effectivity matrix
+		</info:change>
+	</xsd:documentation>
+</xsd:annotation>
+	<!--  		-->
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<!--    -->
+	<xsd:simpleType name="ConfigurationOptionSelectionENUM">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Single"/>
+			<xsd:enumeration value="Multiple"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ConfigurationFeatureRelationshipUsageENUM">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Must"/>
+			<xsd:enumeration value="May"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ConfigurationFeatureRelationshipInclusionRuleENUM">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Exclusion"/>
+			<xsd:enumeration value="Inclusion"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ConfigurationFeatureAllocationTypeENUM">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Standard"/>
+			<xsd:enumeration value="Optional"/>
+			<xsd:enumeration value="Required"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ConfigurationFeatureDefaultSelectionENUM">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Yes"/>
+			<xsd:enumeration value="No"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!--               -->
+	<xsd:group name="ConfigurationMarketingGroup">
+		<xsd:sequence>
+			<xsd:element name="MarketingName" type="AttributeValueStringType" minOccurs="0"/>
+			<xsd:element name="MarketingText" type="AttributeValueStringType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:complexType name="ConfigurationFeatureRelationshipBase" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>Abstract type for Feature and Option relationships</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase">
+				<xsd:sequence>
+					<xsd:element name="DefaultSelection" type="ConfigurationFeatureDefaultSelectionENUM" default="No" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConfigurationFeatureBase" abstract="false">
+		<xsd:annotation>
+			<xsd:documentation>Abstract type for Feature and Options</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence>
+					<xsd:element ref="Originator" minOccurs="0"/>
+					<xsd:element name="DisplayName" type="AttributeValueStringType" minOccurs="0"/>
+					<xsd:element name="DisplayText" type="AttributeValueStringType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConfigurationFeatureType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigurationFeatureBase">
+				<xsd:attribute name="selectionType" type="ConfigurationOptionSelectionENUM" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConfigurationOptionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigurationFeatureBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConfigurationFeatureRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Relation between a GovernanceProductType and a ConfigurationFeatureType.
+				ConfigurationFeatureType can be instanciated only once. It can not be resued by other GovernanceProductType
+				</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ConfigurationFeatureRelationshipBase">
+				<xsd:attribute name="usage" type="ConfigurationFeatureRelationshipUsageENUM" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConfigurationOptionRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Relation between a ConfiguratinFeatureType and a ConfigurationOptionType</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>Relation between a ConfigurationFeature and a ConfigurationOption</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="ConfigurationFeatureRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--                -->
+	<xsd:complexType name="GovernanceModelElementEvolutionBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence>
+					<xsd:choice minOccurs="0">
+						<xsd:element name="ModelRef" type="xsd:IDREF" />
+						<xsd:element name="VersionedFrom" type="xsd:IDREF" />
+						<xsd:element name="DerivedFrom" type="xsd:IDREF" />
+					</xsd:choice>
+					<xsd:element ref="Originator" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	
+	
+	<xsd:complexType name="SelectionsType">		
+		<xsd:sequence>
+			<xsd:element name="Selection" maxOccurs="unbounded" minOccurs="1">
+				<xsd:complexType>					
+					<xsd:sequence>
+						<xsd:element name="SelectedOption" type="xsd:IDREF" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+					<xsd:attribute name="feature" type="xsd:IDREF" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	    
+
+	<xsd:complexType name="ModelCompositionsType">
+		<xsd:annotation>
+			<xsd:documentation>ModelCompositionsType defines Model associtated(Link) with the Model</xsd:documentation>
+		</xsd:annotation>          
+		<xsd:sequence>
+			<xsd:element name="ModelComposition" type="xsd:IDREF" minOccurs="1" maxOccurs="unbounded" info:typeRef="ModelType"/>
+		</xsd:sequence>           
+	</xsd:complexType>
+
+	
+	<xsd:simpleType name="ProductConfigurationCompletenessStatusENUM">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Complete"/>
+			<xsd:enumeration value="Partial"/>
+			<xsd:enumeration value="Hybrid"/>
+			<xsd:enumeration value=""/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="ProductConfigurationProductConfigurationPurposeENUM">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Evaluation"/>
+			<xsd:enumeration value="Order"/>
+			<xsd:enumeration value="Accessory"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="ProductConfigurationRuleEvaluationModeENUM">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Incompatibilities"/>
+			<xsd:enumeration value="Dependencies"/>
+			<xsd:enumeration value="CompleteConfiguration"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="ProductConfigurationSelectionModeENUM">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Build"/>
+			<xsd:enumeration value="Refine"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="ProductConfigurationType">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence>
+					<xsd:element ref="Originator" minOccurs="0"/>
+					<xsd:group ref="ConfigurationMarketingGroup"/>
+					<xsd:element name="CompletenessStatus" type="ProductConfigurationCompletenessStatusENUM" minOccurs="0"/>
+					<xsd:element name="EvaluateRules" type="xsd:boolean" minOccurs="0" default="true"/>
+					<xsd:element name="MultiSelectionAllowed" type="xsd:boolean" minOccurs="0" default="false"/>
+					<xsd:element name="ProductConfigurationPurpose" type="ProductConfigurationProductConfigurationPurposeENUM" minOccurs="1"/>
+					<xsd:element name="RuleEvaluationMode" type="ProductConfigurationRuleEvaluationModeENUM" minOccurs="0" default="Dependencies"/>
+					<xsd:element name="SelectionMode" type="ProductConfigurationSelectionModeENUM" minOccurs="0" default="Build"/>
+					<xsd:element name="Selections" type="SelectionsType" minOccurs="0"/>	
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:element name="ProductConfiguration" type="ProductConfigurationType" /> 
+	
+	
+	
+	<xsd:complexType name="GovernanceProductType">
+		<xsd:complexContent>
+			<xsd:extension base="GovernanceModelElementEvolutionBase">
+				<xsd:sequence>
+					<xsd:group ref="ConfigurationMarketingGroup"/>
+					<xsd:element name="ProductConfigurations" minOccurs="0">
+						<xsd:complexType>
+									<xsd:sequence> 									
+										<xsd:element ref="ProductConfiguration" maxOccurs="unbounded"/>
+									</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="EffectivityMatrixLinks" type="EffectivityMatrixLinksType" minOccurs="0" maxOccurs="1"/> 																							
+				</xsd:sequence>
+				<xsd:attribute name="isObjectInserted" type="xsd:boolean" default="false"/>
+				<xsd:attribute name="updateMatrixCompositionRelation" type="UpdateMatrixCompositionRelationEnum" use="optional" default="RemoveExistingNotProvided"/>																																	 
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+
+	  <xsd:simpleType name="UpdateMatrixCompositionRelationEnum">
+		<xsd:annotation>
+			<xsd:documentation>Updates existing, removes those not provided which exists</xsd:documentation>
+			<xsd:documentation>Updates existing, ignores those not provided which exists</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="RemoveExistingNotProvided"/>
+			<xsd:enumeration value="IgnoreExistingNotProvided"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="EffectivityMatrixLinksType" >
+		<xsd:annotation>
+			<xsd:documentation>Effectivity Matrix</xsd:documentation>
+		</xsd:annotation>
+      <xsd:sequence>
+        <xsd:element name="MatrixLink" type="xsd:IDREF" minOccurs="1" maxOccurs="unbounded" info:typeRef="GovernanceProductType"/>
+      </xsd:sequence>
+	</xsd:complexType>
+
+  <xsd:complexType name="GovernanceBuildType">
+    <xsd:complexContent>
+      <xsd:extension base="NonVersionableObjectBase">
+        <xsd:sequence>          
+            <!-- Use to refer Product(i.e. Hardware Product ) -->
+            <xsd:element name="ProductRef" type="xsd:IDREF" minOccurs="0" maxOccurs="1"/>
+            <!-- Use to refer Manufacturing Plan-->
+            <xsd:element name="ManufacturingPlanRef" type="xsd:IDREF" minOccurs="0" maxOccurs="1" />          
+          <!--Build Planning/Shipping Information-->
+		      <xsd:element name="UnitNumber" type="AttributeValuePositiveIntegerType" minOccurs="0"/>          
+          <xsd:element name="SerialNumber" type="AttributeValueStringType" minOccurs="0"/>
+          <xsd:element name="ActualDate" type="AttributeValueDateTimeType" minOccurs="0"/>
+          <xsd:element name="PlannedDate" type="AttributeValueDateTimeType" minOccurs="0"/>
+          <!--Build Planning/Shipping Information-->          
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name="Build" type="GovernanceBuildType" />  
+
+  <xsd:element name="HardwareBuild" type="HardwareBuildType" substitutionGroup="Build"/>
+  <xsd:element name="SoftwareBuild" type="SoftwareBuildType" substitutionGroup="Build"/>
+  
+  <xsd:complexType name="HardwareBuildType">
+    <xsd:complexContent>
+      <xsd:extension base="GovernanceBuildType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <xsd:complexType name="SoftwareBuildType">
+    <xsd:complexContent>
+      <xsd:extension base="GovernanceBuildType"/>
+    </xsd:complexContent>
+  </xsd:complexType>  
+
+  
+
+  <xsd:simpleType name="ManufacturingIntentTypeENUM">
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="Regular"/>
+      <xsd:enumeration value="Retrofit"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="GovernanceManufacturingPlanType">
+    <xsd:complexContent>
+      <xsd:extension base="GovernanceModelElementEvolutionBase">
+       <xsd:sequence>
+         <xsd:element name="ProductRef" type="xsd:IDREF" maxOccurs="1"/>         
+         <xsd:element name="ManufacturingIntent" type="ManufacturingIntentTypeENUM"/>
+       </xsd:sequence>
+        </xsd:extension>      
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:element name="ManufacturingPlan" type="GovernanceManufacturingPlanType"/>
+  
+  <!--    -->	
+	<xsd:element name="Product" type="GovernanceProductType" /> 	
+	<xsd:complexType name="ModelType">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence>
+					<xsd:element ref="Originator" minOccurs="0"/>
+					<xsd:element name="Prefix" type="AttributeValueStringType" minOccurs="0"/>
+					<xsd:group ref="ConfigurationMarketingGroup"/>
+					<xsd:sequence minOccurs="0">
+						<xsd:element name="Products" minOccurs="0">
+							<xsd:complexType>
+								<xsd:choice>                  
+									<xsd:element ref="Product" maxOccurs="unbounded"/>                  
+								</xsd:choice>
+							</xsd:complexType>
+						</xsd:element>	
+            <xsd:element name="ManufacturingPlans" minOccurs="0">
+              <xsd:complexType>
+                <xsd:choice>
+                  <xsd:element ref="ManufacturingPlan" maxOccurs="unbounded"/>
+                </xsd:choice>
+              </xsd:complexType>
+            </xsd:element>
+			<xsd:element name="Builds" minOccurs="0">
+              <xsd:complexType>
+                <xsd:choice>
+                  <xsd:element ref="Build" maxOccurs="unbounded"/>
+                </xsd:choice>
+              </xsd:complexType>
+            </xsd:element> 
+<xsd:element name="ModelCompositions" type="ModelCompositionsType" minOccurs="0" maxOccurs="1"/>           
+					</xsd:sequence>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!--    -->	
+	<xsd:element name="HardwareProduct" type="HardwareProductType" substitutionGroup="Product"/> 
+	<xsd:element name="SoftwareProduct" type="SoftwareProductType" substitutionGroup="Product"/>
+	<xsd:element name="ServiceProduct" type="ServiceProductType" substitutionGroup="Product"/>
+	<!--    -->
+	<xsd:complexType name="HardwareProductType">
+	<xsd:complexContent>
+		<xsd:extension base="GovernanceProductType"/>
+	</xsd:complexContent>
+	</xsd:complexType>
+		<xsd:complexType name="SoftwareProductType">
+	<xsd:complexContent>
+	<xsd:extension base="GovernanceProductType"/>
+	</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ServiceProductType">
+	<xsd:complexContent>
+		<xsd:extension base="GovernanceProductType"/>
+	</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:element name="ModelStructure" type="ModelStructureType" substitutionGroup="XPDMXML_Structure"/>
+	<xsd:complexType name="ModelStructureType">
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="Model" type="ModelType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="Feature" type="ConfigurationFeatureType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="Option" type="ConfigurationOptionType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="OptionRelationship" type="ConfigurationOptionRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="FeatureRelationship" type="ConfigurationFeatureRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+	<!--  -->
+</xsd:schema>

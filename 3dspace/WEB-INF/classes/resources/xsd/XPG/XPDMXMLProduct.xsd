@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2010. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.11">
+	<xsd:include schemaLocation="XPDMXMLDocument.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLProductAEC.xsd"/>
+        <xsd:include schemaLocation="XPDMXMLProductSpace.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLXCADPowerBy.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLSourcing.xsd"/>
+	<!-- Added EBN   new XCAD xsd -->
+	<!--    -->
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="2.1">
+            - Adding ProductDrawingGroup in ProductStructureType
+            - Adding FastenerGroup in ProductStructureType
+		   </info:change>
+			<info:change version="2.2">
+				- Adding fileRef attribute on  Product3DType
+		  </info:change>
+			<info:change version="2.3">
+				- Product element in ProductStructure is now optional 
+		  </info:change>
+			<info:change version="2.4">
+				- new 'productType' optional attribut on Product3DType (for future usage)
+		  </info:change>
+			<info:change version="2.5">
+				- FastenerShapeAttributeGroup:   
+				     -  height attribute removed,
+				     -  new thickness optional attribute
+				     - diameter attribute becomes optional
+				- FastenerInstanceType: Stacking element becomes optional
+				- RelativeTransformation3D becomes Optional in Product3DInstanceType. It is still mandatory but in ReferenceMode
+		  </info:change>
+			<info:change version="2.6">
+        - Referencing ProductAECGroup in ProductStructureType:
+      </info:change>
+			<info:change version="2.6.1">
+            - Add Property on FastenPartRef (for future usage)
+            - Add inContextOfRef attribute on Stacking (for future usage)
+		   </info:change>
+			<info:change version="2.7">
+		    - Add ReconciliationMode to set GlassBox mode
+            - Add V5ComponentName to synchronyze V5Component and XPDM object
+		   </info:change>
+			<info:change version="2.8">
+		    - Add CADLink on Product3DType
+		   </info:change>
+			<info:change version="2.9">
+		    - Add CADAssemblyFamily and CAD3DRepFamily
+		   </info:change>
+			<info:change version="2.10">
+		    - Add ShapeRep and its type : ShapeRepType
+		   </info:change>
+			<info:change version="2.11">
+			- Add ClassificationForCADDoc  and its type : ClassificationForCADDocType for catalog
+			- Add DefinitionForCADDoc  and its type : DefinitionForCADDocType for DesignTable and CATMaterial
+			- Remove ShapeRep and ShapeRepType
+			</info:change>
+			<info:change version="2.12">
+			- Add CADConfiguration and VirtualComponent for Custom Configuration
+			- Add DerivedFrom Attribute on Product3DType and Product3DRepresentationType 
+			</info:change>
+			<info:change version="2.13">
+			- Add PCBPhysicalComponentInst, PCBPhysicalComponent, PCB3DPackage, PCBPackageWrap, PCBPackageFootprint			
+			</info:change>
+			<info:change version="2.14">
+			- Add ProductSpaceGroup			
+			</info:change>
+			<info:change version="2.15">
+			- Add AlternateProduct		
+			</info:change> 	
+			<info:change version="2.16">
+			- Add ManufacturerEquivalentItem			
+			</info:change>	   
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--    -->
+	<xsd:group name="ProductStructureGroup">
+		<xsd:annotation>
+			<xsd:documentation>
+        ProductStructureGroup is dedicated to manages 3D structuration and 3D representations.
+        -  Product is made of other instantiated Product.
+        -  ProductInst is the instantiation of Product and it defines the 3D relative position.
+        -  Rep3D associates a Geometrical definition to a Product.
+        -  Rep3DInst is the instantiation of Rep3D and is used to link the Rep3D to Product.
+        -  Rep3DAggr is an aggregated Rep3D.
+        -  CAD3DRepFamily is the reference to a Part from a CAD
+        -  CADAssemblyFamily is the reference to a Assembly from a CAD
+        -  ClassificationForCADDoc is the reference to any classification xCAD document from a CAD
+		-  DefinitionForCADDoc is the reference to any classification xCAD document from a CAD
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="Product" type="Product3DType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ProductInst" type="Product3DInstanceType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Rep3D" type="Product3DRepresentationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Rep3DInst" type="Product3DRepresentationInstanceType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Rep3DAggr" type="Product3DRepresentationAggregatedType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CAD3DRepFamily" type="CAD3DRepFamilyType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CADAssemblyFamily" type="CADAssemblyFamilyType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ClassificationForCADDoc" type="ClassificationForCADDocType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="DefinitionForCADDoc" type="DefinitionForCADDocType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- EBN Added new keyword for link description -->
+			<xsd:element name="PresentationForCADDoc" type="PresentationForCADDocType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="AttachmentForCADDoc" type="AttachmentForCADDocType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ItemOfLink" type="ItemOfLinkType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CADRelationship" type="CADRelationshipType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CADConfiguration" type="CADConfigurationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="VirtualComponent" type="VirtualComponentType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PCBPhysicalComponent" type="PCBPhysicalComponentType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PCB3DPackage" type="PCB3DPackageType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PCBPackageWrap" type="PCBPackageWrapType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PCBPackageFootprint" type="PCBPackageFootprintType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PCBPhysicalComponentInst" type="PCBPhysicalComponentInstType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="DefinitionForDrawing" type="DefinitionForDrawingType" minOccurs="0" maxOccurs="unbounded"/>
+           	<xsd:element name="AlternateProduct" type="AlternateProduct3DType" minOccurs="0" maxOccurs="unbounded" />
+		<xsd:element name="ManufacturerEquivalentItem" type="ManufacturerEquivalentItemType" minOccurs="0" maxOccurs="unbounded"/>																													   
+		</xsd:choice>
+	</xsd:group>
+<!--  AlternateProduct  -->	
+	<xsd:complexType name="AlternateProduct3DType">
+		<xsd:annotation>
+			<xsd:documentation>The 3DExperience relationship Alternate Of is expose through the xml element AlternateOf</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:element name="AlternateOf" type="xsd:IDREF" minOccurs="1" maxOccurs="1" info:typeRef="Product"/>				  
+					<xsd:element name="AlternateItems" type="AlternateItemTypes"  minOccurs="1" maxOccurs="1" />					
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="AlternateItemTypes">
+		<xsd:annotation>
+			<xsd:documentation>AlternateItemTypes</xsd:documentation>
+		</xsd:annotation>          
+		<xsd:sequence>
+			<xsd:element name="AlternateItem" type="AlternateItemType" minOccurs="1" maxOccurs="unbounded"/>      
+		</xsd:sequence> 		
+	</xsd:complexType>		
+
+	<xsd:complexType name="AlternateItemType" >
+		<xsd:annotation>
+			<xsd:documentation>The 3DExperience relationship Alternate Item is expose through the xml element AltItem
+The 3DExperience pathType Alternate Context is expose through the xml element AltContextPath
+</xsd:documentation>
+		</xsd:annotation>
+      <xsd:sequence>
+        <xsd:element name="AltItem" type="xsd:IDREF" minOccurs="1" maxOccurs="unbounded" info:typeRef="Product"/>
+        <xsd:element name="AltContextPath" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded" info:typeRef="Product"/>
+      </xsd:sequence>
+	</xsd:complexType>	
+<!--  AlternateProduct  -->
+	<!--    -->
+	<xsd:complexType name="Product3DType">
+		<xsd:annotation>
+			<xsd:documentation>
+        Product3D is made of other instantiated Product.
+        Note : Usually the Rep3D is associated to Product without any ProductInst
+         -  FileRef references a file associated to the Product
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence>
+                                        <xsd:element name="EnterpriseItemNumber" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="QuantityVolume" type="xsd:double" minOccurs="0"/>
+					<xsd:element name="QuantityMass" type="xsd:double" minOccurs="0"/>
+					<xsd:group ref="XCADReferenceGroup" minOccurs="0"/>
+					<!-- EBN  added XCADReferenceGroup -->
+					<xsd:element name="FileRef" type="ObjectRef" minOccurs="0" info:typeRef="FileType"/>
+					<xsd:element name="CADLink" type="CADLinkType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="DerivedFrom" type="xsd:IDREF" minOccurs="0" info:typeRef="Product3DType"/>
+				</xsd:sequence>
+				<xsd:attribute name="productType" type="xsd:string" use="optional"/>
+				<xsd:attribute name="CatiaV5ComponentName" type="xsd:string" use="optional"/>
+				<xsd:attribute name="ReconciliationMode" type="ReconciliationModeEnum" use="optional" default="CATProductMaster"/>
+				<xsd:attribute name="CADOrigin" type="xsd:string" use="optional"/>
+				<xsd:attribute name="partType" type="xsd:string" use="optional"/>
+                                <xsd:attribute name="stream" type="streamTypeENUM" use="optional"/>
+	                        <xsd:attribute name="updateFileMode" type="UpdateFileModeEnum" use="optional" default="IgnoreExistingNotProvided"/>
+			</xsd:extension>
+			<!-- EBN added CADOrigin and partType -->
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="Product3DRepresentationType">
+		<xsd:annotation>
+			<xsd:documentation>
+      Product3DRepresentationType exposes one and only one 3D geometry.
+      It is usually shared by several Product by using Rep3D objects.
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="RepresentationBase">
+			<xsd:sequence>
+				<xsd:element name="DerivedFrom" type="xsd:IDREF" minOccurs="0" info:typeRef="Product3DRepresentationType"/>
+			</xsd:sequence>
+				<xsd:attribute name="CADOrigin" type="xsd:string" use="optional"/>
+			</xsd:extension>
+			<!-- EBN added -->
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="Product3DRepresentationAggregatedType">
+		<xsd:annotation>
+			<xsd:documentation>
+			Product3DRepresentationAggregatedType exposes a 3D geometry. 
+			It is aggregated by a Product via its 'Owned' element.
+			It shares the same Versioning information with the Product3D it is aggregated to.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="RepresentationAggregatedBase">
+				<xsd:attribute name="CADOrigin" type="xsd:string" use="optional"/>
+			</xsd:extension>
+			<!-- EBN added CADOrigin -->
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="Product3DInstanceType">
+		<xsd:annotation>
+			<xsd:documentation>
+        Product3DInstanceType allows the reuse of an existing Product3D by Product3D that aggregates it.
+        It is aggregated by a Product via its 'Owned' element.
+        The Product3DInstanceType defines relative 3D position between the two Product3D
+        </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase">
+				<xsd:sequence>
+					<xsd:element ref="RelativeTransformation3D" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Relative Transformation matrix between both Product3D. It is  mandatory but in ReferenceMode</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<!-- EBN Added  XCADReferenceGroup for xCADId -->
+					<xsd:group ref="XCADReferenceGroup" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="CatiaV5ComponentName" type="xsd:string" use="optional"/>
+        <xsd:attribute name="CADOrigin" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="Product3DRepresentationInstanceType">
+		<xsd:annotation>
+			<xsd:documentation>
+        Product3DRepresentationInstanceType allows the reuse of an existing Rep3D by a Product.
+        It is aggregated by a Product via its 'Owned' element.
+        </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="RepresentationInstanceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+	<xsd:group name="ProductDrawingGroup">
+		<xsd:annotation>
+			<xsd:documentation>
+      ProductDrawingGroup is dedicated to manage 2D representation in a Product Structure.
+       -  Drawing associates a 2D representation to a Product. 
+       -  DrawingInst is the instantiation of Drawing.  
+       -  DrawingAggr is an aggregated Drawing. 
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="Drawing" type="DrawingType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="DrawingInst" type="DrawingInstanceType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="DrawingAggr" type="DrawingAggregatedType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:complexType name="DrawingType">
+		<xsd:annotation>
+			<xsd:documentation>
+       DrawingType exposes a 2D representation. 
+			 It is instanciated by a Product via a DrawingInst
+        </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="RepresentationBase">
+				<xsd:sequence>
+					<!-- EBN Added  XCADReferenceGroup for xCADId -->
+					<xsd:group ref="XCADReferenceGroup" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="CADOrigin" type="xsd:string" use="optional"/>
+			</xsd:extension>
+			<!-- EBN added -->
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="DrawingAggregatedType">
+		<xsd:annotation>
+			<xsd:documentation>
+			  DrawingAggregatedType exposes a 2D geometry. 
+			It is aggregated by a Product via its 'Owned' element.
+			It shares the same Versioning information with the Product3D it is aggregated to.
+        </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="RepresentationAggregatedBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="DrawingInstanceType">
+		<xsd:annotation>
+			<xsd:documentation>
+        DrawingInstanceType allows the reuse of an existing Drawing by a Product that aggregates it.
+        It is aggregated by a Product via its 'Owned' element.
+        </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="RepresentationInstanceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:attributeGroup name="FastenerShapeAttributeGroup">
+		<xsd:attribute name="diameter" type="LengthType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>diameter of the Spot fastener</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="thickness" type="LengthType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>thickness for a Bead fastener </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<!--    -->
+	<xsd:complexType name="FastenerReferenceType" mixed="false">
+		<xsd:annotation>
+			<xsd:documentation>
+      FastenerReferenceType contains all the technological and process information of the Fastener.
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:attributeGroup ref="FastenerShapeAttributeGroup"/>
+				<xsd:attribute name="type" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+	<xsd:complexType name="FastenerInstanceType" mixed="false">
+		<xsd:annotation>
+			<xsd:documentation>
+        FastenerInstanceType indicates the positionning and orientation of the fastener.
+        It also aggregates all the stacking information.
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase">
+				<xsd:sequence>
+					<xsd:element name="RelativePosition" type="Transformation3DType">
+						<xsd:annotation>
+							<xsd:documentation>Relative Position matrix between the FastenerReferenceType and  the root Reference3DType</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Stacking" minOccurs="0" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="FastenPartRef" minOccurs="0" maxOccurs="unbounded" info:typeRef="Instance3DType">
+									<xsd:complexType>
+										<xsd:complexContent>
+											<xsd:extension base="ObjectPathRef">
+												<xsd:sequence>
+													<xsd:element name="Property" type="DynamicAttributeType" minOccurs="0" maxOccurs="unbounded"/>
+												</xsd:sequence>
+											</xsd:extension>
+										</xsd:complexContent>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+							<xsd:attribute name="inContextOfRef" type="xsd:IDREF" use="optional">
+								<xsd:annotation>
+									<xsd:documentation>xml identifier reference for secondary fastening</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="length" type="LengthType" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The length of the fastener in case of a Bead fastener</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+	<xsd:group name="ProductFastenerGroup">
+		<xsd:choice>
+			<xsd:element name="Fastener" type="FastenerReferenceType" maxOccurs="unbounded"/>
+			<xsd:element name="FastenerInst" type="FastenerInstanceType" maxOccurs="unbounded"/>
+		</xsd:choice>
+	</xsd:group>
+	<!-- -->
+	<xsd:simpleType name="ReconciliationModeEnum">
+		<xsd:annotation>
+			<xsd:documentation>CATProduct data must be declared in xPDMXML file, xPDM attributes defined for those objects prevail over CATProduct attributes values</xsd:documentation>
+			<xsd:documentation>CATProduct data must not be declared in xPDMXML file</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="xPDMMaster"/>
+			<xsd:enumeration value="CATProductMaster"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- -->
+	<xsd:complexType name="ProductStructureType">
+		<xsd:annotation>
+			<xsd:documentation>
+       List of Objects used to define a whole Product structure.
+       rootRefs   : gives the id of the root Product nodes of the product 3D structure
+       </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:group ref="ProductStructureGroup" maxOccurs="unbounded"/>
+					<xsd:group ref="ProductDrawingGroup" maxOccurs="unbounded"/>
+					<xsd:group ref="ProductFastenerGroup" maxOccurs="unbounded"/>
+					<xsd:group ref="ProductAECGroup" maxOccurs="unbounded"/>
+                    <xsd:group ref="ProductSpaceGroup" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!-- -->
+	<xsd:element name="ProductStructure" type="ProductStructureType" substitutionGroup="XPDMXML_Structure">
+		<xsd:key name="ProductKey">
+			<xsd:selector xpath="Product"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:keyref name="ProductOwnedRef" refer="ProductKey">
+			<xsd:selector xpath="ProductInst|Rep3DInst|Rep3DAggr"/>
+			<xsd:field xpath="Owned"/>
+		</xsd:keyref>
+	</xsd:element>
+	<!--  -->
+		<xsd:complexType name="CADFamilyBase" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Please add comment        
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:group ref="XCADReferenceGroup" minOccurs="0"/>
+					<xsd:element name="FileRef" type="ObjectRef" minOccurs="0" info:typeRef="FileType"/>
+					<xsd:element name="CADLink" type="CADLinkType" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="CADConfigurations" type="CADConfigurationsType" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="VirtualComponents" type="VirtualComponentsType" minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+				<xsd:attribute name="CADOrigin" type="xsd:string" use="optional"/>
+	            <xsd:attribute name="updateFileMode" type="UpdateFileModeEnum" use="optional" default="IgnoreExistingNotProvided"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	
+	
+	<xsd:complexType name="CAD3DRepFamilyType">
+		<xsd:annotation>
+			<xsd:documentation>
+        CAD3DRepFamilyType class serves a purpose consistent with a Part.
+		-  FileRef references a file associated to the CAD Part
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="CADFamilyBase">
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="CADAssemblyFamilyType">
+		<xsd:annotation>
+			<xsd:documentation>
+        CADAssemblyFamilyType is made of other instantiated CADAssemblyFamilyType or CAD3DRepFamilyType.
+            -  FileRef references a file associated to the CAD Assembly
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="CADFamilyBase">			
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="ClassificationForCADDocType">
+		<xsd:annotation>
+			<xsd:documentation>
+			ClassificationForCADDocType class serves a purpose consistent with a Rep3D.
+			-  FileRef references a file associated to the Assistive File in CAD viz. catalog that will result in XCADNonPSBaseRepReference.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:element name="FileRef" type="ObjectRef" minOccurs="0" info:typeRef="FileType"/>
+					<xsd:element name="CADLink" type="CADLinkType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+	                        <xsd:attribute name="stream" type="streamTypeENUM" use="optional"/>
+	                        <xsd:attribute name="updateFileMode" type="UpdateFileModeEnum" use="optional" default="IgnoreExistingNotProvided"/>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="DefinitionForCADDocType">
+		<xsd:annotation>
+			<xsd:documentation>
+			DefinitionForCADDocType class serves a purpose consistent with a Rep3D.
+			-  FileRef references a file associated to the Assistive File in CAD viz. CATMaterial / DesignTable that will result in XCADNonPSBaseRepReference.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:element name="FileRef" type="ObjectRef" minOccurs="0" info:typeRef="FileType"/>
+					<xsd:element name="CADLink" type="CADLinkType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+	                        <xsd:attribute name="stream" type="streamTypeENUM" use="optional"/>
+	                        <xsd:attribute name="updateFileMode" type="UpdateFileModeEnum" use="optional" default="IgnoreExistingNotProvided"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+</xsd:schema>

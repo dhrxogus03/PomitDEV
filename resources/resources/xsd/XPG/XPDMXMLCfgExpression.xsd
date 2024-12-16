@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2011. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.2">
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="2.0">
+            - History Creation
+		   </info:change>
+		   <info:change version="2.1">
+			- Adding support of decoupling effectivity
+			</info:change>
+			<info:change version="2.2">
+			- Adding support of Change effectivity
+			</info:change>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!-- Configuration Context  -->
+	<xsd:element name="ConfigurationContext" type="ConfigurationContextType" substitutionGroup="ReferenceConfigurationContextBase"/>  
+	
+	<xsd:complexType name="ConfigurationContextType">
+          <xsd:annotation>
+                 <xsd:documentation>ConfigurationContextType defines Configuration Model associtated with the Reference</xsd:documentation>
+          </xsd:annotation>          
+           <xsd:sequence>
+                 <xsd:element name="ModelRef" type="xsd:IDREF" minOccurs="1" maxOccurs="unbounded" info:typeRef="ModelType"/>
+           </xsd:sequence>           
+         </xsd:complexType>
+	
+	<!--    -->
+    <xsd:element name="EffectivityEvolution"           type="ContextualEffectivityEvolutionConditionType" substitutionGroup="ConfigEffectivityEvolutionBase"/>	
+	<xsd:element name="EffectivityVariant"             type="ContextualEffectivityVariantConditionType"   substitutionGroup="ConfigEffectivityVariantBase"/>	
+	<xsd:element name="ConfigEffectivityVariantBase"   type="ConfigExpressionBaseType" abstract="true"    substitutionGroup="InstanceEffectivityVariantBase"/>
+	<xsd:element name="ConfigEffectivityEvolutionBase" type="ConfigExpressionBaseType" abstract="true"    substitutionGroup="InstanceEffectivityEvolutionBase"/>
+	<!-- for Change support    -->
+	<xsd:element name="EffectivityChange"              type="ContextualEffectivityChangeConditionType"    substitutionGroup="ConfigEffectivityChangeBase"/>
+	<xsd:element name="ConfigEffectivityChangeBase"    type="ConfigExpressionBaseType" abstract="true"    substitutionGroup="InstanceEffectivityChangeBase"/>
+	<!--    -->
+	<xsd:element name="Effectivity"                    type="ContextualEffectivityConditionType"          substitutionGroup="ConfigEffectivityBase"/>
+	<xsd:element name="Configuration"                  type="ContextualFilterConditionType"               substitutionGroup="ConfigFilterBase"/>
+	<xsd:element name="ConfigEffectivityBase"          type="ConfigExpressionBaseType" abstract="true"    substitutionGroup="InstanceEffectivityBase"/>
+	<xsd:element name="ConfigFilterBase"               type="ConfigExpressionBaseType" abstract="true"    substitutionGroup="ReferenceFilterBase"/>
+	<xsd:complexType name="ConfigExpressionBaseType" abstract="true"/>
+	<!-- -->
+	<!-- 	============================================================================================  -->
+	<xsd:complexType name="ContextualEffectivityEvolutionConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigExpressionBaseType">
+				<xsd:sequence>
+					<xsd:element name="Condition" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="ModelRef" type="ConfigConditionElementRefType"/>
+								<xsd:element ref="EvolutionConditionElementBase"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ContextualEffectivityVariantConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigExpressionBaseType">
+				<xsd:sequence>
+					<xsd:element name="Condition" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="ModelRef" type="ConfigConditionElementRefType"/>
+								<xsd:element ref="VariantConditionElementBase"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>	
+
+
+	<xsd:complexType name="ContextualEffectivityConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigExpressionBaseType">
+				<xsd:sequence>
+					<xsd:element name="Condition" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="ModelRef" type="ConfigConditionElementRefType"/>
+								<xsd:element ref="ConditionElementBase"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:simpleType name="PredefinedSelectionModeTypeENUM">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Strict"/>
+			<xsd:enumeration value="150%"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ContextualFilterConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigExpressionBaseType">
+				<xsd:sequence>
+					<xsd:element name="Condition">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="ModelRef" type="ConfigConditionElementRefType"/>
+								<xsd:element ref="ConfigConditionElementBase" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="name" type="xsd:string" use="required"/>
+				<xsd:attribute name="description" type="xsd:string"/>
+				<xsd:attribute name="selectionMode">
+					<xsd:simpleType>
+						<xsd:union memberTypes="PredefinedSelectionModeTypeENUM xsd:string"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!-- 	============================================================================================  -->
+	<!--   -->
+	<xsd:complexType name="ConfigConditionElementBaseType" abstract="true" mixed="false">
+		<xsd:complexContent>
+			<xsd:extension base="ConditionElementBaseType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="ConfigConditionElementBase" type="ConfigConditionElementBaseType" abstract="true" substitutionGroup="ConditionElementBase"/>
+	<xsd:element name="ProductStateCondition"      type="GovernanceProductConditionType"                 substitutionGroup="ConfigConditionElementBase"/>
+	<xsd:element name="FeatureCondition"           type="ConfigurationFeatureConditionType"              substitutionGroup="ConfigConditionElementBase"/>
+	<xsd:element name="DateCondition"              type="DateExpressionWithIntervalConditionType"        substitutionGroup="ConfigConditionElementBase"/>
+	<xsd:element name="ManufacturingPlanCondition" type="ManufacturingPlanConditionType"                 substitutionGroup="ConfigConditionElementBase"/>
+	<xsd:element name="UnitCondition"              type="UnitConditionType"                              substitutionGroup="ConfigConditionElementBase"/>
+	<xsd:element name="MilestoneCondition"         type="MilestoneConditionType"                         substitutionGroup="ConfigConditionElementBase"/>
+	
+	<!--  Variant -->
+	<xsd:element name="VariantFeatureCondition"    type="ConfigurationFeatureConditionType"              substitutionGroup="VariantConditionElementBase"/>
+	
+	<!-- Evolution  -->	
+	<xsd:element name="EvolutionProductStateCondition" type="GovernanceProductConditionType" substitutionGroup="EvolutionConditionElementBase"/>
+	<xsd:element name="EvolutionDateCondition" type="DateExpressionWithIntervalConditionType" substitutionGroup="EvolutionConditionElementBase"/>
+	<xsd:element name="EvolutionManufacturingPlanCondition" type="ManufacturingPlanConditionType" substitutionGroup="EvolutionConditionElementBase"/>
+	<xsd:element name="EvolutionUnitCondition" type="UnitConditionType" substitutionGroup="EvolutionConditionElementBase"/>
+	<xsd:element name="EvolutionMilestoneCondition" type="MilestoneConditionType" substitutionGroup="EvolutionConditionElementBase"/>
+	<!--   -->
+	<xsd:complexType name="GovernanceProductConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigExpressionWithTreeConditionType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ManufacturingPlanConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigExpressionWithTreeConditionType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="UnitConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigExpressionWithIntervalConditionType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--  -->
+	<xsd:simpleType name="PredefinedMilestoneTypeENUM">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Engineering"/>
+			<xsd:enumeration value="Manufacturing"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="MilestoneConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigExpressionWithTreeConditionType">
+				<xsd:attribute name="type">
+					<xsd:simpleType>
+						<xsd:union memberTypes="PredefinedMilestoneTypeENUM xsd:string"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+	<!-- 	============================================================================================ -->
+	<xsd:attributeGroup name="ConfigConditionElementIdentificationBaseGoup">
+		<xsd:attribute name="id" type="xsd:ID" use="optional" info:typeRef="ConfigConditionElementRefType">
+			<xsd:annotation>
+				<xsd:documentation>ConfigConditionElementRefType will refer to itself, only in the case of TNR usage</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<!-- <xsd:attribute name="T" type="xsd:string" use="optional"/> -->
+		<xsd:attribute name="N" type="xsd:string" use="optional"/>
+		<xsd:attribute name="R" type="xsd:string" use="optional"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="ConfigConditionElementRefType">
+		<xsd:annotation>
+			<xsd:documentation>ConfigConditionElementRefType references an element of the ModelStructure</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:IDREF">
+				<xsd:attributeGroup ref="ConfigConditionElementIdentificationBaseGoup"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="ConfigConditionElementRefWithExclusionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigConditionElementRefType">
+				<xsd:attribute name="isExcluded" type="xsd:boolean" use="optional" default="false"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<xsd:complexType name="ConfigurationFeatureConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigConditionElementBaseType">
+				<xsd:sequence>
+					<xsd:element name="FeatureRef" type="ConfigConditionElementRefType"/>
+					<xsd:element name="OptionRef" type="ConfigConditionElementRefType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--  -->
+	<xsd:complexType name="ConfigExpressionWithTreeConditionType">
+		<xsd:annotation>
+			<xsd:documentation>
+	 LeafItemRef must only be used to exclude an Item and the followings that might exist in the tree.
+	</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ConfigConditionElementBaseType">
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="Tree">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="RootItemRef" type="ConfigConditionElementRefWithExclusionType"/>
+								<xsd:element name="LeafItemRef" type="ConfigConditionElementRefWithExclusionType" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="ItemRef" type="ConfigConditionElementRefType"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--  -->
+	<xsd:complexType name="ConfigExpressionWithIntervalConditionType">
+		<xsd:annotation>
+			<xsd:documentation>
+	 The Item referenced by EndItemRef is included in the interval. When EndItemRef is not declared, the interval is not end-bounded
+	</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ConfigConditionElementBaseType">
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="Interval" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="StartItemRef" type="ConfigConditionElementRefWithExclusionType" minOccurs="0"/>
+								<xsd:element name="EndItemRef" type="ConfigConditionElementRefWithExclusionType" minOccurs="0"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="ItemRef" type="ConfigConditionElementRefType"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--  -->
+	<!--  -->
+	<xsd:complexType name="DateExpressionWithIntervalConditionType">
+		<xsd:annotation>
+			<xsd:documentation>
+		At least one of StartDate and EndDate has to be specified. 
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ConfigConditionElementBaseType">
+				<xsd:sequence maxOccurs="unbounded">
+					<xsd:element name="Interval">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="StartDate" type="xsd:date" minOccurs="0"/>
+								<xsd:element name="EndDate" type="xsd:date" minOccurs="0"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="VariantConditionBooleanSingleOperandType">
+		<xsd:complexContent>
+			<xsd:extension base="ConditionElementBaseType">
+				<xsd:choice>
+					<xsd:element ref="VariantConditionElementBase"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="VariantConditionBooleanMultiOperandType">
+		<xsd:complexContent>
+			<xsd:extension base="ConditionElementBaseType">
+				<xsd:choice minOccurs="2" maxOccurs="unbounded">
+					<xsd:element ref="VariantConditionElementBase"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="VariantConditionBooleanValueType" block="#all" mixed="false">
+		<xsd:complexContent>
+			<xsd:extension base="ConditionElementBaseType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->	
+	<xsd:element name="VariantConditionElementBase" type="ConditionElementBaseType" abstract="true"/>
+	<xsd:element name="NOT_Variant" type="VariantConditionBooleanSingleOperandType" substitutionGroup="VariantConditionElementBase"/>
+	<xsd:element name="OR_Variant" type="VariantConditionBooleanMultiOperandType" substitutionGroup="VariantConditionElementBase"/>
+	<xsd:element name="AND_Variant" type="VariantConditionBooleanMultiOperandType" substitutionGroup="VariantConditionElementBase"/>
+	<xsd:element name="TRUE_Variant" type="VariantConditionBooleanValueType" substitutionGroup="VariantConditionElementBase"/>
+	<xsd:element name="FALSE_Variant" type="VariantConditionBooleanValueType" substitutionGroup="VariantConditionElementBase"/>
+			
+	<xsd:complexType name="EvolutionConditionBooleanSingleOperandType">
+		<xsd:complexContent>
+			<xsd:extension base="ConditionElementBaseType">
+				<xsd:choice>
+					<xsd:element ref="EvolutionConditionElementBase"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EvolutionConditionBooleanMultiOperandType">
+		<xsd:complexContent>
+			<xsd:extension base="ConditionElementBaseType">
+				<xsd:choice minOccurs="2" maxOccurs="unbounded">
+					<xsd:element ref="EvolutionConditionElementBase"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:complexType name="EvolutionConditionBooleanValueType" block="#all" mixed="false">
+		<xsd:complexContent>
+			<xsd:extension base="ConditionElementBaseType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->	
+	<xsd:element name="EvolutionConditionElementBase" type="ConditionElementBaseType" abstract="true"/>
+	<xsd:element name="NOT_Evolution" type="EvolutionConditionBooleanSingleOperandType" substitutionGroup="EvolutionConditionElementBase"/>
+	<xsd:element name="OR_Evolution" type="EvolutionConditionBooleanMultiOperandType" substitutionGroup="EvolutionConditionElementBase"/>
+	<xsd:element name="AND_Evolution" type="EvolutionConditionBooleanMultiOperandType" substitutionGroup="EvolutionConditionElementBase"/>
+	<xsd:element name="TRUE_Evolution" type="EvolutionConditionBooleanValueType" substitutionGroup="EvolutionConditionElementBase"/>
+	<xsd:element name="FALSE_Evolution" type="EvolutionConditionBooleanValueType" substitutionGroup="EvolutionConditionElementBase"/>	
+	
+	<!--  for Change support   -->
+	<xsd:complexType name="ContextualEffectivityChangeConditionType">
+		<xsd:complexContent>
+			<xsd:extension base="ConfigExpressionBaseType">
+				<xsd:sequence>
+					<xsd:element name="Condition" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="ModelRef"  type="ConfigConditionElementRefType"/>
+								<xsd:element name="ChangeRef" type="ConfigConditionElementRefType"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+</xsd:schema>

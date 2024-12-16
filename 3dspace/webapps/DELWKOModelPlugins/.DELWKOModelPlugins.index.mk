@@ -1,0 +1,15 @@
+m|DELWKOApp\DELWKOModelPlugins.mweb
+b|j|c,m
+b|c|c,m
+v|6.426.4.24097|3.2
+r|G:\R426\BSF\.
+t|win_b64\webapps\DELWKOModelPlugins\DELWKOModelPlugins.js|1712385216|74721
+s|DELWKOApp\DELWKOModelPlugins.mweb\src\DELWKOAttributePlugin.js|1711114800|41230
+u|DELWKOApp\DELWKOModelPlugins.mweb\src\DELWKODatabasePlugin.js|1679514246|59722
+u|DELWKOApp\DELWKOModelPlugins.mweb\src\DELWKODatabasePluginCloud.js|1708033088|62009
+u|DELWKOApp\DELWKOModelPlugins.mweb\src\DELWKODicoPlugin.js|1665436531|10941
+u|DELWKOApp\DELWKOModelPlugins.mweb\src\DELWKOTreeViewPlugin.js|1711114427|42326
+u|DELWKOApp\DELWKOModelPlugins.mweb\src\DELWKOTreeViewPluginCloud.js|1706020282|42352
+u|DELWKOApp\DELWKOModelPlugins.mweb\src\DELWKOViewPreferencesUI.js|1705955868|41076
+u|win_b64\code\toolcmds\mkwebconcat.bat|1685139395|287
+u|win_b64\code\toolcmds\terser.bat|1700685953|365

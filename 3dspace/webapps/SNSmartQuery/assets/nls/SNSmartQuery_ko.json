@@ -1,0 +1,11 @@
+{
+  "SNSmartQuery.vocab.predicate.swym:postTestTag": "사후 테스트 태그",
+  "SNSmartQuery.basic_predicate.label": "제목",
+  "SNSmartQuery.basic_predicate.identifier": "이름",
+  "SNSmartQuery.basic_predicate.modified": "수정일",
+  "SNSmartQuery.basic_predicate.description": "설명",
+  "SNSmartQuery.basic_predicate.responsible": "담당",
+  "SNSmartQuery.basic_predicate.created": "생성일:",
+  "SNSmartQuery.pred_keyword.about": "정보",
+  "SNSmartQuery.pred_keyword.by": "-"
+}

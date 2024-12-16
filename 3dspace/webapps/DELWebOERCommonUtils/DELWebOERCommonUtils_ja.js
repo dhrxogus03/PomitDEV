@@ -1,0 +1,1 @@
+define("DS/DELWebOERCommonUtils/DELWebOERCommonUtils_ja",{});define("DS/DELWebOERCommonUtils/assets/nls/DELOERCommonServicesComp",{"Warn.Timeout.Message":"Web サービス要求がタイムアウトしました。タイムアウトを延長するか、しばらくしてからやり直すことができます"});

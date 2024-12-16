@@ -1,0 +1,2056 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:dns="http://www.3ds.com/xsd/XPDMXML" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<!-- Column Type definition -->
+	<xsd:simpleType name="PressureColumn">
+		<xsd:annotation>
+			<xsd:documentation> Data column with units same as pressure
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="PressureType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="TemperatureColumn">
+		<xsd:annotation>
+			<xsd:documentation> Temperature data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="TemperatureType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="DimensionlessColumn">
+		<xsd:annotation>
+			<xsd:documentation> Dimensionless data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="ScalarType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="FrequencyColumn">
+		<xsd:annotation>
+			<xsd:documentation>Frequency data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="FrequencyType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="ThermalConductivityColumn">
+		<xsd:annotation>
+			<xsd:documentation>Thermal Conductivity data column
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="ThermalConductivityType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="DensityColumn">
+		<xsd:annotation>
+			<xsd:documentation>Density data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="DensityType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="InverseTemperatureColumn">
+		<xsd:annotation>
+			<xsd:documentation>Inverse Temperature data column
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="InverseTemperatureType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="CompressibilityColumn">
+		<xsd:annotation>
+			<xsd:documentation>Compressibility data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="CompressibilityType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="EnergyColumn">
+		<xsd:annotation>
+			<xsd:documentation>Energy data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="EnergyType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="MolarHeatCapacityColumn">
+		<xsd:annotation>
+			<xsd:documentation>Molar heat capacity data column
+			</xsd:documentation>
+		</xsd:annotation>
+		<!-- Has to be replace with molar heat capacity type -->
+		<xsd:list itemType="ScalarType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="RStiffnessColumn">
+		<xsd:annotation>
+			<xsd:documentation>RStiffness data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="RStiffnessType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="LengthColumn">
+		<xsd:annotation>
+			<xsd:documentation>Length data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="LengthType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="SpecificHeatCapacitylinearPartColumn">
+		<xsd:annotation>
+			<xsd:documentation>SpecificHeatCapacitylinearPart data column
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="SpecificHeatCapacityLinearPartType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="TStiffnessColumn">
+		<xsd:annotation>
+			<xsd:documentation>TStiffness data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="TStiffnessType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="AngleColumn">
+		<xsd:annotation>
+			<xsd:documentation>Angle data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="AngleType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="DynamicViscosityColumn">
+		<xsd:annotation>
+			<xsd:documentation>DynamicViscosity data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="DynamicViscosityType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="TimeColumn">
+		<xsd:annotation>
+			<xsd:documentation>Time data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="TimeType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="StrainRateColumn">
+		<xsd:annotation>
+			<xsd:documentation>StrainRate data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="StrainRateType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="SpecificEnergyColumn">
+		<xsd:annotation>
+			<xsd:documentation>SpecificEnergy data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="SpecificEnergyType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="AcousticImpedanceColumn">
+		<xsd:annotation>
+			<xsd:documentation>AcousticImpedance data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="AcousticImpedanceType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="FlowResistivityColumn">
+		<xsd:annotation>
+			<xsd:documentation>FlowResistivity data column </xsd:documentation>
+		</xsd:annotation>
+		<xsd:list itemType="FlowResistivityType"/>
+	</xsd:simpleType>
+	<xsd:complexType name="FrequencyTabularIsotropicNoneTableType">
+		<xsd:sequence>
+			<xsd:element name="Omegagreal" type="DimensionlessColumn"/>
+			<xsd:element name="Omegagimag" type="DimensionlessColumn"/>
+			<xsd:element name="Omegakreal" type="DimensionlessColumn"/>
+			<xsd:element name="Omegakimag" type="DimensionlessColumn"/>
+			<xsd:element name="Frequency" type="FrequencyColumn"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="KinematicTableType">
+		<xsd:sequence>
+			<xsd:element name="YieldStress" type="PressureColumn"/>
+			<xsd:sequence minOccurs="1" maxOccurs="10">
+				<xsd:element name="C_n" type="PressureColumn"/>
+				<xsd:element name="Gamma_n" type="DimensionlessColumn"/>
+			</xsd:sequence>
+			<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RateJohnsonCookDataType">
+		<xsd:sequence>
+			<xsd:element name="C" type="AttributeValueDoubleType" default="0.0"/>
+			<!-- The below should be changed to frequency type after definiting the 
+				data type -->
+			<xsd:element name="EpsilonDotZero" type="AttributeValueDoubleType" default="0.0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Simulation Domain Options -->
+	<xsd:complexType name="SimulationOptionBase" abstract="true">
+		<xsd:attribute name="id" type="xsd:ID" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="CastIronPlasticityType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for CastIronPlasticity material
+					option.
+					Add further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:element name="CompressionTable">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="SigmaC" type="PressureColumn"/>
+								<xsd:element name="EpsilonC" type="DimensionlessColumn"/>
+								<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="PlasicityTable">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="PlasticPoissonsRatio" type="DimensionlessColumn"/>
+								<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="TensionTable">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="SigmaT" type="PressureColumn"/>
+								<xsd:element name="EpsilonT" type="DimensionlessColumn"/>
+								<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="CastIronPlasticity" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConductivityType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for IsotropicConductivity material
+					option.
+					Add further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:choice>
+					<xsd:element name="IsotropicTable">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="ThermalConductivity" type="ThermalConductivityColumn"/>
+								<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Conductivity" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CreepType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for Creep material option.
+					Add
+					further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="StrainHardeningTable">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="PowerLawMultiplier" type="DimensionlessColumn"/>
+									<xsd:element name="EquivalentStressOrder" type="DimensionlessColumn"/>
+									<xsd:element name="TimeOrder" type="DimensionlessColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="TimeHardeningTable">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="PowerLawMultiplier" type="DimensionlessColumn"/>
+									<xsd:element name="EquivalentStressOrder" type="DimensionlessColumn"/>
+									<xsd:element name="TimeOrder" type="DimensionlessColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="HyperbolicSineTable">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="PowerLawMultiplier" type="FrequencyColumn"/>
+									<xsd:element name="HyperbolicLawMultiplier" type="CompressibilityColumn"/>
+									<xsd:element name="EquivalentStressOrder" type="DimensionlessColumn"/>
+									<xsd:element name="ActivationEnergy" type="EnergyColumn"/>
+									<xsd:element name="UniversalGasConstant" type="MolarHeatCapacityColumn"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Creep" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DampingType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for Damping material option.
+					Add
+					further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:element name="Alpha" type="AttributeValueDoubleType" default="0.0"/>
+					<xsd:element name="Beta" type="AttributeValueDoubleType" default="0.0"/>
+					<xsd:element name="Structural" type="AttributeValueDoubleType" default="0.0"/>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Damping" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ElasticType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is the schema for elastic material option.
+					Types of elasticity :
+					1) Isotropic,
+					2) Orthotrophic,
+					3) Engineering
+					constants,
+					4) Lamina,
+					5) Anistropic
+
+					Moduli time scale option is
+					applicable when elastic is used
+					in conjunction with the viscoelastic
+					option.
+					Longtime- Elastic constant defines long term behavior
+					Instantaneous - Elastic constant defines instantaneous behavior
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="Isotropic">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="YoungsModulus" type="PressureColumn"/>
+									<xsd:element name="PoissonsRatio" type="DimensionlessColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Orthotropic">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="D1111" type="PressureColumn"/>
+									<xsd:element name="D1122" type="PressureColumn"/>
+									<xsd:element name="D2222" type="PressureColumn"/>
+									<xsd:element name="D1133" type="PressureColumn"/>
+									<xsd:element name="D2233" type="PressureColumn"/>
+									<xsd:element name="D3333" type="PressureColumn"/>
+									<xsd:element name="D1212" type="PressureColumn"/>
+									<xsd:element name="D1313" type="PressureColumn"/>
+									<xsd:element name="D2323" type="PressureColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="EngineeringConstant">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="E1" type="PressureColumn"/>
+									<xsd:element name="E2" type="PressureColumn"/>
+									<xsd:element name="E3" type="PressureColumn"/>
+									<xsd:element name="Nu12" type="DimensionlessColumn"/>
+									<xsd:element name="Nu13" type="DimensionlessColumn"/>
+									<xsd:element name="Nu23" type="DimensionlessColumn"/>
+									<xsd:element name="G12" type="PressureColumn"/>
+									<xsd:element name="G13" type="PressureColumn"/>
+									<xsd:element name="G23" type="PressureColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Lamina">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="E1" type="PressureColumn"/>
+									<xsd:element name="E2" type="PressureColumn"/>
+									<xsd:element name="Nu12" type="DimensionlessColumn"/>
+									<xsd:element name="G12" type="PressureColumn"/>
+									<xsd:element name="G13" type="PressureColumn"/>
+									<xsd:element name="G23" type="PressureColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Anisotropic">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="D1111" type="PressureColumn"/>
+									<xsd:element name="D1122" type="PressureColumn"/>
+									<xsd:element name="D2222" type="PressureColumn"/>
+									<xsd:element name="D1133" type="PressureColumn"/>
+									<xsd:element name="D2233" type="PressureColumn"/>
+									<xsd:element name="D3333" type="PressureColumn"/>
+									<xsd:element name="D1112" type="PressureColumn"/>
+									<xsd:element name="D2212" type="PressureColumn"/>
+									<xsd:element name="D3312" type="PressureColumn"/>
+									<xsd:element name="D1212" type="PressureColumn"/>
+									<xsd:element name="D1113" type="PressureColumn"/>
+									<xsd:element name="D2213" type="PressureColumn"/>
+									<xsd:element name="D3313" type="PressureColumn"/>
+									<xsd:element name="D1213" type="PressureColumn"/>
+									<xsd:element name="D1313" type="PressureColumn"/>
+									<xsd:element name="D1123" type="PressureColumn"/>
+									<xsd:element name="D2223" type="PressureColumn"/>
+									<xsd:element name="D3323" type="PressureColumn"/>
+									<xsd:element name="D1223" type="PressureColumn"/>
+									<xsd:element name="D1323" type="PressureColumn"/>
+									<xsd:element name="D2323" type="PressureColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:choice>
+					<xsd:element name="ModuliTimeScale" default="LongTerm" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="LongTerm"/>
+								<xsd:enumeration value="Instantaneous"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Elasticity" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ExpansionType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for Expansion material option.
+					Add
+					further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="IsotropicTable">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ExpansionCoeffalpha" type="InverseTemperatureColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:choice>
+					<xsd:element name="ReferenceTemp" type="TemperatureType" default="0.0"/>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Expansion" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FailStrainType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for FailStrain material option.
+					Add
+					further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:element name="StrainFiberT" type="DimensionlessColumn"/>
+					<xsd:element name="StrainFiberC" type="DimensionlessColumn"/>
+					<xsd:element name="StrainTransverseT" type="DimensionlessColumn"/>
+					<xsd:element name="StrainTransverseC" type="DimensionlessColumn"/>
+					<xsd:element name="ShearStrain" type="DimensionlessColumn"/>
+					<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="FailStrain" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FailStressType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for FailStress material option.
+					Add
+					further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:element name="StressFiberT" type="PressureColumn"/>
+					<xsd:element name="StressFiberC" type="PressureColumn"/>
+					<xsd:element name="StressTransverseT" type="PressureColumn"/>
+					<xsd:element name="StressTransverseC" type="PressureColumn"/>
+					<xsd:element name="ShearStrength" type="PressureColumn"/>
+					<xsd:element name="CrossProductTermCoefficient" type="DimensionlessColumn"/>
+					<xsd:element name="EquibiaxialStressLimit" type="PressureColumn"/>
+					<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="FailStress" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="HyperelasticityType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for Hyperelasticity material
+					option.
+					Add further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="Isotropic">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:choice>
+										<xsd:element name="ArrudaBoyceTable">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="mu" type="PressureColumn"/>
+													<xsd:element name="lambdam" type="DimensionlessColumn"/>
+													<xsd:element name="D" type="CompressibilityColumn"/>
+													<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="NeoHookeTable">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="C10" type="PressureColumn"/>
+													<xsd:element name="D1" type="CompressibilityColumn"/>
+													<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:choice>
+											<xsd:element name="OgdenTable1">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="mu1" type="PressureColumn"/>
+														<xsd:element name="alpha1" type="DimensionlessColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="OgdenTable2">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="mu1" type="PressureColumn"/>
+														<xsd:element name="alpha1" type="DimensionlessColumn"/>
+														<xsd:element name="mu2" type="PressureColumn"/>
+														<xsd:element name="alpha2" type="DimensionlessColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="OgdenTable3">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="mu1" type="PressureColumn"/>
+														<xsd:element name="alpha1" type="DimensionlessColumn"/>
+														<xsd:element name="mu2" type="PressureColumn"/>
+														<xsd:element name="alpha2" type="DimensionlessColumn"/>
+														<xsd:element name="mu3" type="PressureColumn"/>
+														<xsd:element name="alpha3" type="DimensionlessColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="OgdenTable4">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="mu1" type="PressureColumn"/>
+														<xsd:element name="alpha1" type="DimensionlessColumn"/>
+														<xsd:element name="mu2" type="PressureColumn"/>
+														<xsd:element name="alpha2" type="DimensionlessColumn"/>
+														<xsd:element name="mu3" type="PressureColumn"/>
+														<xsd:element name="alpha3" type="DimensionlessColumn"/>
+														<xsd:element name="mu4" type="PressureColumn"/>
+														<xsd:element name="alpha4" type="DimensionlessColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="D4" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="OgdenTable5">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="mu1" type="PressureColumn"/>
+														<xsd:element name="alpha1" type="DimensionlessColumn"/>
+														<xsd:element name="mu2" type="PressureColumn"/>
+														<xsd:element name="alpha2" type="DimensionlessColumn"/>
+														<xsd:element name="mu3" type="PressureColumn"/>
+														<xsd:element name="alpha3" type="DimensionlessColumn"/>
+														<xsd:element name="mu4" type="PressureColumn"/>
+														<xsd:element name="alpha4" type="DimensionlessColumn"/>
+														<xsd:element name="mu5" type="PressureColumn"/>
+														<xsd:element name="alpha5" type="DimensionlessColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="D4" type="CompressibilityColumn"/>
+														<xsd:element name="D5" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="OgdenTable6">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="mu1" type="PressureColumn"/>
+														<xsd:element name="alpha1" type="DimensionlessColumn"/>
+														<xsd:element name="mu2" type="PressureColumn"/>
+														<xsd:element name="alpha2" type="DimensionlessColumn"/>
+														<xsd:element name="mu3" type="PressureColumn"/>
+														<xsd:element name="alpha3" type="DimensionlessColumn"/>
+														<xsd:element name="mu4" type="PressureColumn"/>
+														<xsd:element name="alpha4" type="DimensionlessColumn"/>
+														<xsd:element name="mu5" type="PressureColumn"/>
+														<xsd:element name="alpha5" type="DimensionlessColumn"/>
+														<xsd:element name="mu6" type="PressureColumn"/>
+														<xsd:element name="alpha6" type="DimensionlessColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="D4" type="CompressibilityColumn"/>
+														<xsd:element name="D5" type="CompressibilityColumn"/>
+														<xsd:element name="D6" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:choice>
+										<xsd:choice>
+											<xsd:element name="PolynomialTable1">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C01" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="PolynomialTable2">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C01" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="C11" type="PressureColumn"/>
+														<xsd:element name="C02" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="PolynomialTable3">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C01" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="C11" type="PressureColumn"/>
+														<xsd:element name="C02" type="PressureColumn"/>
+														<xsd:element name="C30" type="PressureColumn"/>
+														<xsd:element name="C21" type="PressureColumn"/>
+														<xsd:element name="C12" type="PressureColumn"/>
+														<xsd:element name="C03" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="PolynomialTable4">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C01" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="C11" type="PressureColumn"/>
+														<xsd:element name="C02" type="PressureColumn"/>
+														<xsd:element name="C30" type="PressureColumn"/>
+														<xsd:element name="C21" type="PressureColumn"/>
+														<xsd:element name="C12" type="PressureColumn"/>
+														<xsd:element name="C03" type="PressureColumn"/>
+														<xsd:element name="C40" type="PressureColumn"/>
+														<xsd:element name="C31" type="PressureColumn"/>
+														<xsd:element name="C22" type="PressureColumn"/>
+														<xsd:element name="C13" type="PressureColumn"/>
+														<xsd:element name="C04" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="D4" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="PolynomialTable5">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C01" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="C11" type="PressureColumn"/>
+														<xsd:element name="C02" type="PressureColumn"/>
+														<xsd:element name="C30" type="PressureColumn"/>
+														<xsd:element name="C21" type="PressureColumn"/>
+														<xsd:element name="C12" type="PressureColumn"/>
+														<xsd:element name="C03" type="PressureColumn"/>
+														<xsd:element name="C40" type="PressureColumn"/>
+														<xsd:element name="C31" type="PressureColumn"/>
+														<xsd:element name="C22" type="PressureColumn"/>
+														<xsd:element name="C13" type="PressureColumn"/>
+														<xsd:element name="C04" type="PressureColumn"/>
+														<xsd:element name="C50" type="PressureColumn"/>
+														<xsd:element name="C41" type="PressureColumn"/>
+														<xsd:element name="C32" type="PressureColumn"/>
+														<xsd:element name="C23" type="PressureColumn"/>
+														<xsd:element name="C14" type="PressureColumn"/>
+														<xsd:element name="C05" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="D4" type="CompressibilityColumn"/>
+														<xsd:element name="D5" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="PolynomialTable6">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C01" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="C11" type="PressureColumn"/>
+														<xsd:element name="C02" type="PressureColumn"/>
+														<xsd:element name="C30" type="PressureColumn"/>
+														<xsd:element name="C21" type="PressureColumn"/>
+														<xsd:element name="C12" type="PressureColumn"/>
+														<xsd:element name="C03" type="PressureColumn"/>
+														<xsd:element name="C40" type="PressureColumn"/>
+														<xsd:element name="C31" type="PressureColumn"/>
+														<xsd:element name="C22" type="PressureColumn"/>
+														<xsd:element name="C13" type="PressureColumn"/>
+														<xsd:element name="C04" type="PressureColumn"/>
+														<xsd:element name="C50" type="PressureColumn"/>
+														<xsd:element name="C41" type="PressureColumn"/>
+														<xsd:element name="C32" type="PressureColumn"/>
+														<xsd:element name="C23" type="PressureColumn"/>
+														<xsd:element name="C14" type="PressureColumn"/>
+														<xsd:element name="C05" type="PressureColumn"/>
+														<xsd:element name="C60" type="PressureColumn"/>
+														<xsd:element name="C51" type="PressureColumn"/>
+														<xsd:element name="C42" type="PressureColumn"/>
+														<xsd:element name="C33" type="PressureColumn"/>
+														<xsd:element name="C24" type="PressureColumn"/>
+														<xsd:element name="C15" type="PressureColumn"/>
+														<xsd:element name="C06" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="D4" type="CompressibilityColumn"/>
+														<xsd:element name="D5" type="CompressibilityColumn"/>
+														<xsd:element name="D6" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:choice>
+										<xsd:choice>
+											<xsd:element name="ReducedPolyTable1">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="ReducedPolyTable2">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="ReducedPolyTable3">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="C30" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="ReducedPolyTable4">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="C30" type="PressureColumn"/>
+														<xsd:element name="C40" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="D4" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="ReducedPolyTable5">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="C30" type="PressureColumn"/>
+														<xsd:element name="C40" type="PressureColumn"/>
+														<xsd:element name="C50" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="D4" type="CompressibilityColumn"/>
+														<xsd:element name="D5" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="ReducedPolyTable6">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="C10" type="PressureColumn"/>
+														<xsd:element name="C20" type="PressureColumn"/>
+														<xsd:element name="C30" type="PressureColumn"/>
+														<xsd:element name="C40" type="PressureColumn"/>
+														<xsd:element name="C50" type="PressureColumn"/>
+														<xsd:element name="C60" type="PressureColumn"/>
+														<xsd:element name="D1" type="CompressibilityColumn"/>
+														<xsd:element name="D2" type="CompressibilityColumn"/>
+														<xsd:element name="D3" type="CompressibilityColumn"/>
+														<xsd:element name="D4" type="CompressibilityColumn"/>
+														<xsd:element name="D5" type="CompressibilityColumn"/>
+														<xsd:element name="D6" type="CompressibilityColumn"/>
+														<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:choice>
+										<xsd:element name="MooneyRivlinTable">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="C10" type="PressureColumn"/>
+													<xsd:element name="C01" type="PressureColumn"/>
+													<xsd:element name="D1" type="CompressibilityColumn"/>
+													<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="VanderWaalsTable">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="mu" type="PressureColumn"/>
+													<xsd:element name="lambdam" type="DimensionlessColumn"/>
+													<xsd:element name="alpha" type="DimensionlessColumn"/>
+													<xsd:element name="beta" type="DimensionlessColumn"/>
+													<xsd:element name="D" type="CompressibilityColumn"/>
+													<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="YeohTable">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="C10" type="PressureColumn"/>
+													<xsd:element name="C20" type="PressureColumn"/>
+													<xsd:element name="C30" type="PressureColumn"/>
+													<xsd:element name="D1" type="CompressibilityColumn"/>
+													<xsd:element name="D2" type="CompressibilityColumn"/>
+													<xsd:element name="D3" type="CompressibilityColumn"/>
+													<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:choice>
+									<xsd:element name="ModuliTimeScale" default="Longterm" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="Longterm"/>
+												<xsd:enumeration value="Instantaneous"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Hyperelasticity" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="HyperfoamType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for Hyperfoam material option.
+					Add
+					further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="Order1Table">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="mu1" type="PressureColumn"/>
+									<xsd:element name="alpha1" type="DimensionlessColumn"/>
+									<xsd:element name="nu1" type="DimensionlessColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Order2Table">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="mu1" type="PressureColumn"/>
+									<xsd:element name="alpha1" type="DimensionlessColumn"/>
+									<xsd:element name="mu2" type="PressureColumn"/>
+									<xsd:element name="alpha2" type="DimensionlessColumn"/>
+									<xsd:element name="nu1" type="DimensionlessColumn"/>
+									<xsd:element name="nu2" type="DimensionlessColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Order3Table">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="mu1" type="PressureColumn"/>
+									<xsd:element name="alpha1" type="DimensionlessColumn"/>
+									<xsd:element name="mu2" type="PressureColumn"/>
+									<xsd:element name="alpha2" type="DimensionlessColumn"/>
+									<xsd:element name="mu3" type="PressureColumn"/>
+									<xsd:element name="alpha3" type="DimensionlessColumn"/>
+									<xsd:element name="nu1" type="DimensionlessColumn"/>
+									<xsd:element name="nu2" type="DimensionlessColumn"/>
+									<xsd:element name="nu3" type="DimensionlessColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Order4Table">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="mu1" type="PressureColumn"/>
+									<xsd:element name="alpha1" type="DimensionlessColumn"/>
+									<xsd:element name="mu2" type="PressureColumn"/>
+									<xsd:element name="alpha2" type="DimensionlessColumn"/>
+									<xsd:element name="mu3" type="PressureColumn"/>
+									<xsd:element name="alpha3" type="DimensionlessColumn"/>
+									<xsd:element name="mu4" type="PressureColumn"/>
+									<xsd:element name="alpha4" type="DimensionlessColumn"/>
+									<xsd:element name="nu1" type="DimensionlessColumn"/>
+									<xsd:element name="nu2" type="DimensionlessColumn"/>
+									<xsd:element name="nu3" type="DimensionlessColumn"/>
+									<xsd:element name="nu4" type="DimensionlessColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Order5Table">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="mu1" type="PressureColumn"/>
+									<xsd:element name="alpha1" type="DimensionlessColumn"/>
+									<xsd:element name="mu2" type="PressureColumn"/>
+									<xsd:element name="alpha2" type="DimensionlessColumn"/>
+									<xsd:element name="mu3" type="PressureColumn"/>
+									<xsd:element name="alpha3" type="DimensionlessColumn"/>
+									<xsd:element name="mu4" type="PressureColumn"/>
+									<xsd:element name="alpha4" type="DimensionlessColumn"/>
+									<xsd:element name="mu5" type="PressureColumn"/>
+									<xsd:element name="alpha5" type="DimensionlessColumn"/>
+									<xsd:element name="nu1" type="DimensionlessColumn"/>
+									<xsd:element name="nu2" type="DimensionlessColumn"/>
+									<xsd:element name="nu3" type="DimensionlessColumn"/>
+									<xsd:element name="nu4" type="DimensionlessColumn"/>
+									<xsd:element name="nu5" type="DimensionlessColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Order6Table">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="mu1" type="PressureColumn"/>
+									<xsd:element name="alpha1" type="DimensionlessColumn"/>
+									<xsd:element name="mu2" type="PressureColumn"/>
+									<xsd:element name="alpha2" type="DimensionlessColumn"/>
+									<xsd:element name="mu3" type="PressureColumn"/>
+									<xsd:element name="alpha3" type="DimensionlessColumn"/>
+									<xsd:element name="mu4" type="PressureColumn"/>
+									<xsd:element name="alpha4" type="DimensionlessColumn"/>
+									<xsd:element name="mu5" type="PressureColumn"/>
+									<xsd:element name="alpha5" type="DimensionlessColumn"/>
+									<xsd:element name="mu6" type="PressureColumn"/>
+									<xsd:element name="alpha6" type="DimensionlessColumn"/>
+									<xsd:element name="nu1" type="DimensionlessColumn"/>
+									<xsd:element name="nu2" type="DimensionlessColumn"/>
+									<xsd:element name="nu3" type="DimensionlessColumn"/>
+									<xsd:element name="nu4" type="DimensionlessColumn"/>
+									<xsd:element name="nu5" type="DimensionlessColumn"/>
+									<xsd:element name="nu6" type="DimensionlessColumn"/>
+									<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:choice>
+					<xsd:element name="ModuliTimeScale" default="Longterm" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Longterm"/>
+								<xsd:enumeration value="Instantaneous"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Hyperfoam" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="InelasticHeatFractionType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for InelasticHeatFraction material
+					option.
+					Add further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:element name="InelasticHeatFraction" type="ScalarType" default="0.9"/>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="InelasticHeatFraction" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="LatentHeatType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for LatentHeat material option.
+					Add
+					further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:element name="LatentHeat" type="SpecificEnergyColumn"/>
+					<xsd:element name="SolidusTemperature" type="TemperatureColumn"/>
+					<xsd:element name="LiquidusTemperature" type="TemperatureColumn"/>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="LatentHeat" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="MaterialDensityType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for Density material option.
+					Add
+					further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:choice>
+					<xsd:element name="isPLMDensity" type="AttributeValueBooleanType" fixed="true"/>
+					<xsd:element name="DensityTable">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="Density" type="DensityColumn"/>
+								<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Density" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="IsotropicPlasticTableType">
+		<xsd:sequence>
+			<xsd:element name="YieldStress" type="PressureColumn" />
+			<xsd:element name="PlasticStrain" type="DimensionlessColumn" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PlasticityType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for Plasticity material option.
+					Add
+					further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="IsotropicJCookData">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="IsotropicJCookTable">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="A" type="PressureColumn"/>
+												<xsd:element name="B" type="PressureColumn"/>
+												<xsd:element name="n" type="DimensionlessColumn"/>
+												<xsd:element name="m" type="DimensionlessColumn"/>
+												<xsd:element name="MeltingTemperature" type="TemperatureColumn"/>
+												<xsd:element name="TransitionTemperature" type="TemperatureColumn"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="RateJohnsonCookData" type="RateJohnsonCookDataType" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:sequence>
+							<xsd:element name="PlasticHillTable" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="R11" type="DimensionlessColumn"/>
+										<xsd:element name="R22" type="DimensionlessColumn"/>
+										<xsd:element name="R33" type="DimensionlessColumn"/>
+										<xsd:element name="R12" type="DimensionlessColumn"/>
+										<xsd:element name="R13" type="DimensionlessColumn"/>
+										<xsd:element name="R23" type="DimensionlessColumn"/>
+										<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:choice>
+								<xsd:element name="IsotropicData">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="IsotropicTable">
+												<xsd:complexType>
+													<xsd:complexContent>
+														<xsd:extension base="IsotropicPlasticTableType">
+															<xsd:sequence>
+																<xsd:element name="StrainRate" type="FrequencyColumn" minOccurs="0" />
+																<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+															</xsd:sequence>
+														</xsd:extension>
+													</xsd:complexContent>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:choice minOccurs="0">
+												<xsd:element name="RatePowerLawTable">
+													<xsd:complexType>
+														<xsd:sequence>
+															<xsd:element name="Multiplier" type="DimensionlessColumn"/>
+															<xsd:element name="Exponent" type="DimensionlessColumn"/>
+															<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+														</xsd:sequence>
+													</xsd:complexType>
+												</xsd:element>
+												<xsd:element name="RateYieldRatioTable">
+													<xsd:complexType>
+														<xsd:sequence>
+															<xsd:element name="YieldStressRatio" type="DimensionlessColumn"/>
+															<xsd:element name="EquivalentPlasticStrainRate" type="DimensionlessColumn"/>
+															<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+														</xsd:sequence>
+													</xsd:complexType>
+												</xsd:element>
+												<xsd:element name="RateJohnsonCookData" type="RateJohnsonCookDataType"/>
+											</xsd:choice>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="KinematicTable" type="KinematicTableType"/>
+								<xsd:element name="Combined">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="KinematicTable" type="KinematicTableType"/>
+											<xsd:choice>
+												<xsd:element name="IsoTabularTable">
+													<xsd:complexType>
+														<xsd:complexContent>
+															<xsd:extension base="IsotropicPlasticTableType">
+																<xsd:sequence>
+																	<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+																</xsd:sequence>
+															</xsd:extension>
+														</xsd:complexContent>
+													</xsd:complexType>
+												</xsd:element>
+												<xsd:element name="IsoExponentialTable">
+													<xsd:complexType>
+														<xsd:sequence>
+															<xsd:element name="YieldStress" type="PressureColumn"/>
+															<xsd:element name="Qinfinity" type="PressureColumn"/>
+															<xsd:element name="HardeningParamb" type="DimensionlessColumn"/>
+															<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+														</xsd:sequence>
+													</xsd:complexType>
+												</xsd:element>
+											</xsd:choice>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:choice>
+						</xsd:sequence>
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Plasticity" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SpecificHeatType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for SpecificHeat material option.
+					Add further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="ConstantVolume" type="SpecificHeatCapacitylinearPartColumn"/>
+						<xsd:element name="ConstantPressure" type="SpecificHeatCapacitylinearPartColumn"/>
+					</xsd:choice>
+					<xsd:element name="Temperature" type="TemperatureColumn" minOccurs="0" />
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="SpecificHeat" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ViscoelasticityType" >
+		<xsd:complexContent>
+			<xsd:annotation>
+				<xsd:documentation>
+					This is schema for Viscoelasticity material
+					option.
+					Add further documentation here.
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="SimulationOptionBase">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:choice>
+							<xsd:element name="FrequencyFormulaTable">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="g1real" type="DimensionlessColumn"/>
+										<xsd:element name="g1imag" type="DimensionlessColumn"/>
+										<xsd:element name="a" type="DimensionlessColumn"/>
+										<xsd:element name="k1real" type="DimensionlessColumn"/>
+										<xsd:element name="k1imag" type="DimensionlessColumn"/>
+										<xsd:element name="b" type="DimensionlessColumn"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="FrequenceyPronyTable">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="g_iProny" type="DimensionlessColumn"/>
+										<xsd:element name="k_iProny" type="DimensionlessColumn"/>
+										<xsd:element name="tau_iProny" type="DimensionlessColumn"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:choice>
+								<xsd:choice>
+									<xsd:element name="FrequencyTabularIsotropicNoneTable" type="FrequencyTabularIsotropicNoneTableType"/>
+									<xsd:element name="FrequencyTabularIsotropicUniTable">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="LossModulus" type="PressureColumn"/>
+												<xsd:element name="StorageModulus" type="PressureColumn"/>
+												<xsd:element name="Frequency" type="FrequencyColumn"/>
+												<xsd:element name="UniaxialStrain" type="DimensionlessColumn"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="FrequencyTabularIsotropicVolTable">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="LossModulus" type="PressureColumn"/>
+												<xsd:element name="StorageModulus" type="PressureColumn"/>
+												<xsd:element name="Frequency" type="FrequencyColumn"/>
+												<xsd:element name="VolumeRatio" type="DimensionlessColumn"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:choice>
+								<xsd:choice>
+									<xsd:element name="FrequencyTabularTractionNoneTable">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="NormalizedLossModulus" type="PressureColumn"/>
+												<xsd:element name="NormalizedStorageModulus" type="PressureColumn"/>
+												<xsd:element name="Frequency" type="FrequencyColumn"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="FrequencyTabularTractionUniTable">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="LossModulus" type="PressureColumn"/>
+												<xsd:element name="StorageModulus" type="PressureColumn"/>
+												<xsd:element name="Frequency" type="FrequencyColumn"/>
+												<xsd:element name="Closure" type="DimensionlessColumn"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:choice>
+							</xsd:choice>
+						</xsd:choice>
+						<xsd:choice>
+							<xsd:element name="TimePronyTable">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="g_iProny" type="DimensionlessColumn"/>
+										<xsd:element name="k_iProny" type="DimensionlessColumn"/>
+										<xsd:element name="tau_iProny" type="DimensionlessColumn"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="TimeFrequencyData">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="FrequencyTabularIsotropicNoneTable" type="FrequencyTabularIsotropicNoneTableType"/>
+										<xsd:element name="Nmax" type="AttributeValuePositiveIntegerType" default="13"/>
+										<xsd:element name="ErrorTol" type="AttributeValueDoubleType" default="0.01"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:attribute name="optionType" type="xsd:string" fixed="Viscoelasticity" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+  <xsd:simpleType name="IntentionEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Intention of this appearance is undefined
+      </xsd:documentation>
+      <xsd:documentation xml:lang="en">
+        Intention of this appearance is to define a fabric material
+      </xsd:documentation>
+      <xsd:documentation xml:lang="en">
+        Intention of this appearance is to define a glass material
+      </xsd:documentation>
+      <xsd:documentation xml:lang="en">
+        Intention of this appearance is to define a metal material
+      </xsd:documentation>
+      <xsd:documentation xml:lang="en">
+        Intention of this appearance is to define a paint material
+      </xsd:documentation>
+      <xsd:documentation xml:lang="en">
+        Intention of this appearance is to define a plastic material
+      </xsd:documentation>
+      <xsd:documentation xml:lang="en">
+        Intention of this appearance is to define a stone material
+      </xsd:documentation>
+      <xsd:documentation xml:lang="en">
+        Intention of this appearance is to define a wood material
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="undefined"/>
+      <xsd:enumeration value="fabric"/>
+      <xsd:enumeration value="glass"/>
+      <xsd:enumeration value="metal"/>
+      <xsd:enumeration value="paint"/>
+      <xsd:enumeration value="plastic"/>
+      <xsd:enumeration value="stone"/>
+      <xsd:enumeration value="wood"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ChannelType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Color data encoded associated to channel (e.g. red channel in RGB representation)
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="UniformPercentageType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Percentage value represents value varying from 0 to 100 percent represented as scalar value
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0"/>
+      <xsd:maxInclusive value="1.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="UniformRotationType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Rotation value represents rotation angle, in radians
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0"/>
+      <xsd:maxInclusive value="6.28"/>
+      <!-- PIx2 -->
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="UniformPositiveScalarType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Represents a positive scalar value
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="UniformDistanceValueType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Represents a distance value
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="DistanceUnitType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Represents a distance unit by its symbol
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="MM">
+        <xsd:annotation>
+          <xsd:documentation>Millimeters</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CM">
+        <xsd:annotation>
+          <xsd:documentation>Centimeters</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DM">
+        <xsd:annotation>
+          <xsd:documentation>Decimeters</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="M">
+        <xsd:annotation>
+          <xsd:documentation>Meters</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="UniformDistanceType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Represents a distance type with in a given unit
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="UniformDistanceValueType">
+        <xsd:attribute name="unit" type="DistanceUnitType"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="UniformScaleType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Scale represents...well the parent's scale...
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="UniformIndexOfRefractionType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Index of Refraction value represents value varying from 1.0+ to infinite for a given matter
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minExclusive value="1.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="UniformColorRGBType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Represents a RGB color representation
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Red"   type="ChannelType"/>
+      <xsd:element name="Green" type="ChannelType"/>
+      <xsd:element name="Blue"  type="ChannelType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:group name="ReflectanceValues">
+    <xsd:choice>
+    </xsd:choice>
+  </xsd:group>
+  <xsd:complexType name="ShardType" abstract="true">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Shard is the basis of any material's appearance description
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="ColorShardType">
+    <xsd:complexContent>
+      <xsd:extension base="ShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Color Shard is dedicated to define color aspect
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhysicalColorShardType">
+    <xsd:complexContent>
+      <xsd:extension base="ColorShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Physical Color Shard exposes feature that are in accord to the physically based paradigm
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ArtisticColorShardType">
+    <xsd:complexContent>
+      <xsd:extension base="PhysicalColorShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Artistic Color Shard exposes feature that are in opposition to the physically based paradigm
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="BaseColorType">
+    <xsd:complexContent>
+      <xsd:extension base="PhysicalColorShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Base color represents a matter substrate's color
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="ColorValueRGB" type="UniformColorRGBType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="SpecularColorType">
+    <xsd:complexContent>
+      <xsd:extension base="ArtisticColorShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Specular color represents the reflected light's tint when hitting a material, often seen through highlight on a surface.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="ColorValueRGB" type="UniformColorRGBType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="AbsorptionColorType">
+    <xsd:complexContent>
+      <xsd:extension base="ArtisticColorShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Absoption color represents the material's absorbed color
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="ColorValueRGB" type="UniformColorRGBType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="SurfaceShardType">
+    <xsd:complexContent>
+      <xsd:extension base="ShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Surface Shard is dedicated to define surface aspect
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhysicalSurfaceShardType">
+    <xsd:complexContent>
+      <xsd:extension base="SurfaceShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Physical Surface Shard exposes feature that are in accord to the physically based paradigm
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ArtisticSurfaceShardType">
+    <xsd:complexContent>
+      <xsd:extension base="PhysicalSurfaceShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Artistic Surface Shard exposes feature that are in opposition to the physically based paradigm
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="GlossinessType">
+    <xsd:complexContent>
+      <xsd:extension base="ArtisticSurfaceShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Glossiness defines to finish of a matter by specifying the amount or the surface micro-roughness, 0% means totally rough, 100% means totally polished
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="Percentage" type="UniformPercentageType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="TransparencyGlossinessType">
+    <xsd:complexContent>
+      <xsd:extension base="ArtisticSurfaceShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Transparency Glossiness defines to finish of a matter specific to the transmittance, 0% means totally rough, 100% means totally polished
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="Percentage" type="UniformPercentageType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ReflectanceShardType">
+    <xsd:complexContent>
+      <xsd:extension base="ShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Reflectance Shard is dedicated to define reflectance aspect
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhysicalReflectanceShardType">
+    <xsd:complexContent>
+      <xsd:extension base="ReflectanceShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Physical Reflectance Shard exposes feature that are in accord to the physically based paradigm
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ArtisticReflectanceShardType">
+    <xsd:complexContent>
+      <xsd:extension base="PhysicalReflectanceShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Artistic Reflectance Shard exposes feature that are in opposition to the physically based paradigm
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="IORType">
+    <xsd:complexContent>
+      <xsd:extension base="PhysicalReflectanceShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Index of Refraction (aka IOR) is a measure specific to every matter,
+            this value represents the refracted's amount and reflected's amount of light given an incoming radiance.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="IndexOfRefraction" type="UniformIndexOfRefractionType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="SpecularReflectanceType">
+    <xsd:complexContent>
+      <xsd:extension base="ArtisticReflectanceShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Specular Reflectance is a measure specific to every matter,
+            this value represents the amount of light measured if we observe a material at a normal viewpoint (i.e. 0°) given a light source at 0°.
+            This value is often interpolated given an implementation defined curve to define the behavior between normal and grazing angle.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="F0Color" type="UniformColorRGBType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="VolumeShardType">
+    <xsd:complexContent>
+      <xsd:extension base="ShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Volume Shard is dedicated to define volume aspect
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhysicalVolumeShardType">
+    <xsd:complexContent>
+      <xsd:extension base="VolumeShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Physical Volume Shard exposes feature that are in accord to the physically based paradigm
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ArtisticVolumeShardType">
+    <xsd:complexContent>
+      <xsd:extension base="PhysicalVolumeShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Artistic Volume Shard exposes feature that are in opposition to the physically based paradigm
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="TransparencyType">
+    <xsd:complexContent>
+      <xsd:extension base="PhysicalVolumeShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Transparency represents the matter's ability to let light pass through its surface.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="Percentage" type="UniformPercentageType"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="VolumeDispersionType">
+    <xsd:complexContent>
+      <xsd:extension base="PhysicalVolumeShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Volume IOR represents the light's dispersion effect that happen within a volume, specified by the Abbe Number.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="IndexOfRefraction" type="UniformIndexOfRefractionType" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="VolumeAbsorptionType">
+    <xsd:complexContent>
+      <xsd:extension base="ArtisticVolumeShardType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Volume absorption represents the light's absorption effect that happen within a volume.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="AbsorptionColor" type="AbsorptionColorType" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:group name="SurfaceColorShards">
+    <xsd:sequence>
+      <xsd:element name="BaseColor" type="BaseColorType"   minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="MicroSurfaceShards">
+    <xsd:sequence>
+      <xsd:element name="Glossiness" type="GlossinessType" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="ArtisticMicroSurfaceShards">
+    <xsd:sequence>
+      <xsd:element name="TransparencyGlossiness" type="TransparencyGlossinessType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="SurfaceShards">
+    <xsd:sequence>
+      <xsd:group ref="SurfaceColorShards"/>
+      <xsd:group ref="MicroSurfaceShards"/>
+      <xsd:group ref="ArtisticMicroSurfaceShards"/>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="PrimaryReflectanceShards">
+    <xsd:sequence>
+      <xsd:element name="SpecularColor"       type="SpecularColorType"/>
+      <xsd:choice>
+        <xsd:element name="IOR"                 type="IORType"/>
+        <xsd:element name="SpecularReflectance" type="SpecularReflectanceType"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="ReflectanceShards">
+    <xsd:sequence>
+      <xsd:group ref="PrimaryReflectanceShards"   minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="VolumeShards">
+    <xsd:sequence>
+      <xsd:element name="Transparency" type="TransparencyType"     minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="Dispersion"   type="VolumeDispersionType" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="Absorption"   type="VolumeAbsorptionType" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:group>
+   
+	<!-- Material References Types -->
+	<xsd:complexType name="MaterialReferenceBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence>
+					<xsd:element name="AlternateName" type="AttributeValueStringType" minOccurs="0" />
+					<xsd:element name="Familly" type="AttributeValueStringType" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="MaterialCoreType" >
+		<xsd:complexContent>
+			<xsd:extension base="MaterialReferenceBase">
+				<xsd:sequence>
+					<xsd:element name="Density" type="DensityType" minOccurs="0" />
+					<xsd:element name="RenderingDomain" type="RenderingDomainType" minOccurs="0" />
+					<xsd:element name="SimulationDomain" type="SimulationDomainType" minOccurs="0" />
+					<xsd:element name="MaterialBehavior" type="MaterialBehaviorType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:unique name="UniqueMaterialOptionType">
+							<xsd:selector xpath="dns:SelectedOption"/>
+							<xsd:field xpath="@optionType"/>
+						</xsd:unique>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="MaterialCoveringType" >
+		<xsd:complexContent>
+			<xsd:extension base="MaterialReferenceBase">
+				<xsd:sequence>
+					<xsd:element name="Density" type="DensityType" minOccurs="0" />
+					<xsd:element name="RenderingDomain" type="RenderingDomainType" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- Material Domain Types -->
+	<xsd:complexType name="MaterialDomainBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+  <xsd:complexType name="RenderingDomainType">
+    <xsd:complexContent>
+      <xsd:extension base="MaterialDomainBase">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Rendering Domain denotes the boundary where we define the Rendering Domain
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Appearance" type="AppearanceType" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="SlotType" abstract="true">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Slot is the basis of any shard entry
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="SurfaceSlotType">
+    <xsd:complexContent>
+      <xsd:extension base="SlotType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Surface Slot is dedicated to receive Surface Shard
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:group ref="SurfaceShards"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ReflectanceSlotType">
+    <xsd:complexContent>
+      <xsd:extension base="SlotType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Reflectance Slot is dedicated to receive Reflectance Shard
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:group ref="ReflectanceShards"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="VolumeSlotType">
+    <xsd:complexContent>
+      <xsd:extension base="SlotType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Volume Slot is dedicated to receive Volume Shard
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:group ref="VolumeShards"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="AppearanceType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Appearance denotes the boundary where we define appearance inputs into the Rendering Domain
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Surface"       type="SurfaceSlotType"       minOccurs="1" maxOccurs="1" />
+      <xsd:element name="Reflectance"   type="ReflectanceSlotType"   minOccurs="1" maxOccurs="1" />
+      <xsd:element name="Volume"        type="VolumeSlotType"        minOccurs="0" maxOccurs="1" />
+    </xsd:sequence>
+    <!-- TODO constraint version to a specific format e.g. MAJOR.MINOR.REVISION -->
+    <xsd:attribute name="version"    type="xsd:string" use="required"/>
+    <xsd:attribute name="Intention" type="IntentionEnum" default="undefined"/>
+  </xsd:complexType>
+	<xsd:complexType name="SimulationDomainType" >
+		<xsd:complexContent>
+			<xsd:extension base="MaterialDomainBase">
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="CastIronPlasticity" type="CastIronPlasticityType"/>
+					<xsd:element name="Conductivity" type="ConductivityType"/>
+					<xsd:element name="Creep" type="CreepType" />
+					<xsd:element name="Damping" type="DampingType" />
+					<xsd:element name="Elastic" type="ElasticType" />
+					<xsd:element name="Expansion" type="ExpansionType"/>
+					<xsd:element name="FailStrain" type="FailStrainType"/>
+					<xsd:element name="FailStress" type="FailStressType"/>
+					<xsd:element name="Hyperelasticity" type="HyperelasticityType"/>
+					<xsd:element name="Hyperfoam" type="HyperfoamType"/>
+					<xsd:element name="InelasticHeatFraction" type="InelasticHeatFractionType"/>
+					<xsd:element name="LatentHeat" type="LatentHeatType"/>
+					<xsd:element name="MaterialDensity" type="MaterialDensityType"/>
+					<xsd:element name="Plasticity" type="PlasticityType"/>
+					<xsd:element name="SpecificHeat" type="SpecificHeatType"/>
+					<xsd:element name="Viscoelasticity" type="ViscoelasticityType"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- Material Behavior and links Definition -->
+	<xsd:complexType name="MaterialBehaviorType">
+		<xsd:complexContent>
+			<xsd:extension base="ObjectBase">
+				<xsd:sequence>
+					<xsd:element name="SelectedOption" minOccurs="0" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:attribute name="optionID" type="xsd:IDREF" use="required"/>
+							<xsd:attribute name="optionType" type="xsd:string" use="required"/>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Root Structure Definition -->
+	<xsd:complexType name="MaterialStructureType">
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="Material"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="MaterialStructure" type="MaterialStructureType" substitutionGroup="XPDMXML_Structure">
+		<xsd:key name="MaterialCoreID">
+			<xsd:selector xpath="MaterialCore"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:key name="MaterialCoveringID">
+			<xsd:selector xpath="MaterialCovering"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+	</xsd:element>
+	<xsd:element name="Material" type="MaterialReferenceBase" abstract="true"/>
+	<xsd:element name="MaterialCore" type="MaterialCoreType" substitutionGroup="Material">
+			<xsd:keyref name="BehaviorLinks" refer="SimulationOptionID">
+			<xsd:selector xpath="dns:MaterialBehavior/dns:SelectedOption"/>
+			<xsd:field xpath="@id"/>
+			<xsd:field xpath="@optionType"/>
+		</xsd:keyref>
+		<xsd:key name="SimulationOptionID">
+			<!-- xsd:selector xpath="dns:SimulationDomain/*"/-->
+			<xsd:selector xpath="dns:SimulationDomain/SimulationOptionBase"/>
+			<xsd:field xpath="@id"/>
+			<xsd:field xpath="@optionType"/>
+		</xsd:key>
+		<xsd:unique name="UniqueBehaviorName">
+			<xsd:selector xpath="dns:MaterialBehavior/dns:Name"/>
+			<xsd:field xpath="."/>
+		</xsd:unique>
+	</xsd:element>
+	<xsd:element name="MaterialCovering" type="MaterialCoveringType" substitutionGroup="Material"/>
+</xsd:schema>

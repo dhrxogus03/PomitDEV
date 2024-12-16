@@ -1,0 +1,12 @@
+m|DELPPWModules\DELPPWTreeListAuthoringModule.mweb
+b|j|c,m
+b|c|c,m
+v|6.426.4.24115|3.2
+r|G:\R426\BSF\.
+t|win_b64\webapps\DELPPWTreeListAuthoringModule\DELPPWTreeListAuthoringModule.js|1713994918|19975
+s|DELPPWModules\DELPPWTreeListAuthoringModule.mweb\src\RoutingsModule.js|1712241468|21142
+u|DELPPWModules\DELPPWTreeListAuthoringModule.mweb\src\TreeListAuthoringBaseModule.js|1713267172|13119
+u|DELPPWModules\DELPPWTreeListAuthoringModule.mweb\src\TreeListAuthoringModule.js|1713271975|27835
+u|DELPPWModules\DELPPWTreeListAuthoringModule.mweb\src\UpperViewsModule.js|1712241460|20155
+u|win_b64\code\toolcmds\mkwebconcat.bat|1685139395|287
+u|win_b64\code\toolcmds\terser.bat|1700685953|365

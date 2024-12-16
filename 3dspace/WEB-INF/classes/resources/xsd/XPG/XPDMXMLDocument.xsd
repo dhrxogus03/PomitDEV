@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2010. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/Info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="1.1">
+					- Originator element is declared in XPDMXMLCore.xsd 
+			  </info:change>
+			<info:change version="1.2">
+					- SpecificationBase renamed in DocumentSpecificatinBase
+					- ReferenceDocumentRelationshipBase renamed in ReferenceDocumentRelationshipType
+					- AnyDocumentSpecificationType renamed AnyDocumentSpecificationBase
+					- Removing Title in DocumentBase 
+			  </info:change>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--   -->
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<!--   -->
+	<xsd:simpleType name="Language_Enum">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="English"/>
+			<xsd:enumeration value="German"/>
+			<xsd:enumeration value="Chinese"/>
+			<xsd:enumeration value="French"/>
+			<xsd:enumeration value="Italian"/>
+			<xsd:enumeration value="Japanese"/>
+			<xsd:enumeration value="Korean"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- ======================================================================================== -->
+	<!--                                                                                                                                                                                  -->
+	<!-- ======================================================================================== -->
+	<xsd:group name="DocumentAttributesGroup">
+		<xsd:sequence>
+			<xsd:element name="Language" type="Language_Enum" default="English" minOccurs="0"/>
+			<xsd:element ref="Originator" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="GenericDocumentAttributesGroup">
+		<xsd:sequence>
+			<xsd:element name="Approver" type="AttributeValueStringType" minOccurs="0"/>
+			<xsd:element name="CreatedOn" type="AttributeValueDateTimeType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<!-- -->
+	<!-- ============================================__============================================ -->
+	<!--                                                                                                                                                                                  -->
+	<!-- ======================================================================================== -->
+	<xsd:element name="AnyDocumentBase" type="DocumentBase" abstract="true"/>
+	<xsd:complexType name="DocumentBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="RepresentationBase">
+				<xsd:sequence>
+					<xsd:group ref="DocumentAttributesGroup"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--                 -->
+	<xsd:element name="Document" type="DocumentType" substitutionGroup="AnyDocumentBase"/>
+	<xsd:complexType name="DocumentType">
+		<xsd:complexContent>
+			<xsd:extension base="DocumentBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--                 -->
+	<xsd:element name="GenericDocument" type="GenericDocumentType" substitutionGroup="AnyDocumentBase"/>
+	<xsd:complexType name="GenericDocumentType">
+		<xsd:complexContent>
+			<xsd:extension base="DocumentBase">
+				<xsd:sequence>
+					<xsd:group ref="GenericDocumentAttributesGroup"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--                 -->
+	<xsd:element name="AnyDocumentSpecificationBase" type="DocumentSpecificationBase" abstract="true"/>
+	<xsd:complexType name="DocumentSpecificationBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="DocumentBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--                 -->
+	<xsd:element name="DrawingPrint" type="DrawingPrintType" substitutionGroup="AnyDocumentSpecificationBase"/>
+	<xsd:complexType name="DrawingPrintType">
+		<xsd:complexContent>
+			<xsd:extension base="DocumentSpecificationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="TechnicalSpecification" type="TechnicalSpecificationType" substitutionGroup="AnyDocumentSpecificationBase"/>
+	<xsd:complexType name="TechnicalSpecificationType">
+		<xsd:complexContent>
+			<xsd:extension base="DocumentSpecificationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--   -->
+	<!--   -->
+	<xsd:element name="AnyDocumentRelationshipBase" type="DocumentRelationshipBase" abstract="true"/>
+	<xsd:complexType name="DocumentRelationshipBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="RepresentationInstanceBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--   -->
+	<xsd:element name="DocumentReferenceRelationship" type="DocumentReferenceRelationshipType" substitutionGroup="AnyDocumentRelationshipBase"/>
+	<xsd:complexType name="DocumentReferenceRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>this is a relationship from an object extending ReferenceBase to a DocumentType or GenericDocumentType</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="DocumentRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--   -->
+	<xsd:element name="DocumentSpecificationRelationship" type="DocumentSpecficationRelationshipType" substitutionGroup="AnyDocumentRelationshipBase"/>
+	<xsd:complexType name="DocumentSpecficationRelationshipType">
+		<xsd:complexContent>
+			<xsd:extension base="DocumentRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--   -->
+	<xsd:element name="ReferenceDocumentRelationship" type="ReferenceDocumentRelationshipType" substitutionGroup="AnyDocumentRelationshipBase"/>
+	<xsd:complexType name="ReferenceDocumentRelationshipType">
+		<xsd:complexContent>
+			<xsd:extension base="DocumentRelationshipBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<!--    -->
+</xsd:schema>

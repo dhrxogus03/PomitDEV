@@ -1,0 +1,14 @@
+{
+  "betaOptions": [
+    {
+      "id": "FUN143768",
+      "title": "Otwórz aplikacje internetowe jako karty przeglądarki (BETA)",
+      "description": "Aplikacje internetowe 3DCompass będą otwierane w specjalnych kartach zamiast w oknie podglądu pulpitu."
+    },
+    {
+      "id": "FUN136611",
+      "title": "Włącz duplikowanie pulpitu i synchronizację (BETA)",
+      "description": "Włącz duplikowanie pulpitu dla wszystkich użytkowników platformy wraz z funkcją synchronizacji na żądanie."
+    }
+  ]
+}

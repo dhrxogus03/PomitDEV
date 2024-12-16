@@ -1,0 +1,11 @@
+{
+  "App.Title": "Manufacturing Items Management",
+  "App.Motto": "Build your Manufacturing Bill of Materials",
+  "Restore.Title": "Wiederherstellen",
+  "Restore.FontIcon": "Schriftsymbol Schriftsymbol-Reset",
+  "Open.Title": "Öffnen",
+  "Open.FontIcon": "Schriftsymbol Schriftsymbol-öffnen",
+  "CreateAssembly.Title": "Fertigungsbaugruppe erzeugen",
+  "CreateAssembly.FontIcon": "Schriftsymbol Schriftsymbol-plus",
+  "DragAndDrop.Title": "Öffnen"
+}

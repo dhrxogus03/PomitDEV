@@ -1,0 +1,37 @@
+{
+  "dseehw:EEHwItem": {
+    "summary": "EE Hardware reference",
+    "description": "Electrical and Electronics hardware reference :EETopology, EEECU, EEActuator, EESensor, EEDevice,EEElectricalDevice,EERack",
+    "PUBLICMasks": ["dsmveehw:EEHWItemMask.Reference.Common","dsmveehw:EEHWItemMask.Reference.EEECU","dsmveehw:EEHWItemMask.Reference.Rack"],
+    "PROTECTEDMasks": [],
+    "PRIVATEMasks": [],
+
+    "PUBLICFields": ["dsmveehw:attribute.reference.partNumber","dsmveehw:attribute.reference.ecu.wakeUpOverBusSupported","dsmveehw:attribute.reference.rack.nbOfColumns","dsmveehw:attribute.reference.rack.nbOfRows","dsmveehw:attribute.reference.rack.nbOfSlotsPerUnit"],
+    "PROTECTEDFields": [],
+    "PRIVATEFields": [],
+
+    "PUBLICExtensions": [ ],
+    "PROTECTEDExtensions": [],
+    "PRIVATEExtensions": [],
+
+    "PUBLICExcludedURIs": ["getItems", "DELETE", "GETAll","bulkfetch", "BULKUPDATE", "PATCHBulk", "DELETEBulk"]
+
+  },
+  "dseehw:EEHwInstance": {
+    "summary": "EE Hardware instance",
+    "description": "instance of an EE Hardware reference: EEECUInstance, EEActuatorInstance,EESensorInstance,EEDeviceInstance,EEElectricalDeviceInstance,EESubSystem",
+    "PUBLICMasks": ["dsmveehw:EEHWInstanceMask.Instance.Basic","dsmveehw:EEHWInstanceMask.Instance.EEInstanceCommon"],
+    "PROTECTEDMasks": [],
+    "PRIVATEMasks": [],
+
+    "PUBLICFields": ["dsmveehw:attribute.instance.eeecus.comConfigurationGwTimeBase","dsmveehw:attribute.instance.eeecus.comConfigurationTxTimeBase","dsmveehw:attribute.instance.eeecus.comConfigurationRxTimeBase"],
+    "PROTECTEDFields": [],
+    "PRIVATEFields": [],
+
+    "PUBLICExtensions": [],
+    "PROTECTEDExtensions": [],
+    "PRIVATEExtensions": [],
+
+    "PUBLICExcludedURIs": ["getItems", "DELETE","bulkfetch", "BULKUPDATE", "PATCHBulk", "DELETEBulk"]
+  }
+}

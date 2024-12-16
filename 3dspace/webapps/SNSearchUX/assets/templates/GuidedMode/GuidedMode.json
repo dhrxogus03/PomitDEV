@@ -1,0 +1,121 @@
+{
+  "Examples": [
+    {
+      "title": "Objects containing Hello word in the Title",
+      "blocks": [
+        {
+          "type": "PREDICATE",
+          "uri": "ds6w:label",
+          "displayValue": "Title",
+          "value": "[ds6w:label]",
+          "suggestion": {
+            "displayValue": "Title",
+            "value": "[ds6w:label]",
+            "type": "PREDICATE",
+            "uri": "ds6w:label",
+            "iconClass": "fonticon-properties",
+            "category": "ds6w:what"
+          },
+          "dataTypes": "string"
+        },
+        {
+          "type": "R_OPERATOR",
+          "uri": "operator:contains",
+          "displayValue": "Contains",
+          "value": ":",
+          "suggestion": {
+            "displayValue": "Contains",
+            "value": ":",
+            "type": "R_OPERATOR",
+            "uri": "operator:contains",
+            "category": "OPERATOR"
+          }
+        },
+        {
+          "type": "USER_TEXT",
+          "uri": "",
+          "displayValue": "hello word",
+          "value": "hello word",
+          "suggestion": {
+            "displayValue": "hello word",
+            "type": "USER_TEXT",
+            "uri": "",
+            "iconClass": "fonticon-pencil",
+            "value": "hello word"
+          }
+        }
+      ],
+      "display": [
+        "Hello word",
+        "containing",
+        "Title"
+      ]
+    },
+    {
+      "title": "Post created by Me This Year",
+      "edit": false,
+      "blocks": [
+        {
+          "type": "TYPE",
+          "uri": "swym:Post",
+          "displayValue": "Post",
+          "value": "[ds6w:type]:\"swym:Post\"",
+          "suggestion": {
+            "displayValue": "Post",
+            "type": "TYPE",
+            "value": "[ds6w:type]:\"swym:Post\"",
+            "uri": "swym:Post",
+            "iconClass": "fonticon-newspaper",
+            "category": "ds6w:what"
+          }
+        },
+        {
+          "type": "PREDICATE",
+          "uri": "ds6w:created",
+          "displayValue": "Creation Date",
+          "value": "[ds6w:created]",
+          "suggestion": {
+            "displayValue": "Creation Date",
+            "value": "[ds6w:created]",
+            "type": "PREDICATE",
+            "uri": "ds6w:created",
+            "iconClass": "fonticon-properties",
+            "category": "ds6w:when",
+            "dataTypes": "date"
+          },
+          "dataTypes": "date"
+        },
+        {
+          "type": "VALUE_KEYWORD",
+          "uri": "keyword:thisyear",
+          "displayValue": "This Year",
+          "value": "$THIS_YEAR",
+          "suggestion": {
+            "displayValue": "This Year",
+            "value": "$THIS_YEAR",
+            "type": "VALUE_KEYWORD",
+            "uri": "keyword:thisyear",
+            "category": "ds6w:when"
+          }
+        },
+        {
+          "type": "KEYWORD",
+          "displayValue": "ME",
+          "value": "$ME",
+          "suggestion": {
+            "displayValue": "ME",
+            "value": "$ME",
+            "type": "KEYWORD",
+            "category": "ds6w:who"
+          }
+        }
+      ],
+      "display": [
+        "Post",
+        "created",
+        "Me",
+        "This Year"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "CMDExpandAll": "Rozbalit vše",
+  "CMDCollapseAll": "Sbalit vše",
+  "plmnew_management": "PLM New (Nový PLM)",
+  "multiSelectionComponent": {
+    "button_OK": "Sečíst",
+    "button_Cancel": "Zrušit",
+    "widget_name": "",
+    "msg_ClassifyInProgress": "Přidat...",
+    "msg_ClassifySuccessful": "Úspěšně přidáno.",
+    "msg_ClassifyFailed": "Během přidávání došlo k chybě",
+    "msg_selectNodeToSeeInfo": "Výběrem uzlu procházení zobrazíte jeho podrobnosti."
+  },
+  "loader": {
+    "findingObjects": "Hledání..."
+  },
+  "error_association_service": "Služba selhala",
+  "loading": "Načítání…",
+  "error_run_command": "Spuštění příkazu se nezdařilo",
+  "error_command_selection": "Příkaz není pro tento výběr k dispozici.",
+  "tooltip_selection_rows_invalid": "Některé vybrané řádky nejsou kompatibilní.",
+  "tooltip_selecion_terms_invalid": "Ve struktuře procházení můžete vybrat pouze jeden uzel procházení.",
+  "tooltip_selection_empty": "Výběr je prázdný.",
+  "tooltip_selection_no_changes": "Výběr se nezměnil.",
+  "tooltip_browse": "Procházet",
+  "save": "Uložit",
+  "cancel": "Zrušit",
+  "ExportControlApp": "Kontrola exportu IP",
+  "LibraryApp": "Knihovny",
+  "BookmarksApp": "Záložky",
+  "classificationFailure_title": "Nelze plně klasifikovat nový „{plmnewtype}“.",
+  "classificationFailure_subtitle": "„{plmnewtype}“ byl úspěšně vytvořen, ale nemohl být automaticky klasifikován.",
+  "classificationFailure_message": "Možná budete muset zkontrolovat v každé klasifikační aplikaci, zda je klasifikován, nebo ne, a pokusit se jej klasifikovat",
+  "classificationSuccessMessage": "Zařízení „{plmnewtype}“ bylo úspěšně klasifikováno.",
+  "warning_minimum_3_characters_search": "Hledání vyžaduje minimální 3 znaky.",
+  "autoCompleteFilterMessage": {
+    "no_objects_found": "Nebyly nalezeny žádné objekty",
+    "minimum_3_characters_search": "Hledání vyžaduje minimální 3 znaky."
+  },
+  "errorForRemoveContentFromBks": "Nemůžete odebrat obsah ze záložky",
+  "errorForAddContentsToBks": "Nemůžete přidat obsah do záložky",
+  "oneDeclassificationFailure": "Deklasifikace objektu se nezdařila",
+  "oneClassificationFailure": "1 objekt nelze klasifikovat",
+  "oneDeclassificationSuccess": "Objekt deklasifikován ze třídy 1.",
+  "oneClassificationSuccess": "Objekt klasifikován do třídy 1.",
+  "removeBookmarkedSuccess": "Bylo odebrán objekt z 1 záložky.",
+  "bookmarkedSuccess": "Byl přidán objekt do 1 záložky."
+}

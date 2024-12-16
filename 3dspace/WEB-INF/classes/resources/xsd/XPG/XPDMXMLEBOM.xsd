@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2010. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/Info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.5">
+	<xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+	<xsd:include schemaLocation="XPDMXMLDocument.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="1.2">
+				- Weigth converted to MassType.
+			  </info:change>
+			<info:change version="1.3">
+					- BOM Document enheriting from XPDMXMLDocument.xsd
+					- ViewableType and  ViewableAttributesGroup removed
+					- ReferenceDocumentType replaced by DocumentType 
+					- PartAttributesGroup : attribute removed:  ServiceMakeBuyCode,EndItemOverrideEnabled, AllLevelMBOMGenerated, IsVersion, CurrentVersion
+					- EBOMRelationship : Notes, HasManufacturingSubstitute, StartEffectivityDate/EndEffectivityDate, Source
+			  </info:change>
+			<info:change version="1.4">
+					- Originator element is declared in XPDMXMLCore.xsd
+			  </info:change>
+			<info:change version="1.5">
+					- Add new values for UnitOfMeasureEnum
+			  </info:change>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--   -->
+	<xsd:element name="Part" type="PartType"/>
+	<xsd:element name="SoftwarePart" type="SoftwarePartType" substitutionGroup="Part"/>
+	<xsd:element name="HardwarePart" type="HardwarePartType" substitutionGroup="Part"/>
+	<xsd:element name="ElectricalPart" type="ElectricalPartType" substitutionGroup="Part"/>
+	<xsd:element name="TransistorPart" type="TransistorPartType" substitutionGroup="Part"/>
+	<xsd:element name="CircuitCardPart" type="CircuitCardPartType" substitutionGroup="Part"/>
+	<xsd:element name="CapacitorPart" type="CapacitorPartType" substitutionGroup="Part"/>
+	<xsd:element name="ResistorPart" type="ResistorPartType" substitutionGroup="Part"/>
+	<xsd:element name="ConnectorPart" type="ConnectorPartType" substitutionGroup="Part"/>
+	<xsd:element name="MechanicalPart" type="MechanicalPartType" substitutionGroup="Part"/>
+	<xsd:element name="MoldedPart" type="MoldedPartType" substitutionGroup="Part"/>
+	<xsd:element name="MachinedPart" type="MachinedPartType" substitutionGroup="Part"/>
+	<xsd:element name="BracketPart" type="BracketPartType" substitutionGroup="Part"/>
+	<xsd:element name="FastenerPart" type="FastenerPartType" substitutionGroup="Part"/>
+	<xsd:element name="WasherPart" type="WasherPartType" substitutionGroup="Part"/>
+	<xsd:element name="BoltPart" type="BoltPartType" substitutionGroup="Part"/>
+	<xsd:element name="NutPart" type="NutPartType" substitutionGroup="Part"/>
+	<xsd:element name="ScrewPart" type="ScrewPartType" substitutionGroup="Part"/>
+	<xsd:element name="FramePart" type="FramePartType" substitutionGroup="Part"/>
+	<xsd:element name="ExtrudedPart" type="ExtrudedPartType" substitutionGroup="Part"/>
+	<xsd:element name="OtherPart" type="OtherPartType" substitutionGroup="Part"/>
+	<xsd:element name="CapitalExpenditurePart" type="CapitalExpenditurePartType" substitutionGroup="Part"/>
+	<xsd:element name="DocumentPart" type="DocumentPartType" substitutionGroup="Part"/>
+	<xsd:element name="ToolingPart" type="ToolingPartType" substitutionGroup="Part"/>
+	<!-- -->
+	<xsd:complexType name="PartBase" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceBase">
+				<xsd:sequence>
+					<xsd:group ref="PartAttributesGroup"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PartType">
+		<xsd:complexContent>
+			<xsd:extension base="PartBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SoftwarePartType">
+		<xsd:complexContent>
+			<xsd:extension base="PartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="HardwarePartType">
+		<xsd:complexContent>
+			<xsd:extension base="PartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ElectricalPartType">
+		<xsd:complexContent>
+			<xsd:extension base="HardwarePartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TransistorPartType">
+		<xsd:complexContent>
+			<xsd:extension base="ElectricalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CircuitCardPartType">
+		<xsd:complexContent>
+			<xsd:extension base="ElectricalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CapacitorPartType">
+		<xsd:complexContent>
+			<xsd:extension base="ElectricalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ResistorPartType">
+		<xsd:complexContent>
+			<xsd:extension base="ElectricalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConnectorPartType">
+		<xsd:complexContent>
+			<xsd:extension base="ElectricalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="MechanicalPartType">
+		<xsd:complexContent>
+			<xsd:extension base="HardwarePartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="MoldedPartType">
+		<xsd:complexContent>
+			<xsd:extension base="MechanicalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="MachinedPartType">
+		<xsd:complexContent>
+			<xsd:extension base="MechanicalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BracketPartType">
+		<xsd:complexContent>
+			<xsd:extension base="MechanicalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FastenerPartType">
+		<xsd:complexContent>
+			<xsd:extension base="MechanicalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="WasherPartType">
+		<xsd:complexContent>
+			<xsd:extension base="FastenerPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BoltPartType">
+		<xsd:complexContent>
+			<xsd:extension base="FastenerPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="NutPartType">
+		<xsd:complexContent>
+			<xsd:extension base="FastenerPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ScrewPartType">
+		<xsd:complexContent>
+			<xsd:extension base="FastenerPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FramePartType">
+		<xsd:complexContent>
+			<xsd:extension base="MechanicalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ExtrudedPartType">
+		<xsd:complexContent>
+			<xsd:extension base="MechanicalPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="OtherPartType">
+		<xsd:complexContent>
+			<xsd:extension base="PartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CapitalExpenditurePartType">
+		<xsd:complexContent>
+			<xsd:extension base="OtherPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentPartType">
+		<xsd:complexContent>
+			<xsd:extension base="OtherPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ToolingPartType">
+		<xsd:complexContent>
+			<xsd:extension base="OtherPartType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- ======================================================================================== -->
+	<!--                                                                                                                                                                                  -->
+	<!-- ======================================================================================== -->
+	<xsd:simpleType name="UnitOfMeasureEnum" final="#all">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Batch"/>
+			<xsd:enumeration value="CG (centigram)"/>
+			<xsd:enumeration value="CL (centiliter)"/>
+			<xsd:enumeration value="CM (centimeter)"/>
+			<xsd:enumeration value="CM^2 (square centimeter)"/>
+			<xsd:enumeration value="CM^3 (cubic centimeter)"/>
+			<xsd:enumeration value="EA (each)"/>
+			<xsd:enumeration value="FT (feet)"/>
+			<xsd:enumeration value="FT^2 (square feet)"/>
+			<xsd:enumeration value="FT^3 (cubic feet)"/>
+			<xsd:enumeration value="G (gram)"/>
+			<xsd:enumeration value="GA (gallon)"/>
+			<xsd:enumeration value="IN (inch)"/>
+			<xsd:enumeration value="IN^2 (square inch)"/>
+			<xsd:enumeration value="IN^3 (cubic inch)"/>
+			<xsd:enumeration value="KG (kilogram)"/>
+			<xsd:enumeration value="LB (pound)"/>
+			<xsd:enumeration value="LITER (liter)"/>
+			<xsd:enumeration value="M (meter)"/>
+			<xsd:enumeration value="M^2 (square meter)"/>
+			<xsd:enumeration value="M^3 (cubic meter)"/>
+			<xsd:enumeration value="MG (milligram)"/>
+			<xsd:enumeration value="ML (milliliter)"/>
+			<xsd:enumeration value="MM (millimeter)"/>
+			<xsd:enumeration value="MM^2 (square millimeter)"/>
+			<xsd:enumeration value="MM^3 (cubic millimeter)"/>
+			<xsd:enumeration value="OZ (ounce)"/>
+			<xsd:enumeration value="PPM (part per million)"/>
+			<xsd:enumeration value="PT (pint)"/>
+			<xsd:enumeration value="QT (quart)"/>
+			<xsd:enumeration value="T (ton)"/>
+			<xsd:enumeration value="WEIGHTLESS"/>
+			<xsd:enumeration value="YD (yard)"/>
+			<xsd:enumeration value="% (percent)"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Design_Purchase_Enum" final="#all">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Purchase"/>
+			<xsd:enumeration value="Design"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Relationship_Usage_Enum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="As Required"/>
+			<xsd:enumeration value="Per Sales Order"/>
+			<xsd:enumeration value="Reference"/>
+			<xsd:enumeration value="Reference-Eng"/>
+			<xsd:enumeration value="Reference-Mfg"/>
+			<xsd:enumeration value="Standard"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- ======================================================================================== -->
+	<!--                                                                                                                                                                                  -->
+	<!-- ======================================================================================== -->
+	<xsd:group name="PartAttributesGroup">
+		<xsd:sequence>
+			<xsd:element name="DesignPurchase" type="Design_Purchase_Enum" minOccurs="0"/>
+			<xsd:element name="EffectivityDate" type="AttributeValueDateTimeType" minOccurs="0"/>
+			<xsd:element name="EstimatedCost" type="AttributeValueDoubleType" minOccurs="0"/>
+			<xsd:element name="TargetCost" type="AttributeValueDoubleType" minOccurs="0"/>
+			<xsd:element name="Weight" type="MassType" minOccurs="0"/>
+			<xsd:element name="MaterialCategory" type="AttributeValueStringType" default="Metal" minOccurs="0"/>
+			<xsd:element name="PartClassification" type="AttributeValueStringType" default="Unassigned" minOccurs="0"/>
+			<xsd:element name="ProductionMakeBuy" type="Make_Buy_Enum" default="Unassigned" minOccurs="0"/>
+			<xsd:element name="UnitOfMeasure" type="UnitOfMeasureEnum" default="M (meter)" minOccurs="0"/>
+			<xsd:element name="SparePartType" type="Yes_No_Enum" default="No" minOccurs="0"/>
+			<xsd:element name="LeadTime" type="AttributeValueStringType" default="Unassigned" minOccurs="0"/>
+			<xsd:element ref="Originator" minOccurs="0"/>
+			<xsd:element name="EndItem" type="Yes_No_Enum" default="No" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<!--  -->
+	<!-- ======================================================================================== -->
+	<!--                                                                                                                                                                                  -->
+	<!--                                                                                                                                                                                  -->
+	<!--                                                                                                                                                                                  -->
+	<!--                                                                                                                                                                                  -->
+	<!-- ======================================================================================== -->
+	<xsd:element name="PartSpecification" type="PartSpecificationType" substitutionGroup="AnyDocumentSpecificationBase"/>
+	<xsd:complexType name="PartSpecificationType">
+		<xsd:complexContent>
+			<xsd:extension base="DocumentSpecificationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--     -->
+	<!--    -->
+	<xsd:element name="PartDocumentRelationship" type="DocumentRelationshipBase" abstract="true"/>
+	<xsd:element name="PartSpecificationRelationship" type="PartSpecificationRelationshipType" substitutionGroup="PartDocumentRelationship"/>
+	<xsd:complexType name="PartSpecificationRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>this is a relationship from a Part to a PartSpecification, DrawingPrint, TechnicalSpecification</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="DocumentSpecficationRelationshipType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="PartReferenceDocumentRelationship" type="PartReferenceDocumentRelationshipType" substitutionGroup="PartDocumentRelationship"/>
+	<xsd:complexType name="PartReferenceDocumentRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>this is a relationship from a Part to a DocumentType</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ReferenceDocumentRelationshipType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--     -->
+	<!--     -->
+	<!--     -->
+	<xsd:element name="EBOMRelationship" type="EBOMRelationshipType"/>
+	<xsd:complexType name="EBOMRelationshipType">
+		<xsd:annotation>
+			<xsd:documentation>this is a relationship of type "EBOM" between two Parts</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="InstanceBase">
+				<xsd:sequence>
+					<xsd:element name="ComponentLocation" type="AttributeValueStringType" minOccurs="0"/>
+					<xsd:element name="Quantity" type="AttributeValueDoubleType" default="1.0" minOccurs="0"/>
+					<xsd:element name="ReferenceDesignator" type="AttributeValueStringType" minOccurs="0"/>
+					<xsd:element name="Usage" type="Relationship_Usage_Enum" default="Standard" minOccurs="0"/>
+					<xsd:element name="FindNumber" type="AttributeValuePositiveIntegerType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+	<xsd:element name="EBOMStructure" type="EBOMStructureType" substitutionGroup="XPDMXML_Structure"/>
+	<xsd:complexType name="EBOMStructureType">
+		<xsd:complexContent>
+			<xsd:extension base="StructureBase">
+				<xsd:sequence>
+					<xsd:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="EBOMRelationship" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="PartDocumentRelationship" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:element ref="AnyDocumentSpecificationBase" minOccurs="0" maxOccurs="unbounded"/>
+						<xsd:element ref="Document" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!--    -->
+</xsd:schema>

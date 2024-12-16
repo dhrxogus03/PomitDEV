@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2011. All rights reserved. -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/XPDMXML" xmlns:info="http://www.3ds.com/xsd/XPDMXML/info" targetNamespace="http://www.3ds.com/xsd/XPDMXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<info:change version="1.0">
+				- Creation : declaration SimulationContext
+			</info:change>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--    -->
+  <xsd:include schemaLocation="XPDMXMLCore.xsd"/>
+  	<!-- ======================================================================================== -->
+	<xsd:complexType name="SimulationContextType">
+		<xsd:annotation>
+			<xsd:documentation>
+      SimulationContextType exposes one and only one CATAnalysis.
+      It is not instantiated by any component.
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="RepresentationBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="SimulationContext" type="SimulationContextType"/>
+</xsd:schema>

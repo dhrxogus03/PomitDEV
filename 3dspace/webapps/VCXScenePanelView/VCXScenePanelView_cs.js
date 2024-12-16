@@ -1,0 +1,1 @@
+define("DS/VCXScenePanelView/VCXScenePanelView_cs",{});define("DS/VCXScenePanelView/assets/nls/VCXScenePanelView",{PreviewModeTooltipTogglePlayButton:"Přehrávání automatického přehrávání",PreviewModeTooltipTogglePauseButton:"Pozastavení automatického přehrávání",PreviewModeLabelTogglePlayButton:"PŘEHRÁT",PreviewModeLabelTogglePauseButton:"POZASTAVIT"});

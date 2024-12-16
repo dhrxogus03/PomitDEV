@@ -1,0 +1,8 @@
+{
+  "CostingDomainTitle": "コスト計算",
+  "CostingDomainTooltip": "コスト指標の展開プロセスを選択します",
+  "CostingDefaultEvolution": "順次",
+  "CostingEvolutionConcurrent": "コンカレント",
+  "deployFailureMsg": "展開プロセスは、「作業中」ステートを過ぎているコスト指標があるため、 [コンカレント] に設定できません",
+  "MetricEvolutionAccordionTitle": "指標展開プロセス"
+}

@@ -1,0 +1,11 @@
+{
+  "SNSmartQuery.vocab.predicate.swym:postTestTag": "Test-Tag posten",
+  "SNSmartQuery.basic_predicate.label": "Titel",
+  "SNSmartQuery.basic_predicate.identifier": "Name",
+  "SNSmartQuery.basic_predicate.modified": "Änderungsdatum",
+  "SNSmartQuery.basic_predicate.description": "Beschreibung",
+  "SNSmartQuery.basic_predicate.responsible": "Verantwortlicher",
+  "SNSmartQuery.basic_predicate.created": "Erstellt am",
+  "SNSmartQuery.pred_keyword.about": "Info",
+  "SNSmartQuery.pred_keyword.by": "Von"
+}
