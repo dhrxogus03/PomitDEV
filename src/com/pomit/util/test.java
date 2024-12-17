@@ -14,4 +14,8 @@ public class test {
 	public static String getMessage(String str) {
 		return str;
 	}
+	
+	public static Integer getMath(Integer a,Integer b) {
+		return a+b;
+	}
 }

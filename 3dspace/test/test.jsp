@@ -16,6 +16,14 @@
 		String str2 = test.getMessage();
 		
 		out.println(str2);
+		
+		Integer a = 10;
+		
+		Integer b = 20;
+		
+		Integer sum = test.getMath(a, b);
+		
+		out.println(sum);
 	%>
 </body>
 </html>
