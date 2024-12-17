@@ -21,9 +21,9 @@
 		
 		Integer b = 20;
 		
-		Integer sum = test.getMath(a, b);
+		Integer sum2 = test.getMath2(a, b);
 		
-		out.println(sum);
+		out.println(sum2);
 	%>
 </body>
 </html>

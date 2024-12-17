@@ -15,7 +15,7 @@ public class test {
 		return str;
 	}
 	
-	public static Integer getMath(Integer a,Integer b) {
+	public static Integer getMath2(Integer a,Integer b) {
 		return a+b;
 	}
 }
