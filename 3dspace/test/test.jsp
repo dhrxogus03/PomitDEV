@@ -12,7 +12,10 @@
 		String str = test.getMessage("test is test");
 	
 		out.println(str);
-	
+		
+		String str2 = test.getMessage();
+		
+		out.println(str2);
 	%>
 </body>
 </html>

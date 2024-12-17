@@ -7,8 +7,11 @@ public class test {
 
 	}
 	
+	public static String getMessage() {
+		return "test";
+	}
+
 	public static String getMessage(String str) {
 		return str;
 	}
-
 }
