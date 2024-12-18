@@ -1,0 +1,7 @@
+# Modified by thok on 2024.12.18
+
+# copy menu AEFPersonMenu AEFPersonMenu_ootb;
+
+mod menu AEFPersonMenu
+	add command reloadStringResourceCmd
+;

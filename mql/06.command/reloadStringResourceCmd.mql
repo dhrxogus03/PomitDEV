@@ -1,0 +1,8 @@
+# Added by thok on 2024.12.18
+
+# del command reloadStringResourceCmd;
+add command reloadStringResourceCmd
+	label 'Reload String Resource'
+	href '${COMMON_DIR}/reloadStringResource.jsp'
+	setting 'Target Location' 'hiddenFrame'
+;
