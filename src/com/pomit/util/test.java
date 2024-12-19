@@ -18,4 +18,8 @@ public class test {
 	public static Integer getMath2(Integer a,Integer b) {
 		return a+b;
 	}
+	
+	public static Integer getX(Integer a,Integer b) {
+		return a*b;
+	}
 }

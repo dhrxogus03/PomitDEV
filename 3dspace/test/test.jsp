@@ -24,6 +24,8 @@
 		Integer sum2 = test.getMath2(a, b);
 		
 		out.println(sum2);
+		
+		out.println(test.getX(a, b));
 	%>
 </body>
 </html>
